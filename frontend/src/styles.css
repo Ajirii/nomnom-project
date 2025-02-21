@@ -1,0 +1,36 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f0f0f0;
+}
+
+.plant-pot {
+    position: relative;
+    width: 250px;
+}
+
+.pot {
+    width: 100%;
+}
+
+.eye, .mouth {
+    position: absolute;
+    width: 40px;
+}
+
+.eye-left {
+    top: 30%;
+    left: 30%;
+}
+
+.eye-right {
+    top: 30%;
+    right: 30%;
+}
+
+.mouth {
+    top: 50%;
+    left: 45%;
+}
