@@ -25,7 +25,7 @@ SPOONACULAR_API_KEY = "27907ac6af53412b9bfb5ef710cfbd43"
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "rest_framework",
     "recipes",
+    "corsheaders",
 ]
 
 MIDDLEWARE = [
@@ -48,7 +49,10 @@ MIDDLEWARE = [
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
-    "django.middleware.clickjacking.XFrameOptionsMiddleware",]
+    "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "corsheaders.middleware.CorsMiddleware",]
+
+CORS_ALLOW_ALL_ORIGINS = True
 
 ROOT_URLCONF = "nomnom.urls"
 
