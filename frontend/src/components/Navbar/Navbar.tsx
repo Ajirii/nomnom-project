@@ -16,6 +16,10 @@ const Navbar = () => {
           <a href="#home">Home</a>
         </li>
         <li className="navbar_font">
+          <p className="navbar_emotes">😊</p>
+          <a href="#mood">Mood</a>
+        </li>
+        <li className="navbar_font">
           <p className="navbar_emotes">🧐</p>
           <a href="#quests">Quests</a>
         </li>
@@ -48,6 +52,9 @@ const Navbar = () => {
             >
               <li className="navbar_font">
                 <a href="#home">Home</a>
+              </li>
+              <li className="navbar_font">
+                <a href="#mood">Mood</a>
               </li>
               <li className="navbar_font">
                 <a href="#quests">Quests</a>

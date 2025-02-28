@@ -4,6 +4,8 @@ import NormalFace from "./components/Faces/Normalface";
 import "./components/Faces/Normalface.css";
 import Home from "./components/Home/Home";
 import "./components/Home/Home.css";
+import { Mood } from "./components/Mood/Mood";
+import "./components/Mood/Mood.css";
 import Quests from "./components/Quests/Quests";
 import "./components/Quests/Quests.css";
 import Recipes from "./components/Recipes/Recipes";
@@ -19,6 +21,7 @@ const App = () => {
       <Navbar />
       <NormalFace />
       <Home />
+      <Mood />
       <Quests />
       <Recipes />
       <Login />
