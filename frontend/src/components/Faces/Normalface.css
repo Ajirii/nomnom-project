@@ -1,0 +1,93 @@
+.container {
+  height: 20em;
+  width: 20em;
+  position: absolute;
+  transform: translate(-50%, -50%);
+  top: 30%;
+  left: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.face-container {
+  transform: rotate(-2deg);
+  transform-origin: 0 100%;
+  animation: nod 5s ease-in-out infinite;
+}
+
+@keyframes nod {
+  50% {
+    transform: rotate(0deg);
+  }
+}
+
+.nomnom-face {
+  height: 50em;
+  width: 50em;
+  position: relative;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.eye-l,
+.eye-r {
+  position: absolute;
+  background-color: #222;
+  height: 4.12em;
+  width: 4.12em;
+  border-radius: 50%;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.eye-l {
+  left: 35%;
+}
+
+.eye-r {
+  left: 55%;
+}
+
+.eye-l::after,
+.eye-r::after {
+  content: "";
+  position: absolute;
+  background-color: #f8f8f8;
+  height: 3.25em;
+  width: 3.25em;
+  border-radius: 50%;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.mouth {
+  position: absolute;
+  background-color: #222;
+  height: 2.12em;
+  width: 2.5em;
+  border-radius: 0 0 2em 2em;
+  left: 46.5%;
+  transform: translateX(-50%);
+  top: 54%;
+}
+
+.blush {
+  height: 4em;
+  width: 4em;
+  background-color: lightpink;
+  border-radius: 50%;
+  position: absolute;
+  top: 52%;
+}
+
+.blush-l {
+  left: 30%;
+}
+
+.blush-r {
+  left: 60%;
+}

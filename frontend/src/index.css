@@ -1,6 +1,17 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import url("https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap");
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Press Start 2P", cursive;
+  display: flex;
+  flex-direction: column;
+  overflow-x: hidden;
+}
 
 :root {
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
@@ -9,98 +20,10 @@
 
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
-  background-color: #222;
+  background-color: #f8f8f8;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-}
-
-.navbar {
-  position: relative;
-  top: 0;
-  right: 0;
-  margin-left: 2.5rem;
-  font-size: 1rem;
-  text-transform: uppercase;
-  cursor: pointer;
-}
-
-.navbar::after {
-  content: "";
-  position: absolute;
-  bottom: -2px;
-  left: 0;
-  height: 2px;
-  width: 100%;
-  background-color: white;
-  transform-origin: bottom right;
-  transform: scaleX(0);
-  transition: transform 0.3s cubic-bezier(0.65, 0.05, 0.36, 1);
-}
-
-.navbar:hover::after {
-  transform-origin: bottom left;
-  transform: scaleX(1);
-}
-
-a {
-  font-weight: 500;
-  color: rgb(216, 216, 216);
-  text-decoration: inherit;
-}
-
-a:hover {
-  color: white;
-}
-
-.navbar_smallscreen {
-  display: none;
-}
-
-.navbar_smallscreen_overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100vh;
-  background: #222;
-  transition: 0.5s ease;
-
-  flex-direction: column;
-  z-index: 5;
-}
-
-.overlay_open {
-  font-size: 27px;
-  cursor: pointer;
-
-  position: absolute;
-  top: 20px;
-  right: 20px;
-}
-
-.navbar_smallscreen_overlay .overlay_close {
-  font-size: 27px;
-  cursor: pointer;
-
-  position: absolute;
-  top: 20px;
-  right: 20px;
-}
-
-@media screen and (max-width: 1150px) {
-  .navbar {
-    display: none;
-  }
-
-  .navbar_smallscreen {
-    display: flex;
-    margin: 2rem;
-    cursor: pointer;
-    font-size: 2rem;
-    text-align: center;
-    justify-content: center;
-  }
 }
