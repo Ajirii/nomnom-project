@@ -1,10 +1,14 @@
 .navbar {
   width: 100%;
-  padding: 10px;
+  padding: 2px;
   display: flex;
   justify-content: space-between;
   align-items: center;
   background: white;
+
+  position: sticky;
+  top: 0;
+  z-index: 100;
 }
 
 .navbar_heading {
@@ -41,10 +45,6 @@
 .navbar_font {
   letter-spacing: 0.04em;
   line-height: 28px;
-}
-
-.navbar_logo img {
-  width: 150px;
 }
 
 .navbar_links {
@@ -84,17 +84,17 @@
   justify-content: center;
   width: 135px;
   height: 50px;
-  border: 2px solid #222;
+  border: 1px solid #222;
   border-radius: 5px;
   margin: 0 1rem;
   text-decoration: none;
   transition: 0.5s ease;
-  color: #222;
+  color: white;
+  background: #b85555;
 }
 
 .navbar_login a:hover {
-  background: #222;
-  color: white;
+  background: #a23838;
 }
 
 .navbar_login div {
@@ -160,8 +160,17 @@
   text-decoration: none;
 }
 
+.navbar_smallscreen_links li:last-child a {
+  color: #b85555;
+}
+
 .navbar_smallscreen_links li a:hover {
   color: grey;
+  text-decoration: underline;
+}
+
+.navbar_smallscreen_links li:last-child a:hover {
+  color: #a23838;
 }
 
 @media screen and (max-width: 1150px) {
