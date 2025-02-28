@@ -1,7 +1,11 @@
 import { useState } from "react";
 import { GiHamburgerMenu } from "react-icons/gi";
 
-const Navbar = () => {
+interface NavbarProps {
+  onLinkClick: (component: string) => void;
+}
+
+const Navbar = ({ onLinkClick }: NavbarProps) => {
   const [toggleNav, setToggleNav] = useState(false);
 
   return (
@@ -13,23 +17,35 @@ const Navbar = () => {
       <ul className="navbar_links">
         <li className="navbar_font">
           <p className="navbar_emotes">😆</p>
-          <a href="#home">Home</a>
+          <a href="#home" onClick={() => onLinkClick("home")}>
+            Home
+          </a>
         </li>
         <li className="navbar_font">
           <p className="navbar_emotes">😊</p>
-          <a href="#mood">Mood</a>
+          <a href="#mood" onClick={() => onLinkClick("mood")}>
+            Mood
+          </a>
         </li>
         <li className="navbar_font">
           <p className="navbar_emotes">🧐</p>
-          <a href="#quests">Quests</a>
+          <a href="#quests" onClick={() => onLinkClick("quests")}>
+            Quests
+          </a>
         </li>
         <li className="navbar_font">
           <p className="navbar_emotes">😺</p>
-          <a href="#recipes">Recipes</a>
+          <a href="#recipes" onClick={() => onLinkClick("recipes")}>
+            Recipes
+          </a>
         </li>
       </ul>
       <div className="navbar_login">
-        <a href="#login" className="navbar_font">
+        <a
+          href="#login"
+          className="navbar_font"
+          onClick={() => onLinkClick("login")}
+        >
           Log In
         </a>
         <div />
@@ -51,19 +67,29 @@ const Navbar = () => {
               onClick={() => setToggleNav(false)}
             >
               <li className="navbar_font">
-                <a href="#home">Home</a>
+                <a href="#home" onClick={() => onLinkClick("home")}>
+                  Home
+                </a>
               </li>
               <li className="navbar_font">
-                <a href="#mood">Mood</a>
+                <a href="#mood" onClick={() => onLinkClick("mood")}>
+                  Mood
+                </a>
               </li>
               <li className="navbar_font">
-                <a href="#quests">Quests</a>
+                <a href="#quests" onClick={() => onLinkClick("quests")}>
+                  Quests
+                </a>
               </li>
               <li className="navbar_font">
-                <a href="#recipes">Recipes</a>
+                <a href="#recipes" onClick={() => onLinkClick("recipes")}>
+                  Recipes
+                </a>
               </li>
               <li className="navbar_font">
-                <a href="#login">Log In</a>
+                <a href="#login" onClick={() => onLinkClick("login")}>
+                  Log In
+                </a>
               </li>
             </ul>
           </div>

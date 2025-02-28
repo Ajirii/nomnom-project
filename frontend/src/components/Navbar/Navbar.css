@@ -1,10 +1,14 @@
 .navbar {
   width: 100%;
-  padding: 10px;
+  padding: 2px;
   display: flex;
   justify-content: space-between;
   align-items: center;
   background: white;
+
+  position: sticky;
+  top: 0;
+  z-index: 100;
 }
 
 .navbar_heading {

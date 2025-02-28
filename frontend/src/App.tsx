@@ -1,3 +1,4 @@
+import { useState } from "react";
 import Navbar from "./components/Navbar/Navbar";
 import "./components/Navbar/Navbar.css";
 import NormalFace from "./components/Faces/Normalface";
@@ -16,15 +17,21 @@ import Footer from "./components/Footer/Footer";
 import "./components/Footer/Footer.css";
 
 const App = () => {
+  const [activeComponent, setActiveComponent] = useState<string>("home");
+
+  const handleLinkClick = (component: string) => {
+    setActiveComponent(component);
+  };
+
   return (
     <main>
-      <Navbar />
+      <Navbar onLinkClick={handleLinkClick} />
       <NormalFace />
-      <Home />
-      <Mood />
-      <Quests />
-      <Recipes />
-      <Login />
+      {activeComponent === "home" && <Home />}
+      {activeComponent === "mood" && <Mood />}
+      {activeComponent === "quests" && <Quests />}
+      {activeComponent === "recipes" && <Recipes />}
+      {activeComponent === "login" && <Login />}
       <Footer />
     </main>
   );
