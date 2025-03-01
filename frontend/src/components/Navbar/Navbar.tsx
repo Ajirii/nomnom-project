@@ -39,6 +39,12 @@ const Navbar = ({ onLinkClick }: NavbarProps) => {
             Recipes
           </a>
         </li>
+        <li className="navbar_font">
+          <p className="navbar_emotes">🎨</p>
+          <a href="#styles" onClick={() => onLinkClick("styles")}>
+            Styles
+          </a>
+        </li>
       </ul>
       <div className="navbar_login">
         <a
@@ -89,6 +95,11 @@ const Navbar = ({ onLinkClick }: NavbarProps) => {
               <li className="navbar_font">
                 <a href="#login" onClick={() => onLinkClick("login")}>
                   Log In
+                </a>
+              </li>
+              <li className="navbar_font"> 
+                <a href="#cosmetics" onClick={() => onLinkClick("cosmetics")}>
+                  Cosmetics
                 </a>
               </li>
             </ul>

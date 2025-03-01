@@ -1,0 +1,29 @@
+
+.style-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-top: 5%;
+  justify-content: center;
+}
+
+
+.style-card {
+  border: 1px solid #ccc;
+  padding: 16px;
+  border-radius: 8px;
+  width: 200px;
+  padding: 5px;
+  text-align: center;
+}
+
+.style-container {
+    margin-top: 25%;
+    margin-bottom: 10%;
+    text-align: center;
+}
+
+.style-card a,h2 {
+  text-decoration: none;
+  color: black;
+}

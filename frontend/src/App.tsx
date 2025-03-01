@@ -15,6 +15,7 @@ import Login from "./components/Login/Login";
 import "./components/Login/Login.css";
 import Footer from "./components/Footer/Footer";
 import "./components/Footer/Footer.css";
+import StylesList from "./pages/StylesList/StylesList";
 
 const App = () => {
   const [activeComponent, setActiveComponent] = useState<string>("home");
@@ -32,6 +33,8 @@ const App = () => {
       {activeComponent === "quests" && <Quests />}
       {activeComponent === "recipes" && <Recipes />}
       {activeComponent === "login" && <Login />}
+      {activeComponent === "styles" && <StylesList />}
+
       <Footer />
     </main>
   );
