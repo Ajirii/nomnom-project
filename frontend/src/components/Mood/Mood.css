@@ -1,0 +1,170 @@
+.mood-container {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  max-width: 400px;
+  position: absolute;
+  top: 60%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: white;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.hp-bar {
+  width: 90%;
+  max-width: 300px;
+  height: 25px;
+  background: #ddd;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 2px solid #000;
+  margin: 15px auto;
+}
+
+.hp-fill {
+  height: 100%;
+  transition: width 0.5s ease-in-out;
+}
+
+.mood-status {
+  padding: 15px;
+  text-align: center;
+  background: #f7f7f7;
+  border-top: 2px solid #ddd;
+}
+
+.mood-description {
+  padding: 15px;
+  text-align: center;
+  font-size: 14px;
+  font-weight: bold;
+  background: #f7f7f7;
+  border-top: 2px solid #ddd;
+  border-radius: 0 0 8px 8px;
+  color: #444;
+  font-family: "Press Start 2P", cursive;
+}
+
+.status {
+  font-size: 18px;
+  font-weight: bold;
+  color: #333;
+}
+
+.cosmetics-container {
+  display: flex;
+  flex-direction: column;
+  width: 70%;
+  max-width: 450px;
+  position: absolute;
+  top: 5%;
+  left: 1%;
+  background: white;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 15px;
+  align-items: center;
+}
+
+.cosmetics-header {
+  font-size: 20px;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 10px;
+  font-family: "Press Start 2P", cursive;
+}
+
+.cosmetics-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  width: 100%;
+  padding: 20px;
+  padding-left: 30px;
+}
+
+.cosmetic-slot {
+  width: 80px;
+  height: 80px;
+  border: 2px solid #ddd;
+  background: #f7f7f7;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.1);
+  transition: 0.2s ease-in-out;
+}
+
+.cosmetic-slot:hover {
+  background: #e0e0e0;
+  border-color: #bbb;
+}
+
+@media screen and (max-width: 768px) {
+  .mood-container {
+    width: 80%;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .mood-container {
+    width: 90%;
+    padding: 15px;
+  }
+
+  .hp-bar {
+    width: 100%;
+  }
+
+  .status {
+    font-size: 14px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .cosmetics-container {
+    width: 80%;
+    left: 10%;
+    top: 35%;
+  }
+
+  .cosmetics-grid {
+    grid-template-columns: repeat(2, 1fr);
+    padding-left: 15px;
+  }
+
+  .cosmetic-slot {
+    width: 60px;
+    height: 60px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .cosmetics-container {
+    width: 90%;
+    left: 5%;
+    top: 35%;
+    padding: 10px;
+  }
+
+  .cosmetics-header {
+    font-size: 16px;
+  }
+
+  .cosmetics-grid {
+    grid-template-columns: repeat(2, 1fr);
+    padding-left: 10px;
+  }
+
+  .cosmetic-slot {
+    width: 50px;
+    height: 50px;
+  }
+}

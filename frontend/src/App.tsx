@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Navbar from "./components/Navbar/Navbar";
 import "./components/Navbar/Navbar.css";
 import NormalFace from "./components/Faces/Normalface";
@@ -18,17 +18,26 @@ import "./components/Footer/Footer.css";
 
 const App = () => {
   const [activeComponent, setActiveComponent] = useState<string>("home");
+  const [hunger, setHunger] = useState<number>(100);
 
   const handleLinkClick = (component: string) => {
     setActiveComponent(component);
   };
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setHunger((prevHunger) => Math.max(prevHunger - 10, 0));
+    }, 6 * 60 * 60 * 1000);
+
+    return () => clearInterval(interval);
+  }, []);
 
   return (
     <main>
       <Navbar onLinkClick={handleLinkClick} />
       <NormalFace />
       {activeComponent === "home" && <Home />}
-      {activeComponent === "mood" && <Mood />}
+      {activeComponent === "mood" && <Mood hunger={hunger} />}
       {activeComponent === "quests" && <Quests />}
       {activeComponent === "recipes" && <Recipes />}
       {activeComponent === "login" && <Login />}
