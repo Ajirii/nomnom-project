@@ -15,6 +15,8 @@ import Login from "./components/Login/Login";
 import "./components/Login/Login.css";
 import Footer from "./components/Footer/Footer";
 import "./components/Footer/Footer.css";
+import ClickEffects from "./components/MouseEffects/ClickEffects";
+import "./components/MouseEffects/ClickEffects.css";
 
 const App = () => {
   const [activeComponent, setActiveComponent] = useState<string>("home");
@@ -25,6 +27,7 @@ const App = () => {
 
   return (
     <main>
+      <ClickEffects />
       <Navbar onLinkClick={handleLinkClick} />
       <NormalFace />
       {activeComponent === "home" && <Home />}
