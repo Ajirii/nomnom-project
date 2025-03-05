@@ -1,3 +1,5 @@
-export const Mood = () => {
-  return <div id="mood"></div>;
+const Mood = () => {
+  return <div>Mood</div>;
 };
+
+export default Mood;

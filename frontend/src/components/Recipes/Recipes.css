@@ -83,7 +83,7 @@
 }
 
 @media screen and (max-width: 600px) {
-  .quest-container {
+  .recipe-container {
     flex-direction: column;
     width: 100%;
   }
@@ -105,15 +105,10 @@
   .detail p {
     font-size: 14px;
   }
-
-  .main {
-    min-height: 100vh;
-    justify-content: space-between;
-  }
 }
 
 @media screen and (min-width: 601px) and (max-width: 1024px) {
-  .quest-container {
+  .recipe-container {
     flex-direction: column;
     width: 90%;
   }
@@ -138,7 +133,7 @@
 }
 
 @media screen and (min-width: 1025px) {
-  .quest-container {
+  .recipe-container {
     flex-direction: row;
     width: 80%;
   }

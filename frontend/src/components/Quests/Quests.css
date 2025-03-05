@@ -1,0 +1,161 @@
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  flex: 1;
+}
+
+.main {
+  flex: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  height: 100vh;
+  padding: 20px;
+  position: relative;
+}
+
+.quest-container {
+  display: flex;
+  width: 80%;
+  position: absolute;
+  top: 60%;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  overflow: hidden;
+  margin-top: 0;
+}
+
+.master {
+  width: 40%;
+  background: #f7f7f7;
+  padding: 20px;
+  border-right: 2px solid #ddd;
+}
+
+.master h2 {
+  text-align: center;
+}
+
+.master ul {
+  list-style: none;
+  padding: 0;
+}
+
+.master li {
+  padding: 10px;
+  margin: 5px 0;
+  cursor: pointer;
+  background: #e0e0e0;
+  border-radius: 5px;
+  transition: background 0.3s;
+}
+
+.master li:hover {
+  background: #d4d4d4;
+}
+
+.master .active {
+  background: #c0c0c0;
+  font-weight: bold;
+}
+
+.detail {
+  width: 60%;
+  padding: 20px;
+  text-align: center;
+}
+
+.detail h2 {
+  color: #333;
+}
+
+.detail p {
+  margin: 10px 0;
+}
+
+.placeholder {
+  color: #999;
+  font-style: italic;
+  margin-top: 20px;
+}
+
+@media screen and (max-width: 600px) {
+  .quest-container {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .master,
+  .detail {
+    width: 100%;
+  }
+
+  .master li {
+    padding: 8px;
+    font-size: 14px;
+  }
+
+  .detail h2 {
+    font-size: 18px;
+  }
+
+  .detail p {
+    font-size: 14px;
+  }
+}
+
+@media screen and (min-width: 601px) and (max-width: 1024px) {
+  .quest-container {
+    flex-direction: column;
+    width: 90%;
+  }
+
+  .master,
+  .detail {
+    width: 100%;
+  }
+
+  .master li {
+    padding: 10px;
+    font-size: 16px;
+  }
+
+  .detail h2 {
+    font-size: 20px;
+  }
+
+  .detail p {
+    font-size: 16px;
+  }
+}
+
+@media screen and (min-width: 1025px) {
+  .quest-container {
+    flex-direction: row;
+    width: 80%;
+  }
+
+  .master {
+    width: 40%;
+  }
+
+  .detail {
+    width: 60%;
+  }
+
+  .master li {
+    padding: 10px;
+    font-size: 18px;
+  }
+
+  .detail h2 {
+    font-size: 24px;
+  }
+
+  .detail p {
+    font-size: 18px;
+  }
+}
