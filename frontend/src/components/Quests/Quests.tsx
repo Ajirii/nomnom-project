@@ -39,40 +39,38 @@ const Quests = () => {
   const [selectedQuest, setSelectedQuest] = useState<Quest | null>(null);
 
   return (
-    <div id="quests">
-      <div className="row">
-        <div className="main">
-          <div className="quest-container">
-            <div className="master">
-              <h2>Quest Log</h2>
-              <ul>
-                {questDetails.map((quest) => (
-                  <li
-                    key={quest.id}
-                    onClick={() => setSelectedQuest(quest)}
-                    className={selectedQuest?.id === quest.id ? "active" : ""}
-                  >
-                    {quest.name}
-                  </li>
-                ))}
-              </ul>
-            </div>
+    <div className="row">
+      <div className="main">
+        <div className="quest-container">
+          <div className="master">
+            <h2>Quest Log</h2>
+            <ul>
+              {questDetails.map((quest) => (
+                <li
+                  key={quest.id}
+                  onClick={() => setSelectedQuest(quest)}
+                  className={selectedQuest?.id === quest.id ? "active" : ""}
+                >
+                  {quest.name}
+                </li>
+              ))}
+            </ul>
+          </div>
 
-            <div className="detail">
-              {selectedQuest ? (
-                <div>
-                  <h2>{selectedQuest.name}</h2>
-                  <p>
-                    <strong>Description:</strong> {selectedQuest.description}
-                  </p>
-                  <p>
-                    <strong>Reward:</strong> {selectedQuest.reward}
-                  </p>
-                </div>
-              ) : (
-                <p className="placeholder">Select a quest to view details</p>
-              )}
-            </div>
+          <div className="detail">
+            {selectedQuest ? (
+              <div>
+                <h2>{selectedQuest.name}</h2>
+                <p>
+                  <strong>Description:</strong> {selectedQuest.description}
+                </p>
+                <p>
+                  <strong>Reward:</strong> {selectedQuest.reward}
+                </p>
+              </div>
+            ) : (
+              <p className="placeholder">Select a quest to view details</p>
+            )}
           </div>
         </div>
       </div>

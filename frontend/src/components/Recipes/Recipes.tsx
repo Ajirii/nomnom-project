@@ -43,40 +43,38 @@ const Recipes = () => {
   const [selectedRecipe, setSelectedRecipe] = useState<Recipe | null>(null);
 
   return (
-    <div id="quests">
-      <div className="row">
-        <div className="main">
-          <div className="recipe-container">
-            <div className="master">
-              <h2>Recipe Collection</h2>
-              <ul>
-                {recipeDetails.map((recipe) => (
-                  <li
-                    key={recipe.id}
-                    onClick={() => setSelectedRecipe(recipe)}
-                    className={selectedRecipe?.id === recipe.id ? "active" : ""}
-                  >
-                    {recipe.name}
-                  </li>
-                ))}
-              </ul>
-            </div>
+    <div className="row">
+      <div className="main">
+        <div className="recipe-container">
+          <div className="master">
+            <h2>Recipe Collection</h2>
+            <ul>
+              {recipeDetails.map((recipe) => (
+                <li
+                  key={recipe.id}
+                  onClick={() => setSelectedRecipe(recipe)}
+                  className={selectedRecipe?.id === recipe.id ? "active" : ""}
+                >
+                  {recipe.name}
+                </li>
+              ))}
+            </ul>
+          </div>
 
-            <div className="detail">
-              {selectedRecipe ? (
-                <div>
-                  <h2>{selectedRecipe.name}</h2>
-                  <p>
-                    <strong>Ingredients:</strong> {selectedRecipe.ingredients}
-                  </p>
-                  <p>
-                    <strong>Description:</strong> {selectedRecipe.description}
-                  </p>
-                </div>
-              ) : (
-                <p className="placeholder">Select a recipe to view details</p>
-              )}
-            </div>
+          <div className="detail">
+            {selectedRecipe ? (
+              <div>
+                <h2>{selectedRecipe.name}</h2>
+                <p>
+                  <strong>Ingredients:</strong> {selectedRecipe.ingredients}
+                </p>
+                <p>
+                  <strong>Description:</strong> {selectedRecipe.description}
+                </p>
+              </div>
+            ) : (
+              <p className="placeholder">Select a recipe to view details</p>
+            )}
           </div>
         </div>
       </div>
