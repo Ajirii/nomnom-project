@@ -17,6 +17,8 @@ import Footer from "./components/Footer/Footer";
 import "./components/Footer/Footer.css";
 import Start from "./components/Start/Start";
 import "./components/Start/Start.css";
+import ClickEffects from "./components/MouseEffects/ClickEffects";
+import "./components/MouseEffects/ClickEffects.css";
 
 const App = () => {
   const [activeComponent, setActiveComponent] = useState<string>("start");
@@ -40,6 +42,7 @@ const App = () => {
 
   return (
     <main>
+      <ClickEffects />
       {activeComponent === "start" && <Start onStartClick={handleStartClick} />}
       {activeComponent !== "start" && (
         <>
