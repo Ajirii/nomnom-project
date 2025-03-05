@@ -1,4 +1,4 @@
-const Mood = ({ hunger }: { hunger: number }) => {
+const Companion = ({ hunger }: { hunger: number }) => {
   return (
     <div className="row">
       <div className="main">
@@ -25,8 +25,7 @@ const Mood = ({ hunger }: { hunger: number }) => {
             ></div>
           </div>
 
-          {/* Mood Status */}
-          <div className="mood-status">
+          {/* <div className="mood-status">
             <p className="status">
               {hunger > 50
                 ? "NomNom is happy! 😊"
@@ -36,15 +35,14 @@ const Mood = ({ hunger }: { hunger: number }) => {
             </p>
           </div>
 
-          {/* Mood Description */}
           <div className="mood-description">
             <p>Complete quests to fill NomNom's HP bar.</p>
             <p>Keep him well-fed to keep him happy! 🍜</p>
-          </div>
+          </div> */}
         </div>
       </div>
     </div>
   );
 };
 
-export default Mood;
+export default Companion;

@@ -23,8 +23,8 @@ const Navbar = ({ onLinkClick }: NavbarProps) => {
         </li>
         <li className="navbar_font">
           <p className="navbar_emotes">😊</p>
-          <a href="#mood" onClick={() => onLinkClick("mood")}>
-            Mood
+          <a href="#companion" onClick={() => onLinkClick("companion")}>
+            Companion
           </a>
         </li>
         <li className="navbar_font">
@@ -72,8 +72,8 @@ const Navbar = ({ onLinkClick }: NavbarProps) => {
                 </a>
               </li>
               <li className="navbar_font">
-                <a href="#mood" onClick={() => onLinkClick("mood")}>
-                  Mood
+                <a href="#companion" onClick={() => onLinkClick("companion")}>
+                  Companion
                 </a>
               </li>
               <li className="navbar_font">
