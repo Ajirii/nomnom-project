@@ -72,7 +72,7 @@
 }
 
 .cosmetics-header {
-  font-size: 20px;
+  font-size: 30px;
   font-weight: bold;
   text-align: center;
   margin-bottom: 10px;
@@ -81,16 +81,20 @@
 
 .cosmetics-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 10px;
+  grid-template-columns: repeat(5, 1fr);
+  column-gap: 10px;
+  row-gap: 40px;
   width: 100%;
-  padding: 20px;
-  padding-left: 30px;
+  justify-items: center;
+  padding: 30px;
+  padding-left: 40px;
+  padding-bottom: 40 px;
+  
 }
 
 .cosmetic-slot {
-  width: 80px;
-  height: 80px;
+  width: 120px;
+  height: 120px;
   border: 2px solid #ddd;
   background: #f7f7f7;
   border-radius: 8px;
@@ -105,6 +109,43 @@
   background: #e0e0e0;
   border-color: #bbb;
 }
+.cosmetics-tabs {
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+  margin-bottom: 10px;
+  gap: 10px;
+}
+
+.cosmetics-tab {
+  background: #f0f0f0;
+  border: none;
+  padding: 40px 40px;
+  font-family: "Press Start 2P", cursive;
+  border-radius: 8px 8px 0 0;
+  border: 2px solid #ccc;
+  border-bottom: none;
+  cursor: pointer;
+  transition: 0.2s ease-in-out;
+  flex: 1;                    
+  text-align: center;
+  min-width: 200px;          
+  max-width: 500px;    
+  
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px 0;
+  height: 60px;
+}
+
+.cosmetics-tab.active {
+  background: white;
+  font-weight: bold;
+  color: black;
+  border-bottom: 2px solid white;
+}
+
 
 @media screen and (max-width: 768px) {
   .cosmetics-container {

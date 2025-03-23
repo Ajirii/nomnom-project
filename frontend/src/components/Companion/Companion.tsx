@@ -1,12 +1,32 @@
+import { useState } from "react";
+
 const Companion = ({ hunger }: { hunger: number }) => {
+  const [activeTab, setActiveTab] = useState(0);
+
+  const tabTitles = ["Head", "Eyes", "Accessories", "Background"]; // Customize these
+  
+
   return (
     <div className="row">
       <div className="main">
         {/* Cosmetics Section */}
         <div className="cosmetics-container">
+          <div className="cosmetics-tabs">
+            {tabTitles.map((title, index) => (
+              <button
+                key={index}
+                className={`cosmetics-tab ${activeTab === index ? "active" : ""}`}
+                onClick={() => setActiveTab(index)}
+              >
+                {title}
+              </button>
+            ))}
+          </div>
+
           <h2 className="cosmetics-header">Cosmetics</h2>
+
           <div className="cosmetics-grid">
-            {[...Array(8)].map((_, index) => (
+            {[...Array(10)].map((_, index) => (
               <div key={index} className="cosmetic-slot"></div>
             ))}
           </div>
@@ -14,7 +34,6 @@ const Companion = ({ hunger }: { hunger: number }) => {
 
         {/* Mood Box */}
         <div className="mood-container">
-          {/* HP Bar */}
           <div className="hp-bar">
             <div
               className="hp-fill"
@@ -24,21 +43,6 @@ const Companion = ({ hunger }: { hunger: number }) => {
               }}
             ></div>
           </div>
-
-          {/* <div className="mood-status">
-            <p className="status">
-              {hunger > 50
-                ? "NomNom is happy! 😊"
-                : hunger > 20
-                ? "NomNom is getting hungry! 😟"
-                : "NomNom is starving! 😢"}
-            </p>
-          </div>
-
-          <div className="mood-description">
-            <p>Complete quests to fill NomNom's HP bar.</p>
-            <p>Keep him well-fed to keep him happy! 🍜</p>
-          </div> */}
         </div>
       </div>
     </div>
