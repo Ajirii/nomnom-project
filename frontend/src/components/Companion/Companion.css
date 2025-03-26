@@ -86,9 +86,7 @@
   row-gap: 40px;
   width: 100%;
   justify-items: center;
-  padding: 30px;
-  padding-left: 40px;
-  padding-bottom: 40 px;
+  padding: 30px 40px 40px 40px;
   
 }
 
@@ -146,6 +144,106 @@
   border-bottom: 2px solid white;
 }
 
+.save-checkbox {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-family: "Press Start 2P", cursive;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #333;
+}
+
+.save-selection-wrapper {
+  position: absolute;
+  top: 15px;
+  right: 30px;
+  z-index: 2;
+}
+
+
+.styled-checkbox {
+  display: none; /* Hide default checkbox */
+}
+
+.styled-label {
+  background-color: #b85555;
+  color: white;
+  font-family: "Press Start 2P", cursive;
+  font-size: 14px;
+  padding: 8px 10px;
+  border-radius: 8px;
+  border: 1px solid black;
+  cursor: pointer;
+  display: inline-block;
+  text-align: center;
+  transition: background 0.s ease-in-out;
+}
+
+.styled-checkbox:checked + .styled-label {
+  background-color: #833e3e;
+}
+
+
+.info-button {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  padding: 6px 12px;
+  font-size: 20px;
+  border-radius: 50%;
+  border: none;
+  background: #eee;
+  cursor: pointer;
+  font-family: "Press Start 2P", cursive;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+.modal {
+  background: white;
+  padding: 30px 40px;
+  border-radius: 12px;
+  text-align: center;
+  max-width: 400px;
+  font-family: "Press Start 2P", cursive;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.modal h2 {
+  margin-bottom: 20px;
+  font-size: 22px;
+}
+
+.modal p {
+  font-size: 14px;
+  margin-bottom: 20px;
+}
+
+.close-button {
+  background: #555;
+  color: white;
+  border: none;
+  padding: 8px 20px;
+  cursor: pointer;
+  border-radius: 6px;
+  font-size: 12px;
+  font-family: inherit;
+}
 
 @media screen and (max-width: 768px) {
   .cosmetics-container {
@@ -201,4 +299,10 @@
   .status {
     font-size: 14px;
   }
+
+  .modal-overlay {
+    align-items: flex-start;
+    padding-top: 60px;
+  }
+  
 }
