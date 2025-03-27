@@ -3,80 +3,108 @@ import { useState } from "react";
 interface Recipe {
   id: number;
   name: string;
-  ingredients: string;
+  image: string;
+  category: string;
   description: string;
 }
 
-const recipeDetails = [
+const recipes: Recipe[] = [
   {
     id: 1,
-    name: "Pudding",
-    ingredients:
-      "2 eggs, 1 tablespoon of butter, 1/3 cup of sugar, 3 tablespoons of cornstarch, 1/8 teaspoon of salt, 2 cups of milk, 1 teaspoon vanilla extract",
-    description:
-      "Mix everything together, cook it, store it in the fridge until its cold and it's done!",
+    name: "Fried Eggs",
+    image: "/assets/recipes/fried-eggs.jpg",
+    category: "Breakfast",
+    description: "Made with eggs, lettuce, salt, oil and other ingredients.",
   },
   {
     id: 2,
-    name: "Fried Rice",
-    ingredients:
-      "4 cups of rice, 3-4 tablespoons of soy sauce, 2 eggs, any vegetables",
-    description: "Put everything in a pan and viola!",
+    name: "Hawaiian Pizza",
+    image: "/assets/recipes/hawaiian-pizza.jpg",
+    category: "Main Dishes",
+    description: "Made with eggs, lettuce, salt, oil and other ingredients.",
   },
   {
     id: 3,
-    name: "Tomato Pasta",
-    ingredients:
-      "1 can of tomatoes, any pasta noodles, salt to taste, 4 gloves of garlic, 1 tablespoon of chopped basil, 1/4 cup of parmesan cheese",
-    description: "Boil the pasta, cook the rest.",
+    name: "Martinez Cocktail",
+    image: "/assets/recipes/cocktail.jpg",
+    category: "Drinks",
+    description: "Made with eggs, lettuce, salt, oil and other ingredients.",
   },
   {
     id: 4,
-    name: "Miso Soup",
-    ingredients:
-      "2 cups of water, 1 tablespoon of miso, 1 tsp hondashi, green onion",
-    description: "Toss it in, mix, and its ready to eat!",
+    name: "Butterscotch Cake",
+    image: "/assets/recipes/cake.jpg",
+    category: "Desserts",
+    description: "Made with eggs, lettuce, salt, oil and other ingredients.",
+  },
+  {
+    id: 5,
+    name: "Mint Lemonade",
+    image: "/assets/recipes/mint-lemonade.jpg",
+    category: "Drinks",
+    description: "Made with eggs, lettuce, salt, oil and other ingredients.",
+  },
+  {
+    id: 6,
+    name: "Chocolate Icecream",
+    image: "/assets/recipes/chocolate-icecream.jpg",
+    category: "Desserts",
+    description: "Made with eggs, lettuce, salt, oil and other ingredients.",
+  },
+  {
+    id: 7,
+    name: "Cheese Burger",
+    image: "/assets/recipes/cheese-burger.jpg",
+    category: "Main Dishes",
+    description: "Made with eggs, lettuce, salt, oil and other ingredients.",
+  },
+  {
+    id: 8,
+    name: "Classic Waffles",
+    image: "/assets/recipes/classic-waffles.jpg",
+    category: "Breakfast",
+    description: "Made with eggs, lettuce, salt, oil and other ingredients.",
   },
 ];
 
+const categories = ["All", "Breakfast", "Main Dishes", "Drinks", "Desserts"];
+
 const Recipes = () => {
-  const [selectedRecipe, setSelectedRecipe] = useState<Recipe | null>(null);
+  const [activeCategory, setActiveCategory] = useState("All");
+
+  const filteredRecipes =
+    activeCategory === "All"
+      ? recipes
+      : recipes.filter((recipe) => recipe.category === activeCategory);
 
   return (
-    <div className="row">
-      <div className="main">
-        <div className="recipe-container">
-          <div className="master">
-            <h2>Recipe Collection</h2>
-            <ul>
-              {recipeDetails.map((recipe) => (
-                <li
-                  key={recipe.id}
-                  onClick={() => setSelectedRecipe(recipe)}
-                  className={selectedRecipe?.id === recipe.id ? "active" : ""}
-                >
-                  {recipe.name}
-                </li>
-              ))}
-            </ul>
-          </div>
+    <div className="recipes-section">
+      <h1 className="recipes-title">Recipes</h1>
+      <p className="recipes-subtitle">Explore recipes</p>
 
-          <div className="detail">
-            {selectedRecipe ? (
-              <div>
-                <h2>{selectedRecipe.name}</h2>
-                <p>
-                  <strong>Ingredients:</strong> {selectedRecipe.ingredients}
-                </p>
-                <p>
-                  <strong>Description:</strong> {selectedRecipe.description}
-                </p>
-              </div>
-            ) : (
-              <p className="placeholder">Select a recipe to view details</p>
-            )}
+      <div className="recipe-filters">
+        {categories.map((cat) => (
+          <button
+            key={cat}
+            className={`filter-btn ${activeCategory === cat ? "active" : ""}`}
+            onClick={() => {
+              setActiveCategory(cat);
+              console.log("Selected Category:", cat);
+            }}
+          >
+            {cat}
+          </button>
+        ))}
+      </div>
+
+      <div className="recipe-grid">
+        {filteredRecipes.map((recipe) => (
+          <div className="recipe-card" key={recipe.id}>
+            <img src={recipe.image} alt={recipe.name} className="recipe-img" />
+            <h2 className="recipe-name">{recipe.name}</h2>
+            <p className="recipe-desc">{recipe.description}</p>
           </div>
-        </div>
+        ))}
       </div>
     </div>
   );
