@@ -79,7 +79,7 @@
   cursor: pointer;
   font-family: "Press Start 2P", cursive;
   transition: background 0.2s ease-in-out;
-  margin-bottom: 30px;
+  margin-bottom: 20px;
 }
 
 
@@ -91,4 +91,23 @@
   background: #a23a3a;
   color: white;
   border-color: #a23a3a;
+}
+
+.favorites-toggle {
+  margin: 20px 0;
+  text-align: center;
+}
+
+.favorite-btn {
+  font-size: 24px;
+  background: none;
+  border: none;
+  margin-top: 10px;
+  margin-bottom: 15px;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.favorite-btn:hover {
+  transform: scale(1.2);
 }

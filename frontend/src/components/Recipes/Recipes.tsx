@@ -71,25 +71,35 @@ const categories = ["All", "Breakfast", "Main Dishes", "Drinks", "Desserts"];
 
 const Recipes = () => {
   const [activeCategory, setActiveCategory] = useState("All");
+  const [favorites, setFavorites] = useState<number[]>([]);
+  const [showingFavorites, setShowingFavorites] = useState(false);
 
-  const filteredRecipes =
-    activeCategory === "All"
-      ? recipes
-      : recipes.filter((recipe) => recipe.category === activeCategory);
+  const toggleFavorite = (id: number) => {
+    setFavorites((prev) =>
+      prev.includes(id) ? prev.filter((favId) => favId !== id) : [...prev, id]
+    );
+  };
+
+  const filteredRecipes = recipes.filter((recipe) => {
+    if (showingFavorites) return favorites.includes(recipe.id);
+    if (activeCategory === "All") return true;
+    return recipe.category === activeCategory;
+  });
 
   return (
     <div className="recipes-section">
       <h1 className="recipes-title">Recipes</h1>
       <p className="recipes-subtitle">Explore recipes</p>
 
+      {/* Category Filters */}
       <div className="recipe-filters">
         {categories.map((cat) => (
           <button
             key={cat}
-            className={`filter-btn ${activeCategory === cat ? "active" : ""}`}
+            className={`filter-btn ${activeCategory === cat && !showingFavorites ? "active" : ""}`}
             onClick={() => {
               setActiveCategory(cat);
-              console.log("Selected Category:", cat);
+              setShowingFavorites(false);
             }}
           >
             {cat}
@@ -97,12 +107,29 @@ const Recipes = () => {
         ))}
       </div>
 
+      {/* Favorites Toggle */}
+      <div className="favorites-toggle">
+        <button
+          className={`filter-btn ${showingFavorites ? "active" : ""}`}
+          onClick={() => setShowingFavorites((prev) => !prev)}
+        >
+          {showingFavorites ? "Show All Recipes" : "Show Favorites"}
+        </button>
+      </div>
+
+      {/* Recipe Grid */}
       <div className="recipe-grid">
         {filteredRecipes.map((recipe) => (
           <div className="recipe-card" key={recipe.id}>
             <img src={recipe.image} alt={recipe.name} className="recipe-img" />
             <h2 className="recipe-name">{recipe.name}</h2>
             <p className="recipe-desc">{recipe.description}</p>
+            <button
+              className="favorite-btn"
+              onClick={() => toggleFavorite(recipe.id)}
+            >
+              {favorites.includes(recipe.id) ? "❤️" : "🤍"}
+            </button>
           </div>
         ))}
       </div>
