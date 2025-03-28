@@ -168,6 +168,8 @@ const Recipes = () => {
   const [showingFavorites, setShowingFavorites] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [selectedRecipe, setSelectedRecipe] = useState<Recipe | null>(null);
+  const [searchQuery, setSearchQuery] = useState("");
+
 
   const toggleFavorite = (id: number) => {
     setFavorites((prev) =>
@@ -176,15 +178,31 @@ const Recipes = () => {
   };
 
   const filteredRecipes = recipes.filter((recipe) => {
-    if (showingFavorites) return favorites.includes(recipe.id);
-    if (activeCategory === "All") return true;
-    return recipe.category === activeCategory;
+    const matchesCategory =
+      activeCategory === "All" || recipe.category === activeCategory;
+    const matchesFavorites = !showingFavorites || favorites.includes(recipe.id);
+    const matchesSearch =
+      recipe.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      recipe.description.toLowerCase().includes(searchQuery.toLowerCase());
+  
+    return matchesCategory && matchesFavorites && matchesSearch;
   });
+  
 
   return (
     <div className="recipes-section">
-      <h1 className="recipes-title">Recipes</h1>
+      <h1 className="recipes-title">Recipes🍳</h1>
       <p className="recipes-subtitle">Explore recipes</p>
+
+          <div className="search-bar">
+      <input
+        type="text"
+        placeholder=" Search recipes... "
+        value={searchQuery}
+        onChange={(e) => setSearchQuery(e.target.value)}
+      />
+    </div>
+
 
       <div className="recipe-filters">
         {categories.map((cat) => (
@@ -206,7 +224,7 @@ const Recipes = () => {
           className={`filter-btn ${showingFavorites ? "active" : ""}`}
           onClick={() => setShowingFavorites((prev) => !prev)}
         >
-          {showingFavorites ? "Show All Recipes" : "Show Favorites"}
+          {showingFavorites ? "Show All Recipes" : "Show Favorites "}
         </button>
       </div>
 
