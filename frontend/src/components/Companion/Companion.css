@@ -91,8 +91,8 @@
 }
 
 .cosmetic-slot {
-  width: 120px;
-  height: 120px;
+  width: 150px;
+  height: 150px;
   border: 2px solid #ddd;
   background: #f7f7f7;
   border-radius: 8px;
@@ -116,6 +116,7 @@
 }
 
 .cosmetics-tab {
+  font-size: 18px; 
   background: #f0f0f0;
   border: none;
   padding: 40px 40px;
@@ -127,15 +128,15 @@
   transition: 0.2s ease-in-out;
   flex: 1;                    
   text-align: center;
-  min-width: 200px;          
+  min-width: 250px;          
   max-width: 500px;    
-  
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 20px 0;
   height: 60px;
 }
+
 
 .cosmetics-tab.active {
   background: white;
@@ -178,7 +179,7 @@
   color: white;
   font-family: "Press Start 2P", cursive;
   font-size: 14px;
-  padding: 8px 10px;
+  padding: 10px 10px;
   border-radius: 8px;
   border: 1px solid black;
   cursor: pointer;
