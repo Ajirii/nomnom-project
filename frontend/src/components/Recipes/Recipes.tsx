@@ -1,4 +1,6 @@
 import { useState } from "react";
+import eggIcon from "../../assets/cosmetics/egg1.png";
+
 
 interface Recipe {
   id: number;
@@ -191,7 +193,12 @@ const Recipes = () => {
 
   return (
     <div className="recipes-section">
-      <h1 className="recipes-title">Recipes🍳</h1>
+      <div className="recipes-header">
+      
+  <h1 className="recipes-title">Recipes </h1>
+  <img src={eggIcon} alt="fried egg" className="recipes-icon" />
+</div>
+
       <p className="recipes-subtitle">Explore recipes</p>
 
           <div className="search-bar">
