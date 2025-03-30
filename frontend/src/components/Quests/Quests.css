@@ -82,14 +82,14 @@
   margin-top: 20px;
 }
 
-/* Additional Styles for Quest Page */
+
 
 .quest-section-heading {
   font-weight: bold;
   border-bottom: 2px solid #ccc;
   margin: 15px 0 10px;
   padding-bottom: 4px;
-  font-size: 18px;
+  font-size: 20px;
   font-family: "Press Start 2P", cursive;
 }
 
@@ -113,11 +113,11 @@
 }
 
 .quest-item.accepted {
-  background: #ffe5b4; /* pastel orange */
+  background: #ffe5b4; 
 }
 
 .quest-item.completed {
-  background: #c3f7c9; /* pastel green */
+  background: #c3f7c9; 
 }
 
 .quest-btn {
@@ -170,6 +170,15 @@
 .quest-item.completed:hover {
   background-color: #7edc7d; 
 }
+
+.quest-icon {
+  height: 65px;
+  width: 65px;
+  vertical-align: middle;
+  margin-right: 15px;
+  margin-left: 18px;
+}
+
 
 
 @media screen and (max-width: 600px) {

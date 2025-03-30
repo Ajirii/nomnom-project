@@ -1,4 +1,5 @@
 import { useState } from "react";
+import orange from "../../assets/cosmetics/orange.png";
 
 interface Quest {
   id: number;
@@ -52,7 +53,7 @@ const Quests = () => {
   };
 
   const groupedQuests = {
-    available: quests.filter(q => q.status === "available"),
+    available : quests.filter(q => q.status === "available"),
     accepted: quests.filter(q => q.status === "accepted"),
     completed: quests.filter(q => q.status === "completed"),
   };
@@ -70,7 +71,9 @@ const Quests = () => {
       <div className="main">
         <div className="quest-container">
           <div className="master">
-            <h2>Quest Log</h2>
+            <h2>Quest Log 
+            <img src={orange} alt="orange" className="quest-icon" />
+            </h2>
             {Object.entries(groupedQuests).map(([status, quests]) => (
               <div key={status}>
                 <h3 className="quest-section-heading">
