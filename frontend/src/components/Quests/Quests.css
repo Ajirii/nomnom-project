@@ -82,6 +82,96 @@
   margin-top: 20px;
 }
 
+/* Additional Styles for Quest Page */
+
+.quest-section-heading {
+  font-weight: bold;
+  border-bottom: 2px solid #ccc;
+  margin: 15px 0 10px;
+  padding-bottom: 4px;
+  font-size: 18px;
+  font-family: "Press Start 2P", cursive;
+}
+
+.quest-item {
+  padding: 10px;
+  margin: 5px 0;
+  cursor: pointer;
+  background: #e0e0e0;
+  border-radius: 5px;
+  transition: background 0.3s;
+  font-family: "Press Start 2P", cursive;
+}
+
+.quest-item:hover {
+  background: #d4d4d4;
+}
+
+.quest-item.active {
+  background: #bfbfbf;
+  font-weight: bold;
+}
+
+.quest-item.accepted {
+  background: #ffe5b4; /* pastel orange */
+}
+
+.quest-item.completed {
+  background: #c3f7c9; /* pastel green */
+}
+
+.quest-btn {
+  font-family: "Press Start 2P", cursive;
+  padding: 20px 28px;
+  font-size: 16px;
+  border: 2px solid #999;
+  border-radius: 30px;
+  cursor: pointer;
+  margin: 5px;
+  margin-top: 30px;
+  transition: background 0.3s, color 0.3s;
+}
+.quest-btn-accept {
+  background: white;
+  color: #b85555;
+  border-color: #b85555;
+}
+
+.quest-btn-accept:hover,
+.quest-btn-accept.active {
+  background: #b85555;
+  color: white;
+}
+
+.quest-btn-complete {
+  background: white;
+  color: #4CAF50;
+  border-color: #4CAF50;
+}
+
+.quest-btn-complete:hover,
+.quest-btn-complete.active {
+  background: #4CAF50;
+  color: white;
+}
+
+.quest-item.accepted {
+  background-color: #ffe0a3;
+}
+
+.quest-item.accepted:hover {
+  background-color: #f7b84e; 
+}
+
+.quest-item.completed {
+  background-color: #baf9ba;
+}
+
+.quest-item.completed:hover {
+  background-color: #7edc7d; 
+}
+
+
 @media screen and (max-width: 600px) {
   .quest-container {
     flex-direction: column;
