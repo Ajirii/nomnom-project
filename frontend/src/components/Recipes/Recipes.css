@@ -6,7 +6,7 @@
 
 .recipes-title {
   font-family: "Press Start 2P", cursive;
-  font-size: 36px;
+  font-size: 38px;
   margin-bottom: 18px;
 }
 
@@ -75,7 +75,7 @@
 }
 
 .filter-btn {
-  padding: 15px 20px;
+  padding: 20px 25px;
   border: 2px solid #ccc;
   background: white;
   font-size: 14px;
@@ -245,7 +245,7 @@
 .search-bar input {
   padding: 18px 20px;
   width: 80%;
-  max-width: 800px;
+  max-width: 880px;
   font-size: 16px;
   border: 3px solid #ccc;
   border-radius: 30px;
