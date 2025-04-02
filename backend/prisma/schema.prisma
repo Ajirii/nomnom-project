@@ -25,3 +25,13 @@ model User {
   name String
   email String @unique
 }
+
+model Recipe {
+  id String @id @default(uuid())
+  title String
+  ingredients String[]
+  instructions String[]
+  cookingMinutes Int
+  servings Int
+  notes String
+}

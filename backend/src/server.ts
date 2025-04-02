@@ -1,7 +1,7 @@
 import express, { Request, Response } from 'express';
-import recipeRoutes from './routes/recipes.routes';
+import recipeRoutes from './recipes/recipes.routes';
 const app = express();
-const port = 3000;
+const port:number = parseInt(process.argv[2]);
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use('/api/recipes', recipeRoutes)
