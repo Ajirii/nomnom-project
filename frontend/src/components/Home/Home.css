@@ -26,11 +26,13 @@
   gap: 10px;
   width: 100%;
   max-width: 600px;
-  position: absolute;
-  bottom: 10%;
+  position: relative; /* Fixes send button issue */
+  bottom: 0;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
+/* Ingredient Input */
+/* Ingredient Input */
 .chat-input {
   width: 100%;
   padding: 10px;
@@ -38,12 +40,43 @@
   border: 1px solid #ccc;
   font-size: 16px;
   outline: none;
+  background-color: #f5f5dc; /* Cream background */
+  color: #006400; /* Dark green text */
+  font-family: inherit;
 }
 
 .chat-input:focus {
   border-color: #b85555;
 }
 
+/* Cuisine Dropdown */
+/* Cuisine Dropdown */
+.cuisine-select {
+  width: 100%;
+  padding: 10px;
+  border-radius: 20px;
+  border: 1px solid #ccc;
+  font-size: 16px;
+  outline: none;
+  margin-top: 10px;
+  cursor: pointer;
+  background-color: #f5f5dc; /* Cream background */
+  color: grey; /* Dark green text */
+  font-family: inherit; /* Matches the ingredient input */
+}
+
+/* Placeholder text styling */
+.cuisine-select option:first-child {
+  color: #999;
+  font-style: italic;
+}
+
+/* Match focus effect */
+.cuisine-select:focus {
+  border-color: #b85555;
+}
+
+/* Send Button */
 .send-button {
   width: 100%;
   background-color: #b85555;
@@ -56,6 +89,68 @@
   font-family: inherit;
 }
 
+.send-button:disabled {
+  background-color: #aaa;
+  cursor: not-allowed;
+}
+
+/* Ingredients List */
+.ingredients-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 10px;
+  width: 100%;
+}
+
+.ingredient-tag {
+  background-color: #f3f3f3;
+  padding: 8px 12px;
+  border-radius: 15px;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #333;
+}
+
+.remove-tag {
+  cursor: pointer;
+  color: red;
+  font-weight: bold;
+}
+
+/* Retro Message */
+.retro-message {
+  margin-top: 20px;
+  font-size: 16px;
+  font-weight: bold;
+  color: #ffcc00;
+  background: #222;
+  padding: 10px 15px;
+  border-radius: 5px;
+  font-family: 'Press Start 2P', cursive;
+  text-align: center;
+}
+
+/* Animations */
+.happy-animation {
+  font-size: 30px;
+  color: #ffb900;
+  margin-top: 20px;
+  animation: bounce 1s ease-in-out infinite;
+}
+
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+/* Mobile Styles */
 @media (max-width: 479px) {
   .input-container {
     padding: 15px 30px 50px 30px;
@@ -63,7 +158,7 @@
     margin-bottom: 60px;
   }
 
-  .chat-input {
+  .chat-input, .cuisine-select {
     font-size: 14px;
     padding: 12px;
   }
@@ -72,8 +167,13 @@
     font-size: 14px;
     padding: 12px;
   }
+
+  .message {
+    font-size: 14px;
+  }
 }
 
+/* Tablet Styles */
 @media (min-width: 480px) and (max-width: 767px) {
   .input-container {
     padding: 18px 35px 60px 35px;
@@ -81,7 +181,7 @@
     margin-bottom: 70px;
   }
 
-  .chat-input {
+  .chat-input, .cuisine-select {
     font-size: 15px;
     padding: 13px;
   }
@@ -90,8 +190,13 @@
     font-size: 15px;
     padding: 13px;
   }
+
+  .message {
+    font-size: 16px;
+  }
 }
 
+/* Desktop Styles */
 @media (min-width: 768px) {
   .input-container {
     padding: 20px 60px 80px 60px;
@@ -99,7 +204,7 @@
     margin-bottom: 100px;
   }
 
-  .chat-input {
+  .chat-input, .cuisine-select {
     font-size: 18px;
     padding: 15px;
   }
@@ -107,5 +212,9 @@
   .send-button {
     font-size: 18px;
     padding: 15px;
+  }
+
+  .message {
+    font-size: 18px;
   }
 }
