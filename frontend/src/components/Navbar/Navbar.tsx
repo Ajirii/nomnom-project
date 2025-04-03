@@ -3,10 +3,10 @@ import { GiHamburgerMenu } from "react-icons/gi";
 
 //import navbar images
 import cheesecake from "../../assets/pixel_images/23_cheesecake_dish.png";
-import mirror from "../../assets/pixel_images/item_mirror.png";
-import book from "../../assets/pixel_images/item_book_red_lines.png";
-import flower from "../../assets/pixel_images/item_flower_daisy.png";
-import basket from "../../assets/pixel_images/basket_yellow.png";
+import gummy from "../../assets/pixel_images/50_giantgummybear.png";
+import book from "../../assets/pixel_images/book.png";
+import daisy from "../../assets/pixel_images/daisy.png";
+import ramen from "../../assets/pixel_images/ramen_pixel.png";
 
 interface NavbarProps {
   onLinkClick: (component: string) => void;
@@ -18,30 +18,30 @@ const Navbar = ({ onLinkClick }: NavbarProps) => {
   return (
     <nav className="navbar">
       <div className="navbar_heading">
-        <img src={basket} className="navbar_heading_emote" />
+        <img src={ramen} className="navbar_heading_emote" />
         <h1 className="navbar_title">NomNom</h1>
       </div>
       <ul className="navbar_links">
         <li className="navbar_font">
-          <img src={flower} className="navbar_emotes" />
+          <img src={daisy} className="navbar_daisy" />
           <a href="#home" onClick={() => onLinkClick("home")}>
             Home
           </a>
         </li>
         <li className="navbar_font">
-          <img src={mirror} className="navbar_emotes" />
+          <img src={gummy} className="navbar_small_emotes" />
           <a href="#companion" onClick={() => onLinkClick("companion")}>
             Companion
           </a>
         </li>
         <li className="navbar_font">
-          <img src={book} className="navbar_emotes" />
+          <img src={book} className="navbar_small_emotes" />
           <a href="#quests" onClick={() => onLinkClick("quests")}>
             Quests
           </a>
         </li>
         <li className="navbar_font">
-          <img src={cheesecake} className="navbar_emotes" />
+          <img src={cheesecake} className="navbar_cheesecake" />
           <a href="#recipes" onClick={() => onLinkClick("recipes")}>
             Recipes
           </a>

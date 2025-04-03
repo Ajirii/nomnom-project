@@ -32,12 +32,26 @@
 
 .navbar_heading_emote {
   position: relative;
-  height: 70px;
+  height: 50px;
   left: 20px;
+  bottom: 19px;
+  margin-top: 30px;
 }
 
-.navbar_emotes {
-  height: 30px;
+.navbar_daisy {
+  position: relative;
+  height: 36px;
+  left: 5px;
+}
+
+.navbar_small_emotes {
+  position: relative;
+  height: 50px;
+  left: 10px;
+}
+
+.navbar_cheesecake {
+  height: 40px;
 }
 
 .navbar_font {
