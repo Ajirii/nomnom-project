@@ -2,11 +2,11 @@ import { useState } from "react";
 import { GiHamburgerMenu } from "react-icons/gi";
 
 //import navbar images
-import cheesecake from "../../assets/pixel_images/23_cheesecake_dish.png";
-import gummy from "../../assets/pixel_images/50_giantgummybear.png";
-import book from "../../assets/pixel_images/book.png";
-import daisy from "../../assets/pixel_images/daisy.png";
-import ramen from "../../assets/pixel_images/ramen_pixel.png";
+import cheesecake from "/assets/pixel_images/23_cheesecake_dish.png";
+import gummy from "/assets/pixel_images/50_giantgummybear.png";
+import book from "/assets/pixel_images/book.png";
+import daisy from "/assets/pixel_images/daisy.png";
+import ramen from "/assets/pixel_images/ramen_pixel.png";
 
 interface NavbarProps {
   onLinkClick: (component: string) => void;
