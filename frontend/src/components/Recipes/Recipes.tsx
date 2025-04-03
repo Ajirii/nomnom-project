@@ -1,5 +1,5 @@
 import { useState } from "react";
-import eggIcon from "../../assets/cosmetics/egg1.png";
+import eggIcon from "../../assets/cosmetics/egg3.png";
 
 
 interface Recipe {
