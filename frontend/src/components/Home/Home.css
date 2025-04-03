@@ -27,29 +27,28 @@
   width: 100%;
   max-width: 600px;
   position: relative; /* Fixes send button issue */
-  bottom: 0;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  margin-bottom: 220px;
 }
 
-/* Ingredient Input */
 /* Ingredient Input */
 .chat-input {
   width: 100%;
   padding: 10px;
+  margin-top: 12px;
   border-radius: 20px;
   border: 1px solid #ccc;
   font-size: 16px;
   outline: none;
-  background-color: #f5f5dc; /* Cream background */
-  color: #006400; /* Dark green text */
+  background-color: #fff;
+  color: grey;
   font-family: inherit;
 }
 
 .chat-input:focus {
-  border-color: #b85555;
+  border-color: gray;
 }
 
-/* Cuisine Dropdown */
 /* Cuisine Dropdown */
 .cuisine-select {
   width: 100%;
@@ -58,11 +57,10 @@
   border: 1px solid #ccc;
   font-size: 16px;
   outline: none;
-  margin-top: 10px;
   cursor: pointer;
-  background-color: #f5f5dc; /* Cream background */
-  color: grey; /* Dark green text */
-  font-family: inherit; /* Matches the ingredient input */
+  background-color: #fff;
+  color: grey;
+  font-family: inherit;
 }
 
 /* Placeholder text styling */
@@ -73,12 +71,13 @@
 
 /* Match focus effect */
 .cuisine-select:focus {
-  border-color: #b85555;
+  border-color: gray;
 }
 
 /* Send Button */
 .send-button {
   width: 100%;
+  margin-top: 16px;
   background-color: #b85555;
   color: white;
   border: none;
@@ -87,6 +86,10 @@
   cursor: pointer;
   font-size: 16px;
   font-family: inherit;
+}
+
+.send-button:hover {
+  background-color: #a75050;
 }
 
 .send-button:disabled {
@@ -122,18 +125,14 @@
 
 /* Retro Message */
 .retro-message {
-  margin-top: 20px;
   font-size: 16px;
   font-weight: bold;
-  color: #ffcc00;
-  background: #222;
-  padding: 10px 15px;
-  border-radius: 5px;
-  font-family: 'Press Start 2P', cursive;
+  color: red;
   text-align: center;
+  margin-bottom: 20px;
 }
 
-/* Animations */
+/* Animations
 .happy-animation {
   font-size: 30px;
   color: #ffb900;
@@ -142,23 +141,24 @@
 }
 
 @keyframes bounce {
-  0%, 100% {
+  0%,
+  100% {
     transform: translateY(0);
   }
   50% {
     transform: translateY(-10px);
   }
-}
+} */
 
 /* Mobile Styles */
 @media (max-width: 479px) {
   .input-container {
     padding: 15px 30px 50px 30px;
     gap: 8px;
-    margin-bottom: 60px;
   }
 
-  .chat-input, .cuisine-select {
+  .chat-input,
+  .cuisine-select {
     font-size: 14px;
     padding: 12px;
   }
@@ -178,10 +178,10 @@
   .input-container {
     padding: 18px 35px 60px 35px;
     gap: 10px;
-    margin-bottom: 70px;
   }
 
-  .chat-input, .cuisine-select {
+  .chat-input,
+  .cuisine-select {
     font-size: 15px;
     padding: 13px;
   }
@@ -201,10 +201,10 @@
   .input-container {
     padding: 20px 60px 80px 60px;
     max-width: 800px;
-    margin-bottom: 100px;
   }
 
-  .chat-input, .cuisine-select {
+  .chat-input,
+  .cuisine-select {
     font-size: 18px;
     padding: 15px;
   }

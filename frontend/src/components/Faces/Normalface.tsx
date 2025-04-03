@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+// import { gsap } from "gsap";
 
 const NormalFace: React.FC = () => {
   useEffect(() => {

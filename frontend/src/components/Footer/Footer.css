@@ -1,7 +1,9 @@
 .footer {
   padding: 20px;
   text-align: center;
-  background: #f8f8f8;
+  position: relative;
+  width: 100%;
+  margin-top: auto;
 }
 
 .footer p {

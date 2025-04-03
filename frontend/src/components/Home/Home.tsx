@@ -25,7 +25,7 @@ const Home = () => {
     setMessage("");
 
     if (ingredients.length < 3) {
-      setMessage("Dish needs atleast 3 ingredients");
+      setMessage("Dish needs at least 3 ingredients");
       return;
     }
 
@@ -38,13 +38,16 @@ const Home = () => {
 
     setTimeout(() => {
       setLoading(false);
-      setMessage(` Your ${cuisine} recipe with ${ingredients.join(", ")} is ready! `);
+      setMessage(
+        ` Your ${cuisine} recipe with ${ingredients.join(", ")} is ready! `
+      );
     }, 2000);
   };
 
   return (
     <div className="row">
       <div className="main">
+        <div> {message && <p className="retro-message">{message}</p>}</div>
         <div className="input-container">
           <input
             type="text"
@@ -57,7 +60,13 @@ const Home = () => {
           <div className="ingredients-list">
             {ingredients.map((ingredient, index) => (
               <div key={index} className="ingredient-tag">
-                {ingredient} <span className="remove-tag" onClick={() => removeIngredient(index)}>✖</span>
+                {ingredient}{" "}
+                <span
+                  className="remove-tag"
+                  onClick={() => removeIngredient(index)}
+                >
+                  ✖
+                </span>
               </div>
             ))}
           </div>
@@ -81,7 +90,6 @@ const Home = () => {
             {loading ? "Generating..." : "Send"}
           </button>
         </div>
-        {message && <p className="retro-message">{message}</p>}
       </div>
     </div>
   );
