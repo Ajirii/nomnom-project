@@ -32,14 +32,12 @@
 
 .navbar_heading_emote {
   position: relative;
-  font-size: 2rem;
-  height: 80px;
+  height: 70px;
   left: 20px;
 }
 
 .navbar_emotes {
-  font-size: 2rem;
-  height: 50px;
+  height: 30px;
 }
 
 .navbar_font {
