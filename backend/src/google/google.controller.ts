@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import * as googleAuthService from "../services/google.service";
+import * as googleAuthService from "./google.service";
 
 export const googleCallback = async (
   req: Request,

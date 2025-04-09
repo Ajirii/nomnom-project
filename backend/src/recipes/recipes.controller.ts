@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { getRecipeByIngredients } from "../services/recipes.service";
+import { getRecipeByIngredients } from "./recipes.service";
 
 export const fetchRecipe = async (
   req: Request,

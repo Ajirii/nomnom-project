@@ -1,5 +1,5 @@
 import express from "express";
-import { googleCallback } from "../controllers/google.controller";
+import { googleCallback } from "./google.controller";
 
 const router = express.Router();
 

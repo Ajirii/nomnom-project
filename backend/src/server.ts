@@ -2,8 +2,8 @@ import express from "express";
 import dotenv from "dotenv";
 
 /* ROUTE IMPORT */
-import recipeRoutes from "./routes/recipes.routes";
-import googleRoutes from "./routes/google.routes";
+import recipeRoutes from "./recipes/recipes.routes";
+import googleRoutes from "./google/google.routes";
 
 /* CONFIGURATIONS */
 dotenv.config();
