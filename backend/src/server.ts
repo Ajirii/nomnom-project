@@ -1,15 +1,22 @@
-import express, { Request, Response } from 'express';
-import recipeRoutes from './recipes/recipes.routes';
+import express from "express";
+import dotenv from "dotenv";
+
+/* ROUTE IMPORT */
+import recipeRoutes from "./routes/recipes.routes";
+import googleRoutes from "./routes/google.routes";
+
+/* CONFIGURATIONS */
+dotenv.config();
 const app = express();
-const port:number = parseInt(process.argv[2]);
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use('/api/recipes', recipeRoutes)
-app.get('/', (req: Request, res: Response) => {
-  res.send({'res': 'Hello World!'});
-});
 
+/* ROUTES */
+app.use("/api/recipes", recipeRoutes);
+app.use("/api/google", googleRoutes);
 
-app.listen(port, () => {
-  console.log(`Server started at http://localhost:${port}`);
+/* SERVER */
+const port = Number(process.env.PORT) || 3001;
+app.listen(port, "0.0.0.0", () => {
+  console.log(`Server running on port ${port}`);
 });
