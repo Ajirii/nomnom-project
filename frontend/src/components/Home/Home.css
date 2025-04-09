@@ -1,23 +1,27 @@
+/* Row that contains both containers */
 .row {
   display: flex;
+  justify-content: center; /* Center items horizontally */
+  align-items: flex-start; /* Align items at the top */
+  flex-direction: column; /* Stack content vertically */
   flex-wrap: wrap;
-  flex: 1;
+  height: auto; /* Allow content to adjust height */
 }
 
+/* Main container */
 .main {
-  flex: auto;
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
-  align-items: center;
-  height: 100vh;
+  align-items: center; /* Center content horizontally */
+  justify-content: flex-start; /* Align content to the top */
+  width: 100%;
   padding: 20px;
   position: relative;
+  margin-top: 20px; /* Move content down a bit */
 }
 
+/* Input Container */
 .input-container {
-  border: none;
-  border-radius: 10px;
   background-color: #fff;
   display: flex;
   flex-direction: column;
@@ -26,9 +30,23 @@
   gap: 10px;
   width: 100%;
   max-width: 600px;
-  position: relative; /* Fixes send button issue */
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  margin-bottom: 220px;
+  margin-bottom: 20px; /* Adjust space between input and recipe */
+  border-radius: 12px;
+  position: relative;
+}
+
+/* Recipe Container */
+.recipe-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Centers the content horizontally */
+  justify-content: flex-start; /* Align content at the top */
+  margin-top: 20px; /* Adjust the space between the input and recipe */
+  padding-bottom: 40px;
+  margin-bottom: 40px; /* Ensure proper space at the bottom */
+  position: relative;
 }
 
 /* Ingredient Input */
