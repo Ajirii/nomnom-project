@@ -1,22 +1,24 @@
 import { Request, Response } from "express";
-import { getRecipeByIngredients } from "./recipes.service"
+import { getRecipeByIngredients } from "./recipes.service";
 
-export const fetchRecipe = async (req: Request, res: Response): Promise<void> => {
-    try{
-        const ingredients = req.query.ingredients as string;
-        const cuisine = req.query.cuisine as string ?? "any";
-        const strict = req.query.strict as string ?? "false";
-        
-        if (!ingredients) {
-            res.status(400).json({error: "No ingredients provided."});
-        } 
+export const fetchRecipe = async (
+  req: Request,
+  res: Response
+): Promise<void> => {
+  try {
+    const ingredients = req.query.ingredients as string;
+    const cuisine = (req.query.cuisine as string) ?? "any";
+    const strict = (req.query.strict as string) ?? "false";
 
-        const recipe = await getRecipeByIngredients(ingredients, cuisine, strict);
-        res.json(recipe);
+    if (!ingredients) {
+      res.status(400).json({ error: "No ingredients provided." });
     }
-    catch (err){
-        if (!res.headersSent) {
-            res.status(500).json({ error: "Internal server error" });
-        }
+
+    const recipe = await getRecipeByIngredients(ingredients, cuisine, strict);
+    res.json(recipe);
+  } catch (err) {
+    if (!res.headersSent) {
+      res.status(500).json({ error: "Internal server error" });
     }
-}
+  }
+};

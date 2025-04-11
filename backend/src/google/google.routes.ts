@@ -1,7 +1,8 @@
 import express from "express";
-import { fetchRecipe } from "./recipes.controller";
+import { googleCallback } from "./google.controller";
+
 const router = express.Router();
 
-router.get("/", fetchRecipe);
+router.get("/", googleCallback);
 
 export default router;
