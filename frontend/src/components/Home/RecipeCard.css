@@ -1,0 +1,64 @@
+.recipe-home-card {
+  width: 100%;
+  max-width: 1000px; /* Makes sure the card doesn't get too wide */
+  background-color: #fff; /* White background for recipe card */
+  padding: 60px; /* Padding inside the card */
+  border-radius: 12px; /* Rounded corners for the card */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Shadow effect */
+  text-align: center; /* Centers the text */
+  text-align: center; /* Center the text */
+}
+
+/* recipe-home title */
+.recipe-home-title {
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 15px;
+  color: #000000;
+}
+
+/* recipe-home description */
+.recipe-home-description {
+  font-size: 16px;
+  color: #6d6d6d;
+  margin-bottom: 20px;
+}
+
+/* Meta data like cooking time and servings */
+.recipe-home-meta {
+  font-size: 14px;
+  color: #6d6d6d;
+  margin-bottom: 20px;
+}
+
+.recipe-home-meta strong {
+  color: #000000; /* Darker color */
+}
+
+/* Ingredients and steps sections */
+.recipe-home-ingredients,
+.recipe-home-steps {
+  text-align: left;
+  margin-top: 25px;
+}
+
+.recipe-home-ingredients h3,
+.recipe-home-steps h3 {
+  font-size: 20px;
+  margin-bottom: 10px;
+  color: #000000;
+}
+
+.recipe-home-ingredients ul,
+.recipe-home-steps ol {
+  margin-left: 20px;
+  padding-left: 10px;
+  color: #6d6d6d;
+}
+
+.recipe-home-ingredients li,
+.recipe-home-steps li {
+  margin-bottom: 8px;
+  line-height: 1.5;
+  color: #6d6d6d;
+}
