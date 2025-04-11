@@ -1,5 +1,8 @@
 import express from "express";
 import dotenv from "dotenv";
+import cors from "cors";
+import helmet from "helmet";
+import morgan from "morgan";
 
 /* ROUTE IMPORT */
 import recipeRoutes from "./recipes/recipes.routes";
@@ -9,6 +12,15 @@ import googleRoutes from "./google/google.routes";
 dotenv.config();
 const app = express();
 app.use(express.json());
+app.use(helmet());
+app.use(helmet.crossOriginResourcePolicy({ policy: "cross-origin" }));
+app.use(morgan("common"));
+app.use(
+  cors({
+    origin: "http://localhost:5173",
+    credentials: true,
+  })
+);
 app.use(express.urlencoded({ extended: true }));
 
 /* ROUTES */
