@@ -5,12 +5,12 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 20px 60px 80px 60px;
+  padding: 20px 60px 50px 60px;
   gap: 10px;
   width: 100%;
   max-width: 600px;
   position: absolute;
-  bottom: 20%;
+  bottom: 3%;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
@@ -41,4 +41,18 @@
   cursor: pointer;
   font-size: 16px;
   font-family: inherit;
+}
+
+.error-message {
+  color: red;
+  font-size: 14px;
+  text-align: center;
+  padding-top: 50px;
+}
+
+.success-message {
+  color: rgb(60, 211, 60);
+  font-size: 14px;
+  text-align: center;
+  padding-top: 50px;
 }

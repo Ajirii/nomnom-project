@@ -1,8 +1,7 @@
 import express from "express";
-import { googleCallback } from "./google.controller";
+import { googleLogin } from "./auth.controller";
 
 const router = express.Router();
-
-router.get("/", googleCallback);
+router.post("/google", googleLogin);
 
 export default router;
