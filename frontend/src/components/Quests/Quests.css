@@ -1,3 +1,5 @@
+
+
 .row {
   display: flex;
   flex-wrap: wrap;
@@ -10,7 +12,7 @@
   flex-direction: column;
   justify-content: flex-end;
   align-items: center;
-  height: 100vh;
+  height: 80vh;
   padding: 20px;
   position: relative;
 }
@@ -82,8 +84,6 @@
   margin-top: 20px;
 }
 
-
-
 .quest-section-heading {
   font-weight: bold;
   border-bottom: 2px solid #ccc;
@@ -113,11 +113,11 @@
 }
 
 .quest-item.accepted {
-  background: #ffe5b4; 
+  background: #ffe5b4;
 }
 
 .quest-item.completed {
-  background: #c3f7c9; 
+  background: #c3f7c9;
 }
 
 .quest-btn {
@@ -145,13 +145,13 @@
 
 .quest-btn-complete {
   background: white;
-  color: #4CAF50;
-  border-color: #4CAF50;
+  color: #4caf50;
+  border-color: #4caf50;
 }
 
 .quest-btn-complete:hover,
 .quest-btn-complete.active {
-  background: #4CAF50;
+  background: #4caf50;
   color: white;
 }
 
@@ -160,7 +160,7 @@
 }
 
 .quest-item.accepted:hover {
-  background-color: #f7b84e; 
+  background-color: #f7b84e;
 }
 
 .quest-item.completed {
@@ -168,7 +168,7 @@
 }
 
 .quest-item.completed:hover {
-  background-color: #7edc7d; 
+  background-color: #7edc7d;
 }
 
 .quest-icon {
@@ -178,7 +178,118 @@
   margin-right: 15px;
   margin-left: 18px;
 }
+.achievements-btn {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  padding: 12px 24px;
+  background: #ffa726;
+  border: none;
+  border-radius: 10px;
+  font-family: "Press Start 2P", cursive;
+  cursor: pointer;
+  color: white;
+  transition: background 0.3s ease;
+}
 
+.achievement-heading {
+  font-family: "Press Start 2P", cursive;
+  font-size: 18px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+
+.achievements-btn:hover {
+  background: #fb8c00;
+}
+.modal-overlay {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  width: auto;
+  height: auto;
+  background-color: transparent; 
+  z-index: 9999;
+  padding: 20px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+.modal-content {
+  background: #fff;
+  padding: 20px 30px;
+  border-radius: 16px;
+  width: 320px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  font-family: "Press Start 2P", cursive;
+}
+
+
+
+
+.achievement-boxes {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 16px;
+  margin-top: 20px;
+}
+
+.achievement-tile {
+  text-align: center;
+  padding: 12px;
+  border-radius: 12px;
+  border: 2px solid #ddd;
+  background-color: #eee;
+  font-family: "Press Start 2P", cursive;
+  transition: all 0.3s ease;
+}
+
+.achievement-icon {
+  font-size: 2rem;
+  margin-bottom: 6px;
+}
+
+.achievement-title {
+  font-weight: bold;
+  font-size: 14px;
+  margin-bottom: 4px;
+  font-family: "Press Start 2P", cursive;
+}
+
+.achievement-desc {
+  font-size: 12px;
+  color: #555;
+}
+
+.achievement-tile.locked {
+  opacity: 0.4;
+  filter: grayscale(100%);
+}
+
+.achievement-tile.unlocked {
+  background-color: #fff8dc;
+  border-color: #ffb347;
+}
+
+
+.close-button {
+  margin-top: 20px;
+  background: #b85555;
+  color: white;
+  border: none;
+  padding: 10px 24px;
+  font-size: 14px;
+  font-weight: bold;
+  border-radius: 8px;
+  cursor: pointer;
+  font-family: "Press Start 2P", cursive;
+}
+
+.close-button:hover {
+  background-color: #8e3e3e;
+}
 
 
 @media screen and (max-width: 600px) {
