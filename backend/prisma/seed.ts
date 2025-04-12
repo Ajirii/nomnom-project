@@ -25,11 +25,7 @@ async function deleteAllData(orderedFileNames: string[]) {
 async function main() {
   const dataDirectory = path.join(__dirname, "seedData");
 
-  const orderedFileNames = [
-    "storeLocation.json",
-    "inventoryItem.json",
-    "inventoryLocation.json",
-  ];
+  const orderedFileNames = ["Cosmetic.json", "Quest.json"];
 
   await deleteAllData(orderedFileNames);
 
