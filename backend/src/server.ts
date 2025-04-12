@@ -6,7 +6,7 @@ import morgan from "morgan";
 
 /* ROUTE IMPORT */
 import recipeRoutes from "./recipes/recipes.routes";
-import googleRoutes from "./google/google.routes";
+import googleRoutes from "./login/auth.routes";
 
 /* CONFIGURATIONS */
 dotenv.config();
@@ -25,7 +25,7 @@ app.use(express.urlencoded({ extended: true }));
 
 /* ROUTES */
 app.use("/api/recipes", recipeRoutes);
-app.use("/api/google", googleRoutes);
+app.use("/api/login", googleRoutes);
 
 /* SERVER */
 const port = Number(process.env.PORT) || 3001;
