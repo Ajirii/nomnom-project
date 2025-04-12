@@ -1,0 +1,30 @@
+[
+  {
+    "questId": "1",
+    "title": "Recipe Adventure",
+    "description": "Cook a dish from a cuisine you've never heard of. Bonus points if you can pronounce it!",
+    "rewardCurrency": 30,
+    "rewardHunger": 40
+  },
+  {
+    "questId": "2",
+    "title": "Master the Frying Pan",
+    "description": "Perfectly fry an egg. It's a simple task… unless you're still trying to figure out how not to turn it into scrambled eggs.",
+    "rewardCurrency": 15,
+    "rewardHunger": 20
+  },
+  {
+    "questId": "3",
+    "title": "Cake Perfection",
+    "description": "Create a delicious cake without burning it!",
+    "rewardCurrency": 20,
+    "rewardHunger": 30
+  },
+  {
+    "questId": "4",
+    "title": "Spice Challenge!",
+    "description": "Make a spicy dish. Not too spicy... Or else...",
+    "rewardCurrency": 25,
+    "rewardHunger": 25
+  }
+]

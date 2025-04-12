@@ -1,0 +1,16 @@
+[
+  {
+    "cosmeticId": "1",
+    "name": "Bulter",
+    "description": "Embrace the classic butler style with a monocle, top hat, and a distinguished mustache. Perfect for serving with charm and elegance in the kitchen!",
+    "iconUrl": "/public/cosmetics/bulter-outfit.svg",
+    "price": 100
+  },
+  {
+    "cosmeticId": "2",
+    "name": "Blush",
+    "description": "Sweet and subtle, this pastel outfit gives you a natural, warm glow. Perfect for adding a soft, charming touch to your look!",
+    "iconUrl": "/public/cosmetics/blush.svg",
+    "price": 50
+  }
+]

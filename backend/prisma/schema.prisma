@@ -8,14 +8,15 @@ datasource db {
 }
 
 model User {
-  userId   String  @id @default(uuid())
-  name     String
-  email    String  @unique
-  googleId String  @unique
+  userId        String         @id @default(uuid())
+  name          String
+  email         String         @unique
+  googleId      String         @unique
+  currency      Int            @default(0)
 
-  quests           Quest[]
-  userAchievements UserAchievement[]
-  userCosmetics    UserCosmetic[]
+  quests        Quest[]
+  userCosmetics UserCosmetic[]
+  UserQuest     UserQuest[]
 }
 
 model Recipe {
@@ -31,65 +32,45 @@ model Recipe {
 }
 
 model Quest {
-  questId     String  @id @default(uuid())
+  questId     String @id @default(uuid())
   title       String
   description String
-  reward      Int // increases hunger level on completion. For example, the reward could be 10, 25, 50. The max hunger level is 100 hp.
-  status      Status
-  isCompleted Boolean @default(false)
+  rewardCurrency Int @default(0)
+  rewardHunger   Int @default(0)
 
-  userId   String
-  user     User   @relation(fields: [userId], references: [userId])
+  userQuests  UserQuest[]
+  User        User?       @relation(fields: [userUserId], references: [userId])
+  userUserId  String?
 }
 
-enum Status {
-  available
-  accepted
-  completed
+model UserQuest {
+  userQuestId String   @id @default(uuid())
+  userId      String
+  questId     String
+  completedAt DateTime @default(now())
+
+  user  User  @relation(fields: [userId], references: [userId])
+  quest Quest @relation(fields: [questId], references: [questId])
 }
 
-model Achievement {
-  achievementId     String   @id @default(uuid())
-  name              String
-  description       String
-  iconUrl           String?
-  createdAt         DateTime @default(now())
-
-  cosmeticId        String? @unique
-  cosmetic          Cosmetic? @relation(fields: [cosmeticId], references: [cosmeticId])
-
-  userAchievements  UserAchievement[]
-}
-
-model UserAchievement {
-  userAid       String   @id @default(uuid())
-  userId        String
-  achievementId String
-  unlockedAt    DateTime @default(now())
-
-  user          User        @relation(fields: [userId], references: [userId])
-  achievement   Achievement @relation(fields: [achievementId], references: [achievementId])
-
-  @@unique([userId, achievementId])
-}
 
 model Cosmetic {
-  cosmeticId  String @id @default(uuid())
-  name        String
-  description String
-  iconUrl     String?
+  cosmeticId     String         @id @default(uuid())
+  name           String
+  description    String
+  iconUrl        String?
+  price          Int
 
-  achievement Achievement?
-  userCosmetics UserCosmetic[]
+  userCosmetics  UserCosmetic[]
 }
 
 model UserCosmetic {
-  userCid     String   @id @default(uuid())
-  userId      String
-  cosmeticId  String
+  userCid    String @id @default(uuid())
+  userId     String
+  cosmeticId String
 
-  user        User     @relation(fields: [userId], references: [userId])
-  cosmetic    Cosmetic @relation(fields: [cosmeticId], references: [cosmeticId])
+  user     User     @relation(fields: [userId], references: [userId])
+  cosmetic Cosmetic @relation(fields: [cosmeticId], references: [cosmeticId])
 
   @@unique([userId, cosmeticId])
 }
