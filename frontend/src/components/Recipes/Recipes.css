@@ -46,6 +46,10 @@
 
 .recipe-card:hover {
   transform: translateY(-5px);
+  transform: scale(1.02);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+  
+  
 }
 
 .recipe-img {
@@ -253,8 +257,10 @@
   outline: none;
   font-family: "Press Start 2P", cursive;
   text-align: center;
-  background-color: #fff;
-  color: #333;
+  background-color: rgba(0, 0, 0, 0.4);
+  color: #fff;
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
   box-shadow: 0 4px 8px rgba(0,0,0,0.08);
   transition: all 0.2s ease-in-out;
   margin-bottom: 10px;
@@ -269,7 +275,8 @@
 .search-bar input:focus {
   border-color: #a23a3a;
   box-shadow: 0 0 8px rgba(162, 58, 58, 0.4);
-  background-color: #fdfdfd;
+  background-color: rgba(0, 0, 0, 0.4);
+  color: #fff;
 }
 
 .recipes-header {

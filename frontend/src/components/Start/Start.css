@@ -36,15 +36,14 @@
   }
 }
 
-/* NomNom Face */
 .sleepy-nomnom-face {
   height: 50em;
   width: 50em;
   position: relative;
   border-radius: 50%;
   display: flex;
-  justify-content: center; /* Center eyes and mouth inside face */
-  align-items: center; /* Center eyes and mouth inside face */
+  justify-content: center; 
+  align-items: center; 
 }
 .s-eye-l,
 .s-eye-r {
@@ -55,15 +54,15 @@
   /* height: 2.25em;
   width: 4.12em;
   border-radius: 0 0 2.93em 2.93em; */
-  top: 50%; /* Position from the top */
+  top: 50%; 
   transform: translateY(-50%);
 }
 .s-eye-l {
-  left: 35%; /* Move the left eye slightly to the left */
+  left: 35%; 
 }
 
 .s-eye-r {
-  left: 55%; /* Move the right eye slightly to the right */
+  left: 55%; 
 }
 
 /* .eye-l::after,

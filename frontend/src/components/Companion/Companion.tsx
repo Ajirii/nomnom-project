@@ -1,18 +1,18 @@
 import { useState } from "react";
 
 // Import cosmetics
-import headband from "../../assets/cosmetics/headband.png";
-import witchHat from "../../assets/cosmetics/witchhat.png";
-import halo from "../../assets/cosmetics/halo.png";
-import glasses from "../../assets/cosmetics/glasses.png";
-import bowtie from "../../assets/cosmetics/bowtie.png";
-import chair from "../../assets/cosmetics/chair.png";
-import plant1 from "../../assets/cosmetics/plant1.png";
-import plant2 from "../../assets/cosmetics/plant2.png";
-import crown from "../../assets/cosmetics/crown.png";
-import monocle from "../../assets/cosmetics/monocle.png";
-import mustache from "../../assets/cosmetics/mustache.png";
-import egg from "../../assets/cosmetics/egg.png";
+import headband from "/assets/cosmetics/headband.png";
+import witchHat from "/assets/cosmetics/witchhat.png";
+import halo from "/assets/cosmetics/halo.png";
+import glasses from "/assets/cosmetics/glasses.png";
+import bowtie from "/assets/cosmetics/bowtie.png";
+import chair from "/assets/cosmetics/chair.png";
+import plant1 from "/assets/cosmetics/plant1.png";
+import plant2 from "/assets/cosmetics/plant2.png";
+import crown from "/assets/cosmetics/crown.png";
+import monocle from "/assets/cosmetics/monocle.png";
+import mustache from "/assets/cosmetics/mustache.png";
+import egg from "/assets/cosmetics/egg.png";
 
 const Companion = ({ hunger }: { hunger: number }) => {
   const [activeTab, setActiveTab] = useState(0);
@@ -22,10 +22,10 @@ const Companion = ({ hunger }: { hunger: number }) => {
   const tabTitles = ["Head", "Eyes", "Accessories", "Background"];
 
   const cosmeticsByTab = [
-    [headband, witchHat, halo, crown],     // Headz
-    [glasses, monocle],                // Eyes
-    [bowtie, mustache, egg],                 // Accessories
-    [chair, plant1, plant2],                   // Background
+    [headband, witchHat, halo, crown], // Headz
+    [glasses, monocle], // Eyes
+    [bowtie, mustache, egg], // Accessories
+    [chair, plant1, plant2], // Background
   ];
 
   const handleSaveToggle = () => {
@@ -84,7 +84,9 @@ const Companion = ({ hunger }: { hunger: number }) => {
             {tabTitles.map((title, index) => (
               <button
                 key={index}
-                className={`cosmetics-tab ${activeTab === index ? "active" : ""}`}
+                className={`cosmetics-tab ${
+                  activeTab === index ? "active" : ""
+                }`}
                 onClick={() => setActiveTab(index)}
               >
                 {title}

@@ -64,16 +64,22 @@
 
 .detail {
   width: 60%;
-  padding: 20px;
+  padding: 30px;
   text-align: center;
+  background-color: rgba(75, 75, 75, 0.6); /* semi-transparent black */
+  backdrop-filter: blur(2px); /* blurs what's behind the box */
+  -webkit-backdrop-filter: blur(1px); /* Safari support */
+  
 }
 
 .detail h2 {
-  color: #333;
+  color: #db5800;
 }
 
 .detail p {
   margin: 10px 0;
+  color: #d88e39;
+  
 }
 
 .placeholder {
@@ -170,8 +176,8 @@
 }
 
 .quest-icon {
-  height: 65px;
-  width: 65px;
+  height: 75px;
+  width: 75px;
   vertical-align: middle;
   margin-right: 15px;
   margin-left: 18px;

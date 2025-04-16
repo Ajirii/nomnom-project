@@ -1,6 +1,14 @@
 import { useState } from "react";
 import { GiHamburgerMenu } from "react-icons/gi";
 
+//import navbar images
+import cheesecake from "/assets/pixel_images/23_cheesecake_dish.png";
+import gummy from "/assets/pixel_images/50_giantgummybear.png";
+import book from "/assets/pixel_images/book.png";
+import daisy from "/assets/pixel_images/daisy.png";
+import ramen from "/assets/pixel_images/ramen_pixel.png";
+import noodlebowl from "/assets/pixel_images/noodlebowl.png";
+
 interface NavbarProps {
   onLinkClick: (component: string) => void;
 }
@@ -11,30 +19,30 @@ const Navbar = ({ onLinkClick }: NavbarProps) => {
   return (
     <nav className="navbar">
       <div className="navbar_heading">
-        <p className="navbar_heading_emote">🍜</p>
+      <img src={noodlebowl} className="navbar_heading_emote" />
         <h1 className="navbar_title">NomNom</h1>
       </div>
       <ul className="navbar_links">
         <li className="navbar_font">
-          <p className="navbar_emotes">😆</p>
+          <img src={daisy} className="navbar_daisy" />
           <a href="#home" onClick={() => onLinkClick("home")}>
             Home
           </a>
         </li>
         <li className="navbar_font">
-          <p className="navbar_emotes">😊</p>
+          <img src={gummy} className="navbar_small_emotes" />
           <a href="#companion" onClick={() => onLinkClick("companion")}>
             Companion
           </a>
         </li>
         <li className="navbar_font">
-          <p className="navbar_emotes">🧐</p>
+          <img src={book} className="navbar_small_emotes" />
           <a href="#quests" onClick={() => onLinkClick("quests")}>
             Quests
           </a>
         </li>
         <li className="navbar_font">
-          <p className="navbar_emotes">😺</p>
+          <img src={cheesecake} className="navbar_cheesecake" />
           <a href="#recipes" onClick={() => onLinkClick("recipes")}>
             Recipes
           </a>

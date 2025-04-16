@@ -20,6 +20,15 @@ import "./components/Start/Start.css";
 // import ClickEffects from "./components/MouseEffects/ClickEffects";
 import "./components/MouseEffects/ClickEffects.css";
 
+// Background images per page
+const backgrounds: Record<string, string> = {
+  home: "/assets/background/Summer2.png",
+  quests: "/assets/background/nightcity.png",
+  recipes: "/assets/background/flyingship.png",
+  companion: "/assets/background/sunflower.png",
+  login: "/assets/background/shipwreck.png",
+};
+
 const App = () => {
   const [activeComponent, setActiveComponent] = useState<string>("start");
   const [hunger, setHunger] = useState<number>(100);
@@ -35,16 +44,26 @@ const App = () => {
   useEffect(() => {
     const interval = setInterval(() => {
       setHunger((prevHunger) => Math.max(prevHunger - 10, 0));
-    }, 6 * 60 * 60 * 1000);
+    }, 6 * 60 * 60 * 1000); // Decrease hunger every 6 hours
 
     return () => clearInterval(interval);
   }, []);
 
   return (
     <main>
-      {/* <ClickEffects /> */}
-      {activeComponent === "start" && <Start onStartClick={handleStartClick} />}
+      {/* Background Image Container */}
       {activeComponent !== "start" && (
+        <div
+          className="fullscreen-image"
+          style={{
+            backgroundImage: `url(${backgrounds[activeComponent]})`,
+          }}
+        />
+      )}
+
+      {activeComponent === "start" ? (
+        <Start onStartClick={handleStartClick} />
+      ) : (
         <>
           <Navbar onLinkClick={handleLinkClick} />
           <NormalFace />

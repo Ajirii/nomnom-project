@@ -2,15 +2,16 @@
   padding: 20px;
   text-align: center;
   position: relative;
+  top: 200px;
   width: 100%;
   margin-top: auto;
 }
 
 .footer p {
-  color: #b85555;
+  color: white;
 }
 
 .footer a {
-  color: #b85555;
+  color: white;
   text-decoration: none;
 }

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import orange from "../../assets/cosmetics/orange.png";
+import orange from "/assets/cosmetics/orange.png";
 
 interface Quest {
   id: number;
@@ -20,7 +20,8 @@ const initialQuests: Quest[] = [
   {
     id: 2,
     name: "Master the Frying Pan",
-    description: "Learn to perfectly fry an egg. It'll make you look cool. I promise.",
+    description:
+      "Learn to perfectly fry an egg. It'll make you look cool. I promise.",
     reward: "100 Hunger",
     status: "available",
   },
@@ -45,17 +46,21 @@ const Quests = () => {
   const [selectedQuest, setSelectedQuest] = useState<Quest | null>(null);
 
   const handleAccept = (id: number) => {
-    setQuests(prev => prev.map(q => q.id === id ? { ...q, status: "accepted" } : q));
+    setQuests((prev) =>
+      prev.map((q) => (q.id === id ? { ...q, status: "accepted" } : q))
+    );
   };
 
   const handleComplete = (id: number) => {
-    setQuests(prev => prev.map(q => q.id === id ? { ...q, status: "completed" } : q));
+    setQuests((prev) =>
+      prev.map((q) => (q.id === id ? { ...q, status: "completed" } : q))
+    );
   };
 
   const groupedQuests = {
-    available : quests.filter(q => q.status === "available"),
-    accepted: quests.filter(q => q.status === "accepted"),
-    completed: quests.filter(q => q.status === "completed"),
+    available: quests.filter((q) => q.status === "available"),
+    accepted: quests.filter((q) => q.status === "accepted"),
+    completed: quests.filter((q) => q.status === "completed"),
   };
 
   const getQuestItemClass = (quest: Quest) => {
@@ -71,8 +76,9 @@ const Quests = () => {
       <div className="main">
         <div className="quest-container">
           <div className="master">
-            <h2>Quest Log 
-            <img src={orange} alt="orange" className="quest-icon" />
+            <h2>
+              Quest Log
+              <img src={orange} alt="orange" className="quest-icon" />
             </h2>
             {Object.entries(groupedQuests).map(([status, quests]) => (
               <div key={status}>
@@ -98,8 +104,12 @@ const Quests = () => {
             {selectedQuest ? (
               <div>
                 <h2>{selectedQuest.name}</h2>
-                <p><strong>Description:</strong> {selectedQuest.description}</p>
-                <p><strong>Reward:</strong> {selectedQuest.reward}</p>
+                <p>
+                  <strong>Description:</strong> {selectedQuest.description}
+                </p>
+                <p>
+                  <strong>Reward:</strong> {selectedQuest.reward}
+                </p>
                 {selectedQuest.status !== "completed" && (
                   <div className="button-wrapper">
                     {selectedQuest.status !== "accepted" && (
