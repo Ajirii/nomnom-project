@@ -41,8 +41,8 @@ export const googleLogin = async (
             name: name ?? "Unknown",
           },
         });
+        console.log("New user created:", user);
       }
-      console.log("New user created:", user);
     } catch (error) {
       console.error("Error creating user:", error);
     }

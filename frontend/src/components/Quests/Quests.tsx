@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import orange from "/assets/cosmetics/orange.png";
 
 interface Quest {
@@ -48,10 +48,42 @@ const initialQuests: Quest[] = [
 ];
 
 const Quests = () => {
-  const [quests, setQuests] = useState<Quest[]>(initialQuests);
+  function shuffleArray<T>(array: T[]): T[] {
+    const shuffled = [...array];
+    for (let i = shuffled.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+    }
+    return shuffled;
+  }
+
+  const [quests, setQuests] = useState<Quest[]>(() =>
+    shuffleArray(initialQuests)
+  );
   const [selectedQuest, setSelectedQuest] = useState<Quest | null>(null);
   const [coinsEarned, setCoinsEarned] = useState<number>(0);
   const [showModal, setShowModal] = useState(false);
+
+  useEffect(() => {
+    const fetchQuests = async () => {
+      try {
+        const res = await fetch("/api/quests");
+        if (!res.ok) throw new Error("Failed to fetch quests");
+        const data = await res.json();
+
+        const questsWithStatus = data.map((q: Quest) => ({
+          ...q,
+          status: "available",
+        }));
+
+        setQuests(questsWithStatus);
+      } catch (err) {
+        console.error("Error fetching quests:", err);
+      }
+    };
+
+    fetchQuests();
+  }, []);
 
   const handleAccept = (id: string) => {
     setQuests((prev) =>

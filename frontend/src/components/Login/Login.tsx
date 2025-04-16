@@ -5,6 +5,8 @@ import axios from "axios";
 const Login = () => {
   const [error, setError] = useState<string>("");
   const [successMessage, setSuccessMessage] = useState<string>("");
+  const [user, setUser] = useState<any>(null);
+
   const handleGoogleLogin = async (credentialResponse: any) => {
     const { credential } = credentialResponse;
 
@@ -18,6 +20,7 @@ const Login = () => {
         { credential }
       );
       console.log("User:", response.data.user);
+      setUser(response.data.user);
       setSuccessMessage("Login Successful!");
       setError("");
     } catch (err) {
@@ -45,6 +48,7 @@ const Login = () => {
         { email, password }
       );
       console.log("User:", response.data.user);
+      setUser(response.data.user);
       setSuccessMessage("Login Successful!");
       setError("");
     } catch (err) {
@@ -54,6 +58,13 @@ const Login = () => {
     }
 
     console.log("Sign In Attempted with", email, password);
+  };
+
+  const handleSignOut = () => {
+    setUser(null);
+    setSuccessMessage("");
+    setError("");
+    console.log("User signed out");
   };
 
   return (
@@ -74,9 +85,15 @@ const Login = () => {
               id="password"
               placeholder="Password"
             />
-            <button className="sign-in" type="submit">
-              Sign In
-            </button>
+            {!user ? (
+              <button className="sign-in" type="submit">
+                Sign In
+              </button>
+            ) : (
+              <button className="sign-in" type="button" onClick={handleSignOut}>
+                Sign Out
+              </button>
+            )}
             <GoogleLogin
               onSuccess={handleGoogleLogin}
               onError={() => console.log("Login Failed")}

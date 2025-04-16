@@ -2,13 +2,12 @@ import OpenAI from "openai";
 const { PrismaClient } = require("@prisma/client");
 const prisma = new PrismaClient();
 
-const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
-
 export const getRecipeByIngredients = async (
   ingredients: string,
   cuisine: string,
   strict: string
 ) => {
+  const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
   let strictMode: boolean = false;
   if (strict === "true") {
     strictMode = true;

@@ -39,10 +39,24 @@ const Companion = ({ hunger }: { hunger: number }) => {
   return (
     <div className="row">
       <div className="main">
-        {/* Info Button */}
-        <button className="info-button" onClick={() => setShowModal(true)}>
-          ?
-        </button>
+        <div className="hp-layout">
+          {/* Info Button */}
+          <button className="info-button" onClick={() => setShowModal(true)}>
+            ?
+          </button>
+          {/* Mood Section */}
+          <div className="mood-container">
+            <div className="hp-bar">
+              <div
+                className="hp-fill"
+                style={{
+                  width: `${hunger}%`,
+                  backgroundColor: hunger <= 20 ? "red" : "#4CAF50",
+                }}
+              />
+            </div>
+          </div>
+        </div>
 
         {/* Modal */}
         {showModal && (
@@ -65,20 +79,6 @@ const Companion = ({ hunger }: { hunger: number }) => {
 
         {/* Cosmetics Section */}
         <div className="cosmetics-container">
-          {/* Save Checkbox */}
-          <div className="save-selection-wrapper">
-            <input
-              type="checkbox"
-              id="saveCheckbox"
-              className="styled-checkbox"
-              checked={isSaved}
-              onChange={handleSaveToggle}
-            />
-            <label htmlFor="saveCheckbox" className="styled-label">
-              Save
-            </label>
-          </div>
-
           {/* Tabs */}
           <div className="cosmetics-tabs">
             {tabTitles.map((title, index) => (
@@ -93,8 +93,15 @@ const Companion = ({ hunger }: { hunger: number }) => {
               </button>
             ))}
           </div>
-
-          <h2 className="cosmetics-header">Cosmetics</h2>
+          {/* Title and Save Checkbox */}
+          <div className="">
+            <div className="cosmetics-header-row">
+              <h2 className="cosmetics-header">Cosmetics</h2>
+              <button className="save-button" onClick={handleSaveToggle}>
+                Save
+              </button>
+            </div>
+          </div>
 
           {/* Cosmetic Slots */}
           <div className="cosmetics-grid">
@@ -109,19 +116,6 @@ const Companion = ({ hunger }: { hunger: number }) => {
                 )}
               </div>
             ))}
-          </div>
-        </div>
-
-        {/* Mood Section */}
-        <div className="mood-container">
-          <div className="hp-bar">
-            <div
-              className="hp-fill"
-              style={{
-                width: `${hunger}%`,
-                backgroundColor: hunger <= 20 ? "red" : "#4CAF50",
-              }}
-            />
           </div>
         </div>
       </div>
