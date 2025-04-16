@@ -37,85 +37,87 @@ const Companion = ({ hunger }: { hunger: number }) => {
   };
 
   return (
-    <div className="row">
-      <div className="main">
-        <div className="hp-layout">
-          {/* Info Button */}
-          <button className="info-button" onClick={() => setShowModal(true)}>
-            ?
-          </button>
-          {/* Mood Section */}
-          <div className="mood-container">
-            <div className="hp-bar">
-              <div
-                className="hp-fill"
-                style={{
-                  width: `${hunger}%`,
-                  backgroundColor: hunger <= 20 ? "red" : "#4CAF50",
-                }}
-              />
-            </div>
-          </div>
-        </div>
-
-        {/* Modal */}
-        {showModal && (
-          <div className="modal-overlay" onClick={() => setShowModal(false)}>
-            <div className="modal" onClick={(e) => e.stopPropagation()}>
-              <h2>HP Bar</h2>
-              <p>
-                The more quests you complete, the more NomNom's HP bar fills.
-                Make sure to keep him well-fed and happy!
-              </p>
-              <button
-                className="close-button"
-                onClick={() => setShowModal(false)}
-              >
-                Close
-              </button>
-            </div>
-          </div>
-        )}
-
-        {/* Cosmetics Section */}
-        <div className="cosmetics-container">
-          {/* Tabs */}
-          <div className="cosmetics-tabs">
-            {tabTitles.map((title, index) => (
-              <button
-                key={index}
-                className={`cosmetics-tab ${
-                  activeTab === index ? "active" : ""
-                }`}
-                onClick={() => setActiveTab(index)}
-              >
-                {title}
-              </button>
-            ))}
-          </div>
-          {/* Title and Save Checkbox */}
-          <div className="">
-            <div className="cosmetics-header-row">
-              <h2 className="cosmetics-header">Cosmetics</h2>
-              <button className="save-button" onClick={handleSaveToggle}>
-                Save
-              </button>
-            </div>
-          </div>
-
-          {/* Cosmetic Slots */}
-          <div className="cosmetics-grid">
-            {[...Array(10)].map((_, index) => (
-              <div key={index} className="cosmetic-slot">
-                {cosmeticsByTab[activeTab][index] && (
-                  <img
-                    src={cosmeticsByTab[activeTab][index]}
-                    alt={`Cosmetic ${index}`}
-                    className="cosmetic-img"
-                  />
-                )}
+    <div className="recipes-section">
+      <div className="row">
+        <div className="main">
+          <div className="hp-layout">
+            {/* Info Button */}
+            <button className="info-button" onClick={() => setShowModal(true)}>
+              ?
+            </button>
+            {/* Mood Section */}
+            <div className="mood-container">
+              <div className="hp-bar">
+                <div
+                  className="hp-fill"
+                  style={{
+                    width: `${hunger}%`,
+                    backgroundColor: hunger <= 20 ? "red" : "#4CAF50",
+                  }}
+                />
               </div>
-            ))}
+            </div>
+          </div>
+
+          {/* Modal */}
+          {showModal && (
+            <div className="modal-overlay" onClick={() => setShowModal(false)}>
+              <div className="modal" onClick={(e) => e.stopPropagation()}>
+                <h2>HP Bar</h2>
+                <p>
+                  The more quests you complete, the more NomNom's HP bar fills.
+                  Make sure to keep him well-fed and happy!
+                </p>
+                <button
+                  className="close-button"
+                  onClick={() => setShowModal(false)}
+                >
+                  Close
+                </button>
+              </div>
+            </div>
+          )}
+
+          {/* Cosmetics Section */}
+          <div className="cosmetics-container">
+            {/* Tabs */}
+            <div className="cosmetics-tabs">
+              {tabTitles.map((title, index) => (
+                <button
+                  key={index}
+                  className={`cosmetics-tab ${
+                    activeTab === index ? "active" : ""
+                  }`}
+                  onClick={() => setActiveTab(index)}
+                >
+                  {title}
+                </button>
+              ))}
+            </div>
+            {/* Title and Save Checkbox */}
+            <div className="">
+              <div className="cosmetics-header-row">
+                <h2 className="cosmetics-header">Cosmetics</h2>
+                <button className="save-button" onClick={handleSaveToggle}>
+                  Save
+                </button>
+              </div>
+            </div>
+
+            {/* Cosmetic Slots */}
+            <div className="cosmetics-grid">
+              {[...Array(10)].map((_, index) => (
+                <div key={index} className="cosmetic-slot">
+                  {cosmeticsByTab[activeTab][index] && (
+                    <img
+                      src={cosmeticsByTab[activeTab][index]}
+                      alt={`Cosmetic ${index}`}
+                      className="cosmetic-img"
+                    />
+                  )}
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </div>

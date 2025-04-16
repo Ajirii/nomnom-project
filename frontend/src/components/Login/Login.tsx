@@ -72,41 +72,47 @@ const Login = () => {
   };
 
   return (
-    <div className="row">
-      <div className="main">
-        <div className="login-container">
-          <h2>Login</h2>
-          <form onSubmit={handleSignIn}>
-            <input
-              className="login-input"
-              type="email"
-              id="email"
-              placeholder="Email"
-            />
-            <input
-              className="login-input"
-              type="password"
-              id="password"
-              placeholder="Password"
-            />
-            {!user ? (
-              <button className="sign-in" type="submit">
-                Sign In
-              </button>
-            ) : (
-              <button className="sign-in" type="button" onClick={handleSignOut}>
-                Sign Out
-              </button>
-            )}
-            <GoogleLogin
-              onSuccess={handleGoogleLogin}
-              onError={() => console.log("Login Failed")}
-            />
-            {error && <div className="error-message">{error}</div>}
-            {successMessage && (
-              <div className="success-message">{successMessage}</div>
-            )}
-          </form>
+    <div className="recipes-section">
+      <div className="row">
+        <div className="main">
+          <div className="login-container">
+            <h2>Login</h2>
+            <form onSubmit={handleSignIn}>
+              <input
+                className="login-input"
+                type="email"
+                id="email"
+                placeholder="Email"
+              />
+              <input
+                className="login-input"
+                type="password"
+                id="password"
+                placeholder="Password"
+              />
+              {!user ? (
+                <button className="sign-in" type="submit">
+                  Sign In
+                </button>
+              ) : (
+                <button
+                  className="sign-in"
+                  type="button"
+                  onClick={handleSignOut}
+                >
+                  Sign Out
+                </button>
+              )}
+              <GoogleLogin
+                onSuccess={handleGoogleLogin}
+                onError={() => console.log("Login Failed")}
+              />
+              {error && <div className="error-message">{error}</div>}
+              {successMessage && (
+                <div className="success-message">{successMessage}</div>
+              )}
+            </form>
+          </div>
         </div>
       </div>
     </div>

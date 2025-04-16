@@ -315,11 +315,12 @@
   .quest-container {
     flex-direction: column;
     width: 90%;
-    top: 53%;
+    top: 5%;
   }
 
   .achievements-btn {
     left: 5%;
+    top: 5%;
   }
 
   .master,
@@ -345,6 +346,11 @@
   .quest-container {
     flex-direction: row;
     width: 80%;
+    top: 12%;
+  }
+
+  .achievements-btn {
+    top: 0%;
   }
 
   .master {

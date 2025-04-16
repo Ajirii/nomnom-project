@@ -169,7 +169,7 @@ const Quests = () => {
   };
 
   return (
-    <div className="row">
+    <div className="recipes-section">
       {showModal && (
         <div className="modal-overlay" onClick={() => setShowModal(false)}>
           <div

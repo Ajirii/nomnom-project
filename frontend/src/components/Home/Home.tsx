@@ -64,62 +64,64 @@ const Home = () => {
   };
 
   return (
-    <div className="row">
-      <div className="main">
-        <div>{message && <p className="retro-message">{message}</p>}</div>
-        <div className="input-container">
-          <input
-            type="text"
-            className="chat-input"
-            placeholder="List your ingredients here ..."
-            value={ingredientInput}
-            onChange={(e) => setIngredientInput(e.target.value)}
-            onKeyDown={handleAddIngredient}
-          />
-          <div className="ingredients-list">
-            {ingredients.map((ingredient, index) => (
-              <div key={index} className="ingredient-tag">
-                {ingredient}{" "}
-                <span
-                  className="remove-tag"
-                  onClick={() => removeIngredient(index)}
-                >
-                  ✖
-                </span>
-              </div>
-            ))}
+    <div className="recipes-section">
+      <div className="row">
+        <div className="main">
+          <div>{message && <p className="retro-message">{message}</p>}</div>
+          <div className="input-container">
+            <input
+              type="text"
+              className="chat-input"
+              placeholder="List your ingredients here ..."
+              value={ingredientInput}
+              onChange={(e) => setIngredientInput(e.target.value)}
+              onKeyDown={handleAddIngredient}
+            />
+            <div className="ingredients-list">
+              {ingredients.map((ingredient, index) => (
+                <div key={index} className="ingredient-tag">
+                  {ingredient}{" "}
+                  <span
+                    className="remove-tag"
+                    onClick={() => removeIngredient(index)}
+                  >
+                    ✖
+                  </span>
+                </div>
+              ))}
+            </div>
+            <select
+              className="cuisine-select"
+              value={cuisine}
+              onChange={(e) => setCuisine(e.target.value)}
+            >
+              <option value="">Select your cuisine...</option>
+              <option value="italian">Italian</option>
+              <option value="chinese">Chinese</option>
+              <option value="japanese">Japanese</option>
+              <option value="indian">Indian</option>
+              <option value="french">French</option>
+              <option value="mexican">Mexican</option>
+              <option value="thai">Thai</option>
+              <option value="middle-eastern">Middle Eastern</option>
+              <option value="korean">Korean</option>
+              <option value="spanish">Spanish</option>
+              <option value="no-preference">No Preference</option>
+            </select>
+            <button
+              className="send-button"
+              onClick={handleGenerateRecipe}
+              disabled={loading}
+            >
+              {loading ? "Generating..." : "Send"}
+            </button>
           </div>
-          <select
-            className="cuisine-select"
-            value={cuisine}
-            onChange={(e) => setCuisine(e.target.value)}
-          >
-            <option value="">Select your cuisine...</option>
-            <option value="italian">Italian</option>
-            <option value="chinese">Chinese</option>
-            <option value="japanese">Japanese</option>
-            <option value="indian">Indian</option>
-            <option value="french">French</option>
-            <option value="mexican">Mexican</option>
-            <option value="thai">Thai</option>
-            <option value="middle-eastern">Middle Eastern</option>
-            <option value="korean">Korean</option>
-            <option value="spanish">Spanish</option>
-            <option value="no-preference">No Preference</option>
-          </select>
-          <button
-            className="send-button"
-            onClick={handleGenerateRecipe}
-            disabled={loading}
-          >
-            {loading ? "Generating..." : "Send"}
-          </button>
         </div>
-      </div>
 
-      {/* Recipe Card Wrapper */}
-      <div className="recipe-container">
-        {recipe && <RecipeCard recipe={recipe} />}
+        {/* Recipe Card Wrapper */}
+        <div className="recipe-container">
+          {recipe && <RecipeCard recipe={recipe} />}
+        </div>
       </div>
     </div>
   );
