@@ -1,7 +1,5 @@
 /*TODO: LINE 95 AND 153, REMOVE SYSTEM AUTHENTICATION OVERRIDE FOR "createdBy" FIELD */
 
-<<<<<<< HEAD:backend/src/recipes/recipes.service.ts
-=======
 import { User } from "@prisma/client";
 import OpenAI from "openai";
 import { Recipe } from "@prisma/client";
@@ -9,7 +7,6 @@ const { PrismaClient } = require("@prisma/client");
 import { DELETE_UNFAVORITED_RECIPES_AFTER } from "../../../config";
 const prisma = new PrismaClient();
 
->>>>>>> recipes:backend/src/recipes/services/recipes.service.ts
 export const getRecipeByIngredients = async (
   ingredients: string,
   cuisine: string,
