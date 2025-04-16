@@ -1,11 +1,20 @@
+/*TODO: LINE 95 AND 153, REMOVE SYSTEM AUTHENTICATION OVERRIDE FOR "createdBy" FIELD */
+
+<<<<<<< HEAD:backend/src/recipes/recipes.service.ts
+=======
+import { User } from "@prisma/client";
 import OpenAI from "openai";
+import { Recipe } from "@prisma/client";
 const { PrismaClient } = require("@prisma/client");
+import { DELETE_UNFAVORITED_RECIPES_AFTER } from "../../../config";
 const prisma = new PrismaClient();
 
+>>>>>>> recipes:backend/src/recipes/services/recipes.service.ts
 export const getRecipeByIngredients = async (
   ingredients: string,
   cuisine: string,
-  strict: string
+  strict: string,
+  user?: User
 ) => {
   const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
   let strictMode: boolean = false;
@@ -23,12 +32,13 @@ export const getRecipeByIngredients = async (
                 
                 Always respond ONLY in JSON format, structured as:
                 {
-                    "title": string,            // Give it a catchy, fun, or culturally inspired name — avoid generic names like "Chicken Dish"
+                    "title": string,            // Use a real or realistic name from the selected cuisine — avoid fantasy names; use traditional or fusion-style names with culinary accuracy (e.g., "Shakshuka," "Pollo al Ajillo," "Paneer Tikka Biryani")
                     "ingredients": string[],    // List all ingredients used
                     "instructions": string[],   // Clear step-by-step, but allow creative techniques
                     "cookingMinutes": number,   // Total active + passive time
                     "servings": number,
-                    "notes": string             // Include tips, pairings, or fun facts
+                    "notes": string,             // Include tips, pairings, or fun facts
+                    "cuisine": string,           // The cuisine of the recipe (Italian, Indian, Turkish, French, etc.)
                 }
                 
                 Focus on originality, flavor, and a playful yet professional tone.
@@ -53,21 +63,19 @@ export const getRecipeByIngredients = async (
     });
 
     const rawResponse: string | any = response.choices[0]?.message?.content;
-    const content: {
-      title: string;
-      ingredients: string[];
-      instructions: string[];
-      cookingMinutes: number;
-      servings: number;
-      notes: string;
-    } = JSON.parse(rawResponse);
+    const content: Recipe = JSON.parse(rawResponse) as Recipe;
+
+    if (user) {
+      content.createdBy = user.userId;
+    }
 
     if (!content) {
       throw new Error("Received empty response.");
     }
-
-    storeRecipe(content, cuisine);
-    return content;
+    if (user) {
+      deleteUnfavoritedRecipes(user);
+    }
+    return await storeRecipe(content);
   } catch (error) {
     console.error("Error fetching recipe:", error);
     return {
@@ -81,29 +89,33 @@ export const getRecipeByIngredients = async (
   }
 };
 
-async function storeRecipe(
-  recipe: {
-    title: string;
-    ingredients: string[];
-    instructions: string[];
-    cookingMinutes: number;
-    servings: number;
-    notes: string;
-  },
-  cuisine: string
-) {
+async function storeRecipe(recipe: Recipe): Promise<Recipe | void> {
   try {
     if (!(await doesRecipeExist(recipe))) {
-      const newRecipe = await prisma.recipe.create({
+      if (recipe.createdBy && recipe.createdBy !== "system") {
+        const userExists = await prisma.user.findUnique({
+          where: { userId: recipe.createdBy },
+        });
+
+        if (!userExists) {
+          throw new Error(`User with ID ${recipe.createdBy} does not exist.`);
+        }
+      } else {
+        recipe.createdBy = null;
+      }
+
+      const newRecipe: Recipe = await prisma.recipe.create({
         data: {
           title: recipe.title,
           ingredients: recipe.ingredients,
           instructions: recipe.instructions,
           cookingMinutes: recipe.cookingMinutes,
           servings: recipe.servings,
-          cuisine: cuisine,
           notes: recipe.notes,
-          favorite: false,
+          cuisine: recipe.cuisine,
+          favorite: recipe.favorite,
+          createdBy: recipe.createdBy,
+          createdAt: recipe.createdAt,
         },
       });
       console.log("New user recipe:", newRecipe);
@@ -117,14 +129,7 @@ async function storeRecipe(
   }
 }
 
-async function doesRecipeExist(recipe: {
-  title: string;
-  ingredients: string[];
-  instructions: string[];
-  cookingMinutes: number;
-  servings: number;
-  notes: string;
-}) {
+async function doesRecipeExist(recipe: Recipe) {
   try {
     const existingRecipe = await prisma.recipe.findFirst({
       where: {
@@ -163,5 +168,46 @@ async function doesRecipeExist(recipe: {
   } catch (error) {
     console.error("Error checking for duplicate recipe:", error);
     throw error;
+  }
+}
+
+async function deleteUnfavoritedRecipes(user: User): Promise<void> {
+  if (!user) {
+    return;
+  }
+
+  try {
+    const userRecipes: Array<Recipe> = await prisma.recipe.findMany({
+      where: {
+        createdBy: user.userId,
+        favorite: false,
+      },
+      include: {
+        user: true,
+      },
+      orderBy: {
+        createdAt: "desc",
+      },
+      skip: DELETE_UNFAVORITED_RECIPES_AFTER,
+    });
+
+    if (userRecipes.length < 30) {
+      return;
+    }
+    for (let i of userRecipes) {
+      try {
+        await prisma.recipe.delete({
+          where: {
+            recipeId: i.recipeId,
+          },
+        });
+      } catch (error) {
+        console.error("Failed deletion of record: " + i.recipeId);
+      }
+    }
+  } catch (error) {
+    console.error("Cannot delete unfavorited records: " + error);
+  } finally {
+    await prisma.$disconnect();
   }
 }

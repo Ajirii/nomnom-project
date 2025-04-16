@@ -19,6 +19,12 @@ const Login = () => {
         `${import.meta.env.VITE_API_BASE_URL}api/login/google`,
         { credential }
       );
+
+      const { user, token } = response.data;
+
+      localStorage.setItem("token", token);
+
+      console.log("User:", user);
       console.log("User:", response.data.user);
       setUser(response.data.user);
       setSuccessMessage("Login Successful!");
