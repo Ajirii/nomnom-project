@@ -42,25 +42,31 @@
   transform: translate(-50%, -50%);
   border-radius: 50%;
   pointer-events: none;
-  top: 15%;
+  top: 25%;
+  height: 8em;
+  width: 8em;
 }
 
 .eye-l {
-  left: 20%;
+  left: 27%;
 }
 
 .eye-r {
-  left: 54%;
+  left: 53%;
 }
 
 .mouth {
   position: absolute;
-  top: 15%;
+  top: 25%;
   transform: translate(-50%, -50%);
   pointer-events: none;
+  height: 8em;
+  width: 8em;
 }
 
 .blush {
   position: absolute;
   pointer-events: none;
+  height: 55em;
+  width: 55em;
 }
