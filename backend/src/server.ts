@@ -7,7 +7,7 @@ import morgan from "morgan";
 /* ROUTE IMPORT */
 import recipeRoutes from "./recipes/recipes.routes";
 import googleRoutes from "./login/auth.routes";
-import questRoutes from "./quests/quests.routes";
+import questRoutes from "./quests/quest.routes";
 
 /* CONFIGURATIONS */
 dotenv.config();

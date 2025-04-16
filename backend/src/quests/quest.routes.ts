@@ -1,5 +1,5 @@
 import express from "express";
-import { getRandomQuests } from "./quests.controller";
+import { getRandomQuests } from "./quest.controller";
 const router = express.Router();
 
 router.get("/", getRandomQuests);
