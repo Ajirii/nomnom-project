@@ -26,6 +26,7 @@
   border-radius: 8px;
   overflow: hidden;
   margin-top: 0;
+  background-color: #e9e9e9;
 }
 
 .master {
@@ -178,15 +179,15 @@
 }
 .achievements-btn {
   position: absolute;
-  top: 10px;
-  left: 10px;
+  top: 48%;
+  left: 10%;
   padding: 12px 24px;
-  background: #ffa726;
+  background: #f1f1f1;
   border: none;
   border-radius: 10px;
   font-family: "Press Start 2P", cursive;
   cursor: pointer;
-  color: white;
+  color: rgb(0, 0, 0);
   transition: background 0.3s ease;
 }
 
@@ -198,7 +199,7 @@
 }
 
 .achievements-btn:hover {
-  background: #fb8c00;
+  background: #ffcf95;
 }
 .modal-overlay {
   position: absolute;
@@ -314,7 +315,11 @@
   .quest-container {
     flex-direction: column;
     width: 90%;
-    top: auto;
+    top: 53%;
+  }
+
+  .achievements-btn {
+    left: 5%;
   }
 
   .master,

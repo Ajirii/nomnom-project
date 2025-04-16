@@ -23,71 +23,44 @@
 }
 
 .nomnom-face {
-  height: 50em;
-  width: 50em;
+  height: 20em;
+  width: 40em;
   position: relative;
-  border-radius: 50%;
   display: flex;
   justify-content: center;
   align-items: center;
-}
+  background-color: rgba(0, 0, 0, 0.5);
 
+  border: 4px solid #000;
+  image-rendering: pixelated;
+  outline: 2px solid #555;
+  box-shadow: 0 0 0 4px #fff;
+}
 .eye-l,
 .eye-r {
   position: absolute;
-  background-color: #222;
-  height: 4.12em;
-  width: 4.12em;
+  transform: translate(-50%, -50%);
   border-radius: 50%;
-  top: 50%;
-  transform: translateY(-50%);
+  pointer-events: none;
+  top: 15%;
 }
 
 .eye-l {
-  left: 35%;
+  left: 20%;
 }
 
 .eye-r {
-  left: 55%;
-}
-
-.eye-l::after,
-.eye-r::after {
-  content: "";
-  position: absolute;
-  background-color: #f8f8f8;
-  height: 3.25em;
-  width: 3.25em;
-  border-radius: 50%;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
+  left: 54%;
 }
 
 .mouth {
   position: absolute;
-  background-color: #222;
-  height: 2.12em;
-  width: 2.5em;
-  border-radius: 0 0 2em 2em;
-  left: 46.5%;
-  transform: translateX(-50%);
-  top: 54%;
+  top: 15%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
 }
 
 .blush {
-  height: 4em;
-  width: 4em;
-  background-color: lightpink;
-  border-radius: 50%;
   position: absolute;
-  top: 52%;
-}
-
-.blush-l {
-  left: 30%;
-}
-
-.blush-r {
-  left: 60%;
+  pointer-events: none;
 }
