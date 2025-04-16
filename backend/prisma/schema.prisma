@@ -17,6 +17,7 @@ model User {
   quests        Quest[]
   userCosmetics UserCosmetic[]
   UserQuest     UserQuest[]
+  recipes       Recipe[]
 }
 
 model Recipe {
@@ -29,6 +30,9 @@ model Recipe {
   cuisine        String
   notes          String
   favorite       Boolean  @default(false)
+  user           User? @relation(fields: [createdBy], references: [userId])
+  createdBy      String? @default("system")
+  createdAt      DateTime @default(now())
 }
 
 model Quest {
