@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { GiHamburgerMenu } from "react-icons/gi";
+import { useAuth } from "../../context/AuthContext";
 
 //import navbar images
 import cheesecake from "/assets/pixel_images/23_cheesecake_dish.png";
@@ -14,6 +15,13 @@ interface NavbarProps {
 
 const Navbar = ({ onLinkClick }: NavbarProps) => {
   const [toggleNav, setToggleNav] = useState(false);
+  const { isLoggedIn, setIsLoggedIn } = useAuth();
+
+  const handleSignOut = () => {
+    localStorage.removeItem("token");
+    setIsLoggedIn(false);
+    onLinkClick("home");
+  };
 
   return (
     <nav className="navbar">
@@ -48,14 +56,19 @@ const Navbar = ({ onLinkClick }: NavbarProps) => {
         </li>
       </ul>
       <div className="navbar_login">
-        <a
-          href="#login"
-          className="navbar_font"
-          onClick={() => onLinkClick("login")}
-        >
-          Log In
-        </a>
-        <div />
+        {isLoggedIn ? (
+          <a className="navbar_font" onClick={handleSignOut}>
+            Sign Out
+          </a>
+        ) : (
+          <a
+            href="#login"
+            className="navbar_font"
+            onClick={() => onLinkClick("login")}
+          >
+            Sign In
+          </a>
+        )}
       </div>
       <div className="navbar_smallscreen">
         <GiHamburgerMenu

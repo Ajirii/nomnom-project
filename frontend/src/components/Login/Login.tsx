@@ -1,18 +1,18 @@
 import { useState } from "react";
 import { GoogleLogin } from "@react-oauth/google";
 import axios from "axios";
+import { useAuth } from "../../context/AuthContext";
 
 const Login = () => {
   const [error, setError] = useState<string>("");
   const [successMessage, setSuccessMessage] = useState<string>("");
   const [user, setUser] = useState<any>(null);
+  const { setIsLoggedIn } = useAuth();
 
   const handleGoogleLogin = async (credentialResponse: any) => {
     const { credential } = credentialResponse;
 
-    if (!credential) {
-      return;
-    }
+    if (!credential) return;
 
     try {
       const response = await axios.post(
@@ -23,10 +23,8 @@ const Login = () => {
       const { user, token } = response.data;
 
       localStorage.setItem("token", token);
-
-      console.log("User:", user);
-      console.log("User:", response.data.user);
-      setUser(response.data.user);
+      setUser(user);
+      setIsLoggedIn(true);
       setSuccessMessage("Login Successful!");
       setError("");
     } catch (err) {
@@ -42,32 +40,32 @@ const Login = () => {
     const password = (document.getElementById("password") as HTMLInputElement)
       .value;
 
-    if (!email || !password) {
-      setSuccessMessage("");
-      setError("Email and password are required");
-      return;
-    }
+    // if (!email || !password) {
+    //   setSuccessMessage("");
+    //   setError("Email and password are required");
+    //   return;
+    // }
 
     try {
       const response = await axios.post(
         `${import.meta.env.VITE_API_BASE_URL}api/login/email`,
         { email, password }
       );
-      console.log("User:", response.data.user);
       setUser(response.data.user);
+      setIsLoggedIn(true);
       setSuccessMessage("Login Successful!");
       setError("");
     } catch (err) {
       setSuccessMessage("");
-      setError("Incorrect username or password");
+      // setError("Incorrect username or password");
       console.error("Login error:", err);
     }
-
-    console.log("Sign In Attempted with", email, password);
   };
 
   const handleSignOut = () => {
+    localStorage.removeItem("token");
     setUser(null);
+    setIsLoggedIn(false);
     setSuccessMessage("");
     setError("");
     console.log("User signed out");
