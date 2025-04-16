@@ -33,6 +33,9 @@ export async function getUserQuests(userId: string) {
  
 export async function setUserQuest(userId: string, questId: string){
     try {
+        if (!await prisma.user.findUnique({where:{userId}})){
+            throw Error("User not found")
+        }
         const newUserQuest = await prisma.userQuest.create({
             data: {
                 userId: userId,

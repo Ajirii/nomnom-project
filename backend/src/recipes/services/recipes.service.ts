@@ -94,7 +94,7 @@ async function storeRecipe(recipe: Recipe): Promise<Recipe | void> {
                   notes: recipe.notes,
                   cuisine: recipe.cuisine,
                   favorite: recipe.favorite,
-                  createdBy: recipe.createdBy ?? "fe60b6db-8b4a-409b-b6e9-0400e9757b4b",
+                  ...(recipe.createdBy && { createdBy: recipe.createdBy }),              
                   createdAt: recipe.createdAt
                 },
               });
@@ -147,10 +147,14 @@ async function doesRecipeExist(recipe: Recipe){
 }
 
 async function deleteUnfavoritedRecipes(user: User): Promise<void>{
+    if (!user){
+        return;
+    }
+
     try{
         const userRecipes: Array<Recipe> = await prisma.recipe.findMany({
             where:{
-                createdBy: user.userId ?? "fe60b6db-8b4a-409b-b6e9-0400e9757b4b",
+                createdBy: user.userId,
                 favorite: false
 
             },

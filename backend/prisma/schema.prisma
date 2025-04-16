@@ -31,7 +31,7 @@ model Recipe {
   notes          String
   favorite       Boolean  @default(false)
   user           User? @relation(fields: [createdBy], references: [userId])
-  createdBy      String @default("system")
+  createdBy      String? @default("system")
   createdAt      DateTime @default(now())
 }
 
