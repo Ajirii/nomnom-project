@@ -64,22 +64,16 @@
 
 .detail {
   width: 60%;
-  padding: 30px;
+  padding: 20px;
   text-align: center;
-  background-color: rgba(75, 75, 75, 0.6); /* semi-transparent black */
-  backdrop-filter: blur(2px); /* blurs what's behind the box */
-  -webkit-backdrop-filter: blur(1px); /* Safari support */
-  
 }
 
 .detail h2 {
-  color: #db5800;
+  color: #333;
 }
 
 .detail p {
   margin: 10px 0;
-  color: #d88e39;
-  
 }
 
 .placeholder {
@@ -176,11 +170,118 @@
 }
 
 .quest-icon {
-  height: 75px;
-  width: 75px;
+  height: 65px;
+  width: 65px;
   vertical-align: middle;
   margin-right: 15px;
   margin-left: 18px;
+}
+.achievements-btn {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  padding: 12px 24px;
+  background: #ffa726;
+  border: none;
+  border-radius: 10px;
+  font-family: "Press Start 2P", cursive;
+  cursor: pointer;
+  color: white;
+  transition: background 0.3s ease;
+}
+
+.achievement-heading {
+  font-family: "Press Start 2P", cursive;
+  font-size: 18px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.achievements-btn:hover {
+  background: #fb8c00;
+}
+.modal-overlay {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  width: auto;
+  height: auto;
+  background-color: transparent;
+  z-index: 9999;
+  padding: 20px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+.modal-content {
+  background: #fff;
+  padding: 20px 30px;
+  border-radius: 16px;
+  width: 320px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  font-family: "Press Start 2P", cursive;
+}
+
+.achievement-boxes {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 16px;
+  margin-top: 20px;
+}
+
+.achievement-tile {
+  text-align: center;
+  padding: 12px;
+  border-radius: 12px;
+  border: 2px solid #ddd;
+  background-color: #eee;
+  font-family: "Press Start 2P", cursive;
+  transition: all 0.3s ease;
+}
+
+.achievement-icon {
+  font-size: 2rem;
+  margin-bottom: 6px;
+}
+
+.achievement-title {
+  font-weight: bold;
+  font-size: 14px;
+  margin-bottom: 4px;
+  font-family: "Press Start 2P", cursive;
+}
+
+.achievement-desc {
+  font-size: 12px;
+  color: #555;
+}
+
+.achievement-tile.locked {
+  opacity: 0.4;
+  filter: grayscale(100%);
+}
+
+.achievement-tile.unlocked {
+  background-color: #fff8dc;
+  border-color: #ffb347;
+}
+
+.close-button {
+  margin-top: 20px;
+  background: #b85555;
+  color: white;
+  border: none;
+  padding: 10px 24px;
+  font-size: 14px;
+  font-weight: bold;
+  border-radius: 8px;
+  cursor: pointer;
+  font-family: "Press Start 2P", cursive;
+}
+
+.close-button:hover {
+  background-color: #8e3e3e;
 }
 
 @media screen and (max-width: 600px) {
