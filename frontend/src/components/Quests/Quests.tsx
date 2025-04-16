@@ -1,5 +1,5 @@
 import { useState } from "react";
-import orange from "../../assets/cosmetics/orange.png";
+import orange from "/assets/cosmetics/orange.png";
 
 interface Quest {
   questId: string;
