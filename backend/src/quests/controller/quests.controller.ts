@@ -57,7 +57,10 @@ export const postUserQuest = async (req: Request, res: Response): Promise<void> 
         }
 
         const newUserQuest = await setUserQuest(userId, questId).catch(err => 
-            {if (err.message === "User not found") res.status(400).json({error: "User Doesn't Exist"})
+            {if (err.message === "User not found") 
+                res.status(400).json({error: "User Doesn't Exist"})
+            else if (err.message === "Quest not found")
+                res.status(400).json({error: "Quest Doesn't Exist"})
         });
         res.status(200).json(newUserQuest);
     }
