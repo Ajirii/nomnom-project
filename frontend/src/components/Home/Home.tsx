@@ -96,9 +96,15 @@ const Home = () => {
           >
             <option value="">Select your cuisine...</option>
             <option value="italian">Italian</option>
-            <option value="mexican">Mexican</option>
             <option value="chinese">Chinese</option>
+            <option value="chinese">Japanese</option>
             <option value="indian">Indian</option>
+            <option value="chinese">French</option>
+            <option value="mexican">Mexican</option>
+            <option value="chinese">Thai</option>
+            <option value="chinese">Middle Eastern</option>
+            <option value="chinese">Korean</option>
+            <option value="chinese">Spanish</option>
             <option value="no-preference">No Preference</option>
           </select>
           <button
