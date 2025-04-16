@@ -12,7 +12,7 @@
 
 .recipes-subtitle {
   font-size: 18px;
-  color: #555;
+  color: #ffffff;
   margin-bottom: 100px;
 }
 
@@ -26,12 +26,11 @@
 }
 
 .recipe-card {
-  position: relative;            
-  display: flex;
+  position: relative;
   flex-direction: column;
-  justify-content: space-between;
-  height: 100%;                  
-  padding-bottom: 50px;         
+  justify-content: center;
+  display: flex;
+  height: 100%;
   max-width: 400px;
   margin: 0 auto;
   margin-top: 60px;
@@ -43,13 +42,15 @@
   transition: 0.3s;
 }
 
-
 .recipe-card:hover {
   transform: translateY(-5px);
   transform: scale(1.02);
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
-  
-  
+}
+
+.recipe-overlay {
+  position: relative;
+  bottom: 10px;
 }
 
 .recipe-img {
@@ -91,12 +92,10 @@
   transition: background 0.2s ease-in-out;
   margin-bottom: 20px;
   margin-top: 5px;
-  
 }
 
-
 .filter-btn:hover {
-  background: #d4d4d4; 
+  background: #d4d4d4;
 }
 
 .filter-btn.active {
@@ -108,13 +107,11 @@
 .favorites-toggle {
   margin: 20px 0;
   text-align: center;
-  
 }
 
 .favorite-btn {
-  position: absolute;
-  bottom: 10px;
-  left: 50%;
+  position: relative;
+  left: 15px;
   transform: translateX(-50%);
   background: none;
   border: none;
@@ -142,15 +139,19 @@
 
 .modal-content {
   background: #fff;
-  padding: 30px 40px;
   border-radius: 16px;
   max-width: 700px;
   width: 90%;
   text-align: center;
-  font-family: 'Segoe UI', sans-serif;
+  font-family: "Segoe UI", sans-serif;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+.modal-body {
   overflow-y: auto;
-  max-height: 90vh;
+  max-height: 70vh;
+  position: relative;
+  left: 15px;
 }
 
 .modal-title {
@@ -252,31 +253,30 @@
   width: 80%;
   max-width: 880px;
   font-size: 16px;
-  border: 3px solid #ccc;
+  border: 3px solid #888888;
   border-radius: 30px;
   outline: none;
   font-family: "Press Start 2P", cursive;
   text-align: center;
-  background-color: rgba(0, 0, 0, 0.4);
-  color: #fff;
+  background-color: rgba(255, 255, 255, 0.6);
+  color: #888888;
   backdrop-filter: blur(5px);
   -webkit-backdrop-filter: blur(5px);
-  box-shadow: 0 4px 8px rgba(0,0,0,0.08);
+  box-shadow: 0 4px 8px rgba(255, 255, 255, 0.08);
   transition: all 0.2s ease-in-out;
   margin-bottom: 10px;
 }
 
 .search-bar input::placeholder {
-  color: #aaa;
+  color: #888888;
   font-size: 16px;
   text-align: left;
 }
 
 .search-bar input:focus {
-  border-color: #a23a3a;
-  box-shadow: 0 0 8px rgba(162, 58, 58, 0.4);
-  background-color: rgba(0, 0, 0, 0.4);
-  color: #fff;
+  border-color: #777777;
+  background-color: rgba(199, 199, 199, 0.5);
+  color: #888888;
 }
 
 .recipes-header {
