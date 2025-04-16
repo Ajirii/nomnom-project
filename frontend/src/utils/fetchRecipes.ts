@@ -1,5 +1,3 @@
-// utils/fetchRecipes.ts
-
 type FetchRecipesParams = {
   ingredients: string[];
   cuisine: string;
