@@ -94,13 +94,18 @@
   width: 55em;
 }
 
-@media (max-width: 479px) {
+@media (max-width: 640px) {
   .container {
     top: 60%;
   }
 }
-@media (min-width: 480px) and (max-width: 767px) {
+@media (max-width: 768px) {
   .container {
     top: 60%;
+  }
+}
+@media (max-width: 1024px) {
+  .container {
+    top: 45%;
   }
 }
