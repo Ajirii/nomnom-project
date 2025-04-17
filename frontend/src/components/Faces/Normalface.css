@@ -3,7 +3,7 @@
   width: 20em;
   position: absolute;
   transform: translate(-50%, -50%);
-  top: 60%;
+  top: 30%;
   left: 50%;
   display: flex;
   justify-content: center;
@@ -92,4 +92,15 @@
   pointer-events: none;
   height: 55em;
   width: 55em;
+}
+
+@media (max-width: 479px) {
+  .container {
+    top: 60%;
+  }
+}
+@media (min-width: 480px) and (max-width: 767px) {
+  .container {
+    top: 60%;
+  }
 }

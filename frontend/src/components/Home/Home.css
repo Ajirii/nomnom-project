@@ -1,25 +1,3 @@
-/* Row that contains both containers */
-.row {
-  display: flex;
-  justify-content: center; /* Center items horizontally */
-  align-items: flex-start; /* Align items at the top */
-  flex-direction: column; /* Stack content vertically */
-  flex-wrap: wrap;
-  height: auto; /* Allow content to adjust height */
-}
-
-/* Main container */
-.main {
-  display: flex;
-  flex-direction: column;
-  align-items: center; /* Center content horizontally */
-  justify-content: flex-start; /* Align content to the top */
-  width: 100%;
-  padding: 20px;
-  position: relative;
-  margin-top: 20px; /* Move content down a bit */
-}
-
 /* Input Container */
 .input-container {
   background-color: #fff;
