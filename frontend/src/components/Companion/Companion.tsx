@@ -28,14 +28,14 @@ const Companion = ({
   const tabTitles = ["Head", "Eyes", "Accessories", "Background"];
 
   const cosmeticsByTab = [
-    [headband, witchHat, halo, crown], // Head
-    [glasses, monocle], // Eyes
-    [bowtie, mustache, egg], // Accessories
-    [chair, plant1, plant2], // Background
+    [headband, witchHat, halo, crown],
+    [glasses, monocle],
+    [bowtie, mustache, egg],
+    [chair, plant1, plant2],
   ];
 
   const handleCosmeticClick = (cosmetic: string) => {
-    onCosmeticChange(cosmetic); // Pass the selected cosmetic to the parent
+    onCosmeticChange(cosmetic);
   };
 
   const handleSaveToggle = () => {
