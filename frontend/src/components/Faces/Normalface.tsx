@@ -1,22 +1,60 @@
-import React, { useEffect, useRef } from "react";
+// app/Faces/NormalFace.tsx
+"use client";
 
-const NormalFace: React.FC = () => {
-  const faceRef = useRef<HTMLDivElement | null>(null);
-  const eyeLRef = useRef<HTMLImageElement | null>(null);
-  const eyeRRef = useRef<HTMLImageElement | null>(null);
-  const mouthRef = useRef<HTMLImageElement | null>(null);
-  const blushRef = useRef<HTMLImageElement | null>(null);
+import { useEffect, useRef, forwardRef, useImperativeHandle, useState } from "react";
+
+export type NormalFaceHandle = {
+  setEyesToHappy: () => void;
+  setEyesToDefault: () => void;
+  triggerEyeSwap: () => void;
+};
+
+const NormalFace = forwardRef<NormalFaceHandle>((_, ref) => {
+  const faceRef = useRef<HTMLDivElement>(null);
+  const eyeLRef = useRef<HTMLImageElement>(null);
+  const eyeRRef = useRef<HTMLImageElement>(null);
+  const mouthRef = useRef<HTMLImageElement>(null);
+  const blushRef = useRef<HTMLImageElement>(null);
+
+  const [leftEyeSrc, setLeftEyeSrc] = useState("/assets/white_face_assets/L-default.svg");
+  const [rightEyeSrc, setRightEyeSrc] = useState("/assets/white_face_assets/R-default.svg");
+  
+  useImperativeHandle(ref, () => ({
+    setEyesToHappy: () => {
+      setLeftEyeSrc("/assets/white_face_assets/l-happy.svg");
+      setRightEyeSrc("/assets/white_face_assets/r-happy.svg");
+    },
+    setEyesToDefault: () => {
+      setLeftEyeSrc("/assets/white_face_assets/L-default.svg");
+      setRightEyeSrc("/assets/white_face_assets/R-default.svg");
+    },
+    triggerEyeSwap: () => {
+      setLeftEyeSrc("/assets/white_face_assets/empty.svg");
+      setRightEyeSrc("/assets/white_face_assets/empty.svg");
+
+      setTimeout(() => {
+        setLeftEyeSrc("/assets/white_face_assets/l-happy.svg");
+        setRightEyeSrc("/assets/white_face_assets/r-happy.svg");
+    }, 50);
+    },
+  }));
 
   useEffect(() => {
+    if (
+      !faceRef.current ||
+      !eyeLRef.current ||
+      !eyeRRef.current ||
+      !mouthRef.current ||
+      !blushRef.current
+    ) {
+      console.error("Face or facial features not found!");
+      return;
+    }
+
     const face = faceRef.current;
     const eyes = [eyeLRef.current, eyeRRef.current];
     const mouth = mouthRef.current;
     const blush = blushRef.current;
-
-    if (!face || eyes.some((e) => !e) || !mouth || !blush) {
-      console.error("Face or facial features not found!");
-      return;
-    }
 
     let mouseX = 0,
       mouseY = 0;
@@ -25,8 +63,9 @@ const NormalFace: React.FC = () => {
     const easeFactor = 0.1;
     const maxMove = 20;
 
-    function moveFeatures(event: MouseEvent) {
-      const rect = face!.getBoundingClientRect();
+    const moveFeatures = (event: MouseEvent) => {
+      if (!face) return;
+      const rect = face.getBoundingClientRect();
       const faceX = rect.left + rect.width / 2;
       const faceY = rect.top + rect.height / 2;
 
@@ -35,9 +74,9 @@ const NormalFace: React.FC = () => {
 
       mouseX = Math.min(Math.max(mouseX, -maxMove), maxMove);
       mouseY = Math.min(Math.max(mouseY, -maxMove), maxMove);
-    }
+    };
 
-    function animate() {
+    const animate = () => {
       currentX += (mouseX - currentX) * easeFactor;
       currentY += (mouseY - currentY) * easeFactor;
 
@@ -55,10 +94,10 @@ const NormalFace: React.FC = () => {
         blush.style.transform = `translate(${currentX}px, ${currentY}px)`;
 
       requestAnimationFrame(animate);
-    }
+    };
 
-    animate();
     document.body.addEventListener("mousemove", moveFeatures);
+    animate();
 
     return () => {
       document.body.removeEventListener("mousemove", moveFeatures);
@@ -70,13 +109,14 @@ const NormalFace: React.FC = () => {
       <div className="face-container">
         <div className="nomnom-face" ref={faceRef}>
           <img
-            src="/assets/white_face_assets/L-default.svg"
+          
+            src={leftEyeSrc}
             className="eye eye-l"
             alt="left eye"
             ref={eyeLRef}
           />
           <img
-            src="/assets/white_face_assets/R-default.svg"
+            src={rightEyeSrc}
             className="eye eye-r"
             alt="right eye"
             ref={eyeRRef}
@@ -97,6 +137,6 @@ const NormalFace: React.FC = () => {
       </div>
     </div>
   );
-};
+});
 
 export default NormalFace;
