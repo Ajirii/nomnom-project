@@ -1,6 +1,10 @@
-import { useState } from "react";
+// app/page.tsx or app/components/Home.tsx
+"use client";
+
+import { useState, useRef } from "react";
 import RecipeCard from "./RecipeCard";
 import { fetchRecipes } from "../../utils/fetchRecipes";
+import NormalFace, { NormalFaceHandle } from "../Faces/Normalface";
 
 type Recipe = {
   title: string;
@@ -18,6 +22,8 @@ const Home = () => {
   const [message, setMessage] = useState("");
   const [loading, setLoading] = useState(false);
   const [recipe, setRecipe] = useState<Recipe | null>(null);
+
+  const faceRef = useRef<NormalFaceHandle>(null);
 
   const handleAddIngredient = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter" && ingredientInput.trim()) {
@@ -48,6 +54,8 @@ const Home = () => {
     }
 
     setLoading(true);
+    faceRef.current?.triggerEyeSwap(); // 👀 Triggers permanent happy eyes
+
     try {
       const data = await fetchRecipes({
         ingredients,
@@ -65,9 +73,11 @@ const Home = () => {
 
   return (
     <div className="recipes-section">
+      <NormalFace ref={faceRef} />
       <div className="row">
         <div className="main">
-          <div>{message && <p className="retro-message">{message}</p>}</div>
+          {message && <p className="retro-message">{message}</p>}
+
           <div className="input-container">
             <input
               type="text"
@@ -77,6 +87,7 @@ const Home = () => {
               onChange={(e) => setIngredientInput(e.target.value)}
               onKeyDown={handleAddIngredient}
             />
+
             <div className="ingredients-list">
               {ingredients.map((ingredient, index) => (
                 <div key={index} className="ingredient-tag">
@@ -90,6 +101,7 @@ const Home = () => {
                 </div>
               ))}
             </div>
+
             <select
               className="cuisine-select"
               value={cuisine}
@@ -108,6 +120,7 @@ const Home = () => {
               <option value="spanish">Spanish</option>
               <option value="no-preference">No Preference</option>
             </select>
+
             <button
               className="send-button"
               onClick={handleGenerateRecipe}
@@ -118,7 +131,6 @@ const Home = () => {
           </div>
         </div>
 
-        {/* Recipe Card Wrapper */}
         <div className="recipe-container">
           {recipe && <RecipeCard recipe={recipe} />}
         </div>
