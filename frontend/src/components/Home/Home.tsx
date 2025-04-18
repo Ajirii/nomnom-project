@@ -66,7 +66,7 @@ const Home = ({
 
       setTimeout(() => {
         onFaceStateChange("default");
-      }, 300);
+      }, 600);
     } catch (error) {
       console.error(error);
       setMessage("Error fetching recipe. Try again!");

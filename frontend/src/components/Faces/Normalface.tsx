@@ -20,7 +20,7 @@ const NormalFace: React.FC<NormalFaceProps> = ({ faceState, cosmeticSrc }) => {
       setBounce(true);
       const timeout = setTimeout(() => {
         setBounce(false);
-      }, 300);
+      }, 600);
       return () => clearTimeout(timeout);
     } else {
       setBounce(false);
