@@ -3,11 +3,11 @@ import { GiHamburgerMenu } from "react-icons/gi";
 import { useAuth } from "../../context/AuthContext";
 
 //import navbar images
-import cheesecake from "/assets/pixel_images/23_cheesecake_dish.png";
-import gummy from "/assets/pixel_images/50_giantgummybear.png";
+import companion from "/assets/pixel_images/companion.png";
 import book from "/assets/pixel_images/book.png";
 import daisy from "/assets/pixel_images/daisy.png";
-import noodlebowl from "/assets/pixel_images/noodlebowl.png";
+import ramen from "/assets/pixel_images/ramen.png";
+import cheesecake from "/assets/pixel_images/23_cheesecake_dish.png";
 
 interface NavbarProps {
   onLinkClick: (component: string) => void;
@@ -26,7 +26,7 @@ const Navbar = ({ onLinkClick }: NavbarProps) => {
   return (
     <nav className="navbar">
       <div className="navbar_heading">
-        <img src={noodlebowl} className="navbar_heading_emote" />
+        <img src={ramen} className="navbar_heading_emote" />
         <h1 className="navbar_title">NomNom</h1>
       </div>
       <ul className="navbar_links">
@@ -37,7 +37,7 @@ const Navbar = ({ onLinkClick }: NavbarProps) => {
           </a>
         </li>
         <li className="navbar_font">
-          <img src={gummy} className="navbar_small_emotes" />
+          <img src={companion} className="navbar_small_emotes" />
           <a href="#companion" onClick={() => onLinkClick("companion")}>
             Companion
           </a>
