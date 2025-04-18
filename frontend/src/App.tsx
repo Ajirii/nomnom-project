@@ -18,9 +18,8 @@ import "./components/Footer/Footer.css";
 import Start from "./components/Start/Start";
 import "./components/Start/Start.css";
 // import ClickEffects from "./components/MouseEffects/ClickEffects";
-import "./components/MouseEffects/ClickEffects.css";
+// import "./components/MouseEffects/ClickEffects.css";
 
-// Background images per page
 const backgrounds: Record<string, string> = {
   home: "/assets/background/Summer2.png",
   quests: "/assets/background/nightcity.png",
@@ -32,6 +31,12 @@ const backgrounds: Record<string, string> = {
 const App = () => {
   const [activeComponent, setActiveComponent] = useState<string>("start");
   const [hunger, setHunger] = useState<number>(100);
+  const [cosmetic, setCosmetic] = useState<string>(
+    "/assets/white_face_assets/blush.svg"
+  );
+  const [faceState, setFaceState] = useState<
+    "default" | "happy" | "arrow" | "meh" | "hungry"
+  >("default");
 
   const handleStartClick = () => {
     setActiveComponent("home");
@@ -41,10 +46,20 @@ const App = () => {
     setActiveComponent(component);
   };
 
+  const handleCosmeticChange = (newCosmetic: string) => {
+    setCosmetic(newCosmetic);
+  };
+
+  const handleFaceStateChange = (
+    newFaceState: "default" | "happy" | "arrow" | "meh" | "hungry"
+  ) => {
+    setFaceState(newFaceState);
+  };
+
   useEffect(() => {
     const interval = setInterval(() => {
       setHunger((prevHunger) => Math.max(prevHunger - 10, 0));
-    }, 6 * 60 * 60 * 1000); // Decrease hunger every 6 hours
+    }, 6 * 60 * 60 * 1000);
 
     return () => clearInterval(interval);
   }, []);
@@ -66,9 +81,17 @@ const App = () => {
       ) : (
         <>
           <Navbar onLinkClick={handleLinkClick} />
-          <NormalFace />
-          {activeComponent === "home" && <Home />}
-          {activeComponent === "companion" && <Companion hunger={hunger} />}
+          <NormalFace faceState={faceState} cosmeticSrc={cosmetic} />
+
+          {activeComponent === "home" && (
+            <Home onFaceStateChange={handleFaceStateChange} />
+          )}
+          {activeComponent === "companion" && (
+            <Companion
+              hunger={hunger}
+              onCosmeticChange={handleCosmeticChange}
+            />
+          )}
           {activeComponent === "quests" && <Quests />}
           {activeComponent === "recipes" && <Recipes />}
           {activeComponent === "login" && <Login />}

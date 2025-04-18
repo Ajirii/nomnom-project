@@ -270,6 +270,7 @@
   font-size: 12px;
   font-family: inherit;
 }
+
 @media screen and (min-width: 1025px) {
   .cosmetics-container {
     top: 20%;

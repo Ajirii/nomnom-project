@@ -14,7 +14,13 @@ import monocle from "/assets/cosmetics/monocle.png";
 import mustache from "/assets/cosmetics/mustache.png";
 import egg from "/assets/cosmetics/egg.png";
 
-const Companion = ({ hunger }: { hunger: number }) => {
+const Companion = ({
+  hunger,
+  onCosmeticChange,
+}: {
+  hunger: number;
+  onCosmeticChange: (newCosmetic: string) => void;
+}) => {
   const [activeTab, setActiveTab] = useState(0);
   const [isSaved, setIsSaved] = useState(false);
   const [showModal, setShowModal] = useState(false);
@@ -22,11 +28,15 @@ const Companion = ({ hunger }: { hunger: number }) => {
   const tabTitles = ["Head", "Eyes", "Accessories", "Background"];
 
   const cosmeticsByTab = [
-    [headband, witchHat, halo, crown], // Headz
-    [glasses, monocle], // Eyes
-    [bowtie, mustache, egg], // Accessories
-    [chair, plant1, plant2], // Background
+    [headband, witchHat, halo, crown],
+    [glasses, monocle],
+    [bowtie, mustache, egg],
+    [chair, plant1, plant2],
   ];
+
+  const handleCosmeticClick = (cosmetic: string) => {
+    onCosmeticChange(cosmetic);
+  };
 
   const handleSaveToggle = () => {
     setIsSaved((prev) => !prev);
@@ -106,15 +116,17 @@ const Companion = ({ hunger }: { hunger: number }) => {
 
             {/* Cosmetic Slots */}
             <div className="cosmetics-grid">
-              {[...Array(10)].map((_, index) => (
-                <div key={index} className="cosmetic-slot">
-                  {cosmeticsByTab[activeTab][index] && (
-                    <img
-                      src={cosmeticsByTab[activeTab][index]}
-                      alt={`Cosmetic ${index}`}
-                      className="cosmetic-img"
-                    />
-                  )}
+              {cosmeticsByTab[activeTab].map((cosmetic, index) => (
+                <div
+                  key={index}
+                  className="cosmetic-slot"
+                  onClick={() => handleCosmeticClick(cosmetic)}
+                >
+                  <img
+                    src={cosmetic}
+                    alt={`Cosmetic ${index}`}
+                    className="cosmetic-img"
+                  />
                 </div>
               ))}
             </div>
