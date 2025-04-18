@@ -11,7 +11,13 @@ type Recipe = {
   notes: string;
 };
 
-const Home = () => {
+const Home = ({
+  onFaceStateChange,
+}: {
+  onFaceStateChange: (
+    faceState: "default" | "happy" | "arrow" | "meh" | "hungry"
+  ) => void;
+}) => {
   const [ingredientInput, setIngredientInput] = useState("");
   const [ingredients, setIngredients] = useState<string[]>([]);
   const [cuisine, setCuisine] = useState("");
@@ -55,6 +61,12 @@ const Home = () => {
         strict: false,
       });
       setRecipe(data);
+
+      onFaceStateChange("happy");
+
+      setTimeout(() => {
+        onFaceStateChange("default");
+      }, 300);
     } catch (error) {
       console.error(error);
       setMessage("Error fetching recipe. Try again!");
@@ -65,8 +77,8 @@ const Home = () => {
 
   return (
     <div className="recipes-section">
-      <div className="row">
-        <div className="main">
+      <div className="home-row">
+        <div className="home-main">
           <div>{message && <p className="retro-message">{message}</p>}</div>
           <div className="input-container">
             <input

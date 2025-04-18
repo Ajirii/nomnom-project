@@ -1,19 +1,39 @@
-import React, { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
-const NormalFace: React.FC = () => {
+type FaceState = "default" | "happy" | "arrow" | "meh" | "hungry";
+
+interface NormalFaceProps {
+  faceState: FaceState;
+  cosmeticSrc: string;
+}
+
+const NormalFace: React.FC<NormalFaceProps> = ({ faceState, cosmeticSrc }) => {
   const faceRef = useRef<HTMLDivElement | null>(null);
   const eyeLRef = useRef<HTMLImageElement | null>(null);
   const eyeRRef = useRef<HTMLImageElement | null>(null);
   const mouthRef = useRef<HTMLImageElement | null>(null);
-  const blushRef = useRef<HTMLImageElement | null>(null);
+  const cosmeticRef = useRef<HTMLImageElement | null>(null);
+  const [bounce, setBounce] = useState(false);
+
+  useEffect(() => {
+    if (faceState === "happy") {
+      setBounce(true);
+      const timeout = setTimeout(() => {
+        setBounce(false);
+      }, 300);
+      return () => clearTimeout(timeout);
+    } else {
+      setBounce(false);
+    }
+  }, [faceState]);
 
   useEffect(() => {
     const face = faceRef.current;
     const eyes = [eyeLRef.current, eyeRRef.current];
     const mouth = mouthRef.current;
-    const blush = blushRef.current;
+    const cosmetic = cosmeticRef.current;
 
-    if (!face || eyes.some((e) => !e) || !mouth || !blush) {
+    if (!face || eyes.some((e) => !e) || !mouth || !cosmetic) {
       console.error("Face or facial features not found!");
       return;
     }
@@ -51,8 +71,8 @@ const NormalFace: React.FC = () => {
           currentY / 1.1
         }px)`;
 
-      if (blush)
-        blush.style.transform = `translate(${currentX}px, ${currentY}px)`;
+      if (cosmetic)
+        cosmetic.style.transform = `translate(${currentX}px, ${currentY}px)`;
 
       requestAnimationFrame(animate);
     }
@@ -65,33 +85,63 @@ const NormalFace: React.FC = () => {
     };
   }, []);
 
+  const faceAssets = {
+    default: {
+      eyeL: "/assets/white_face_assets/L-default.svg",
+      eyeR: "/assets/white_face_assets/R-default.svg",
+      mouth: "/assets/white_face_assets/open-smile.svg",
+    },
+    happy: {
+      eyeL: "/assets/white_face_assets/l-happy.svg",
+      eyeR: "/assets/white_face_assets/r-happy.svg",
+      mouth: "/assets/white_face_assets/open-smile.svg",
+    },
+    arrow: {
+      eyeL: "",
+      eyeR: "",
+      mouth: "",
+    },
+    meh: {
+      eyeL: "",
+      eyeR: "",
+      mouth: "",
+    },
+    hungry: {
+      eyeL: "",
+      eyeR: "",
+      mouth: "",
+    },
+  };
+
+  const currentAssets = faceAssets[faceState];
+
   return (
     <div className="container">
       <div className="face-container">
-        <div className="nomnom-face" ref={faceRef}>
+        <div className={`nomnom-face ${bounce ? "bounce" : ""}`} ref={faceRef}>
           <img
-            src="/assets/white_face_assets/L-default.svg"
+            src={currentAssets.eyeL}
             className="eye eye-l"
             alt="left eye"
             ref={eyeLRef}
           />
           <img
-            src="/assets/white_face_assets/R-default.svg"
+            src={currentAssets.eyeR}
             className="eye eye-r"
             alt="right eye"
             ref={eyeRRef}
           />
           <img
-            src="/assets/white_face_assets/open-smile.svg"
+            src={currentAssets.mouth}
             className="mouth"
             alt="mouth"
             ref={mouthRef}
           />
           <img
-            src="/assets/white_face_assets/blush.svg"
-            className="blush"
-            alt="blush"
-            ref={blushRef}
+            src={cosmeticSrc}
+            className="cosmetic"
+            alt="cosmetic"
+            ref={cosmeticRef}
           />
         </div>
       </div>
