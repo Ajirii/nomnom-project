@@ -7,14 +7,13 @@ import morgan from "morgan";
 /* ROUTE IMPORT */
 import recipeRoutes from "./recipes/routes/recipes.routes";
 import googleRoutes from "./login/auth.routes";
-import { authenticateJWT } from "./middleware/jwt";
 import questRoutes from "./quests/routes/quests.routes";
 
 /* CONFIGURATIONS */
 dotenv.config();
 const app = express();
 app.use(express.json());
-app.use(helmet());
+app.use(helmet({ crossOriginOpenerPolicy: false }));
 app.use(helmet.crossOriginResourcePolicy({ policy: "cross-origin" }));
 app.use(morgan("common"));
 app.use(cors());
