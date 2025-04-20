@@ -198,13 +198,28 @@ async function deleteUnfavoritedRecipes(user: User): Promise<void> {
             recipeId: i.recipeId,
           },
         });
-      } catch (error) {
+      } 
+      catch (error) {
         console.error("Failed deletion of record: " + i.recipeId);
       }
     }
-  } catch (error) {
+  } 
+  catch (error) {
     console.error("Cannot delete unfavorited records: " + error);
-  } finally {
+  } 
+  finally {
     await prisma.$disconnect();
   }
+}
+
+
+export const getRecipeById = async (id: string): Promise<Recipe> => {
+  const recipe: Recipe = await prisma.recipe.findUnique(
+    {
+      where: {
+        id
+      }
+    }
+  );
+  return recipe;
 }
