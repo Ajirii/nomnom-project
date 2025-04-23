@@ -29,31 +29,17 @@ const backgrounds: Record<string, string> = {
 const App = () => {
   const [activeComponent, setActiveComponent] = useState<string>("start");
   const [hunger, setHunger] = useState<number>(100);
-  const [cosmetic, setCosmetic] = useState<string>(
-    "/assets/white_face_assets/blush.svg"
-  );
-  const [faceState, setFaceState] = useState<
-    "default" | "happy" | "arrow" | "meh" | "hungry"
-  >("default");
+  const [cosmetic, setCosmetic] = useState<string>("/assets/white_face_assets/blush.svg");
+  const [faceState, setFaceState] = useState<"default" | "happy" | "arrow" | "meh" | "hungry">("default");
   const [coins, setCoins] = useState<number>(0);
 
-  const handleStartClick = () => {
-    setActiveComponent("home");
-  };
+  
+  const [unlockedCosmetics, setUnlockedCosmetics] = useState<{ [key: string]: boolean }>({});
 
-  const handleLinkClick = (component: string) => {
-    setActiveComponent(component);
-  };
-
-  const handleCosmeticChange = (newCosmetic: string) => {
-    setCosmetic(newCosmetic);
-  };
-
-  const handleFaceStateChange = (
-    newFaceState: "default" | "happy" | "arrow" | "meh" | "hungry"
-  ) => {
-    setFaceState(newFaceState);
-  };
+  const handleStartClick = () => setActiveComponent("home");
+  const handleLinkClick = (component: string) => setActiveComponent(component);
+  const handleCosmeticChange = (newCosmetic: string) => setCosmetic(newCosmetic);
+  const handleFaceStateChange = (newFaceState: typeof faceState) => setFaceState(newFaceState);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -65,7 +51,6 @@ const App = () => {
 
   return (
     <main>
-      {/* Background Image Container */}
       {activeComponent !== "start" && (
         <div
           className="fullscreen-image"
@@ -85,15 +70,22 @@ const App = () => {
           {activeComponent === "home" && (
             <Home onFaceStateChange={handleFaceStateChange} />
           )}
+
           {activeComponent === "companion" && (
             <Companion
               hunger={hunger}
               coins={coins}
               setCoins={setCoins}
               onCosmeticChange={handleCosmeticChange}
+              unlockedCosmetics={unlockedCosmetics}
+              setUnlockedCosmetics={setUnlockedCosmetics}
             />
           )}
-          {activeComponent === "quests" && <Quests coins={coins} setCoins={setCoins} />}
+
+          {activeComponent === "quests" && (
+            <Quests coins={coins} setCoins={setCoins} />
+          )}
+
           {activeComponent === "recipes" && <Recipes />}
           {activeComponent === "login" && <Login />}
           <Footer />

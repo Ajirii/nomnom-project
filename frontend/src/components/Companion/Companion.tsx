@@ -18,14 +18,15 @@ interface CompanionProps {
   hunger: number;
   coins: number;
   setCoins: (value: number) => void;
+  unlockedCosmetics: { [key: string]: boolean };
+  setUnlockedCosmetics: (value: { [key: string]: boolean }) => void;
   onCosmeticChange: (newCosmetic: string) => void;
 }
 
-const Companion = ({ hunger, coins, setCoins, onCosmeticChange }: CompanionProps) => {
+const Companion = ({ hunger, coins, setCoins, unlockedCosmetics, setUnlockedCosmetics, onCosmeticChange }: CompanionProps) => {
   const [activeTab, setActiveTab] = useState(0);
   const [isSaved, setIsSaved] = useState(false);
   const [showModal, setShowModal] = useState(false);
-  const [unlocked, setUnlocked] = useState<{ [key: string]: boolean }>({});
   const [message, setMessage] = useState<string | null>(null);
 
   const tabTitles = ["Head", "Eyes", "Accessories", "Background"];
@@ -41,12 +42,12 @@ const Companion = ({ hunger, coins, setCoins, onCosmeticChange }: CompanionProps
 
   const handleCosmeticClick = (cosmetic: string, index: number) => {
     const cost = getCost(index);
-    const isAlreadyUnlocked = unlocked[cosmetic];
+    const isAlreadyUnlocked = unlockedCosmetics[cosmetic];
 
     if (!isAlreadyUnlocked) {
       if (coins >= cost) {
-        setUnlocked((prev) => ({ ...prev, [cosmetic]: true }));
-        setCoins(coins - cost); // Corrected coin subtraction
+        setUnlockedCosmetics((prev) => ({ ...prev, [cosmetic]: true }));
+        setCoins(coins - cost);
         setMessage(`Unlocked for ${cost} coins!`);
         onCosmeticChange(cosmetic);
       } else {
@@ -131,7 +132,7 @@ const Companion = ({ hunger, coins, setCoins, onCosmeticChange }: CompanionProps
             </div>
             <div className="cosmetics-grid">
               {cosmeticsByTab[activeTab].map((cosmetic, index) => {
-                const isUnlocked = unlocked[cosmetic];
+                const isUnlocked = unlockedCosmetics[cosmetic];
                 return (
                   <div
                     key={index}
