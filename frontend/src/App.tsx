@@ -7,7 +7,7 @@ import Home from "./components/Home/Home";
 import "./components/Home/Home.css";
 import Companion from "./components/Companion/Companion";
 import "./components/Companion/Companion.css";
-import Quests from "./components/Quests/Quests";
+import { Quests } from "./components/Quests/Quests";
 import "./components/Quests/Quests.css";
 import Recipes from "./components/Recipes/Recipes";
 import "./components/Recipes/Recipes.css";
@@ -17,8 +17,6 @@ import Footer from "./components/Footer/Footer";
 import "./components/Footer/Footer.css";
 import Start from "./components/Start/Start";
 import "./components/Start/Start.css";
-// import ClickEffects from "./components/MouseEffects/ClickEffects";
-// import "./components/MouseEffects/ClickEffects.css";
 
 const backgrounds: Record<string, string> = {
   home: "/assets/background/Summer2.png",
@@ -37,6 +35,7 @@ const App = () => {
   const [faceState, setFaceState] = useState<
     "default" | "happy" | "arrow" | "meh" | "hungry"
   >("default");
+  const [coins, setCoins] = useState<number>(0);
 
   const handleStartClick = () => {
     setActiveComponent("home");
@@ -89,10 +88,12 @@ const App = () => {
           {activeComponent === "companion" && (
             <Companion
               hunger={hunger}
+              coins={coins}
+              setCoins={setCoins}
               onCosmeticChange={handleCosmeticChange}
             />
           )}
-          {activeComponent === "quests" && <Quests />}
+          {activeComponent === "quests" && <Quests coins={coins} setCoins={setCoins} />}
           {activeComponent === "recipes" && <Recipes />}
           {activeComponent === "login" && <Login />}
           <Footer />
