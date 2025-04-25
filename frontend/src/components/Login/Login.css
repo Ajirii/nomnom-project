@@ -10,7 +10,7 @@
   width: 100%;
   max-width: 600px;
   position: absolute;
-  bottom: 3%;
+  bottom: 50%;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
@@ -29,7 +29,8 @@
   border-color: #b85555;
 }
 
-.sign-in {
+.sign-in,
+.sign-out {
   width: 100%;
   background-color: #b85555;
   color: white;
@@ -43,16 +44,28 @@
   font-family: inherit;
 }
 
+.google-login-button > div {
+  width: 100% !important;
+  max-width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.google-login-button iframe {
+  width: 100% !important;
+  max-width: 100%;
+}
+
 .error-message {
   color: red;
   font-size: 14px;
   text-align: center;
-  padding-top: 50px;
+  padding-top: 30px;
 }
 
 .success-message {
   color: rgb(60, 211, 60);
   font-size: 14px;
   text-align: center;
-  padding-top: 50px;
+  padding-top: 30px;
 }

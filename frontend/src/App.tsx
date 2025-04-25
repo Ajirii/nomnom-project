@@ -17,6 +17,7 @@ import Footer from "./components/Footer/Footer";
 import "./components/Footer/Footer.css";
 import Start from "./components/Start/Start";
 import "./components/Start/Start.css";
+import { useAuth } from "./context/AuthContext";
 // import ClickEffects from "./components/MouseEffects/ClickEffects";
 // import "./components/MouseEffects/ClickEffects.css";
 
@@ -37,6 +38,8 @@ const App = () => {
   const [faceState, setFaceState] = useState<
     "default" | "happy" | "arrow" | "meh" | "hungry"
   >("default");
+
+  const { isLoggedIn } = useAuth();
 
   const handleStartClick = () => {
     setActiveComponent("home");
@@ -94,7 +97,9 @@ const App = () => {
           )}
           {activeComponent === "quests" && <Quests />}
           {activeComponent === "recipes" && <Recipes />}
-          {activeComponent === "login" && <Login />}
+          {!isLoggedIn && activeComponent === "login" && (
+            <Login onLoginSuccess={() => setActiveComponent("home")} />
+          )}
           <Footer />
         </>
       )}
