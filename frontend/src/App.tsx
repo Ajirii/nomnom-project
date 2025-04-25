@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import Navbar from "./components/Navbar/Navbar";
 import "./components/Navbar/Navbar.css";
-import NormalFace from "./components/Faces/Normalface";
 import "./components/Faces/Normalface.css";
 import Home from "./components/Home/Home";
 import "./components/Home/Home.css";
@@ -17,6 +16,8 @@ import Footer from "./components/Footer/Footer";
 import "./components/Footer/Footer.css";
 import Start from "./components/Start/Start";
 import "./components/Start/Start.css";
+import ClickableNomNom from "./components/Faces/ClickableNomNom";
+
 // import ClickEffects from "./components/MouseEffects/ClickEffects";
 // import "./components/MouseEffects/ClickEffects.css";
 
@@ -81,7 +82,7 @@ const App = () => {
       ) : (
         <>
           <Navbar onLinkClick={handleLinkClick} />
-          <NormalFace faceState={faceState} cosmeticSrc={cosmetic} />
+          <ClickableNomNom baseFaceState={faceState} cosmeticSrc={cosmetic} />
 
           {activeComponent === "home" && (
             <Home onFaceStateChange={handleFaceStateChange} />

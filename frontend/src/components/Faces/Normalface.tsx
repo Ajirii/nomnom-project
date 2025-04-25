@@ -1,10 +1,18 @@
 import { useEffect, useRef, useState } from "react";
 
-type FaceState = "default" | "happy" | "arrow" | "meh" | "hungry";
+type FaceState =
+  | "default"
+  | "happy"
+  | "arrow"
+  | "meh"
+  | "hungry"
+  | "click"
+  | "more_click"
+  | "pout";
 
 interface NormalFaceProps {
   faceState: FaceState;
-  cosmeticSrc: string;
+  cosmeticSrc?: string;
 }
 
 const NormalFace: React.FC<NormalFaceProps> = ({ faceState, cosmeticSrc }) => {
@@ -13,6 +21,11 @@ const NormalFace: React.FC<NormalFaceProps> = ({ faceState, cosmeticSrc }) => {
   const eyeRRef = useRef<HTMLImageElement | null>(null);
   const mouthRef = useRef<HTMLImageElement | null>(null);
   const cosmeticRef = useRef<HTMLImageElement | null>(null);
+  const eyebrowLRef = useRef<HTMLImageElement | null>(null);
+  const eyebrowRRef = useRef<HTMLImageElement | null>(null);
+
+  const animateRef = useRef<() => void>(() => {});
+
   const [bounce, setBounce] = useState(false);
 
   useEffect(() => {
@@ -33,7 +46,7 @@ const NormalFace: React.FC<NormalFaceProps> = ({ faceState, cosmeticSrc }) => {
     const mouth = mouthRef.current;
     const cosmetic = cosmeticRef.current;
 
-    if (!face || eyes.some((e) => !e) || !mouth || !cosmetic) {
+    if (!face || eyes.some((e) => !e) || !mouth) {
       console.error("Face or facial features not found!");
       return;
     }
@@ -60,6 +73,13 @@ const NormalFace: React.FC<NormalFaceProps> = ({ faceState, cosmeticSrc }) => {
     function animate() {
       currentX += (mouseX - currentX) * easeFactor;
       currentY += (mouseY - currentY) * easeFactor;
+      const eyebrowL = eyebrowLRef.current;
+      const eyebrowR = eyebrowRRef.current;
+
+      if (eyebrowL)
+        eyebrowL.style.transform = `translate(${currentX}px, ${currentY}px)`;
+      if (eyebrowR)
+        eyebrowR.style.transform = `translate(${currentX}px, ${currentY}px)`;
 
       eyes.forEach((eye) => {
         if (eye)
@@ -71,19 +91,30 @@ const NormalFace: React.FC<NormalFaceProps> = ({ faceState, cosmeticSrc }) => {
           currentY / 1.1
         }px)`;
 
-      if (cosmetic)
+      if (cosmeticSrc && cosmetic) {
         cosmetic.style.transform = `translate(${currentX}px, ${currentY}px)`;
+      }
 
-      requestAnimationFrame(animate);
+      if (animateRef.current) {
+        requestAnimationFrame(() => animateRef.current!());
+      }
     }
 
-    animate();
+    animateRef.current = animate;
+    requestAnimationFrame(animate);
+
     document.body.addEventListener("mousemove", moveFeatures);
 
     return () => {
       document.body.removeEventListener("mousemove", moveFeatures);
     };
-  }, []);
+  }, [faceState, cosmeticSrc]);
+
+  useEffect(() => {
+    if (faceState === "pout" && animateRef.current) {
+      requestAnimationFrame(() => animateRef.current!());
+    }
+  }, [faceState]);
 
   const faceAssets = {
     default: {
@@ -97,19 +128,34 @@ const NormalFace: React.FC<NormalFaceProps> = ({ faceState, cosmeticSrc }) => {
       mouth: "/assets/white_face_assets/open-smile.svg",
     },
     arrow: {
-      eyeL: "",
-      eyeR: "",
-      mouth: "",
+      eyeL: "/assets/white_face_assets/l-happy.svg",
+      eyeR: "/assets/white_face_assets/l-happy.svg",
+      mouth: "/assets/white_face_assets/l-happy.svg",
     },
     meh: {
-      eyeL: "",
-      eyeR: "",
-      mouth: "",
+      eyeL: "/assets/white_face_assets/l-happy.svg",
+      eyeR: "/assets/white_face_assets/l-happy.svg",
+      mouth: "/assets/white_face_assets/l-happy.svg",
     },
     hungry: {
-      eyeL: "",
-      eyeR: "",
-      mouth: "",
+      eyeL: "/assets/white_face_assets/l-happy.svg",
+      eyeR: "/assets/white_face_assets/l-happy.svg",
+      mouth: "/assets/white_face_assets/l-happy.svg",
+    },
+    click: {
+      eyeL: "/assets/white_face_assets/L-wink.svg",
+      eyeR: "/assets/white_face_assets/R-wink.svg",
+      mouth: "/assets/white_face_assets/cat-mouth.svg",
+    },
+    more_click: {
+      eyeL: "/assets/white_face_assets/L-wink.svg",
+      eyeR: "/assets/white_face_assets/R-wink.svg",
+      mouth: "/assets/white_face_assets/smile-mouth.svg",
+    },
+    pout: {
+      eyeL: "/assets/white_face_assets/L-default.svg",
+      eyeR: "/assets/white_face_assets/R-default.svg",
+      mouth: "/assets/white_face_assets/pout-mouth.svg",
     },
   };
 
@@ -137,12 +183,30 @@ const NormalFace: React.FC<NormalFaceProps> = ({ faceState, cosmeticSrc }) => {
             alt="mouth"
             ref={mouthRef}
           />
-          <img
-            src={cosmeticSrc}
-            className="cosmetic"
-            alt="cosmetic"
-            ref={cosmeticRef}
-          />
+          {faceState === "pout" && (
+            <>
+              <img
+                src="/assets/white_face_assets/L-angry-eyebrow.svg"
+                className="eyebrow eyebrow-l"
+                alt="left eyebrow"
+                ref={eyebrowLRef}
+              />
+              <img
+                src="/assets/white_face_assets/R-angry-eyebrow.svg"
+                className="eyebrow eyebrow-r"
+                alt="right eyebrow"
+                ref={eyebrowRRef}
+              />
+            </>
+          )}
+          {cosmeticSrc && (
+            <img
+              src={cosmeticSrc}
+              className="cosmetic"
+              alt="cosmetic"
+              ref={cosmeticRef}
+            />
+          )}
         </div>
       </div>
     </div>
