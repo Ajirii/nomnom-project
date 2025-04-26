@@ -23,6 +23,8 @@ const NormalFace: React.FC<NormalFaceProps> = ({ faceState, cosmeticSrc }) => {
   const cosmeticRef = useRef<HTMLImageElement | null>(null);
   const eyebrowLRef = useRef<HTMLImageElement | null>(null);
   const eyebrowRRef = useRef<HTMLImageElement | null>(null);
+  const isCosmeticVisible =
+    typeof cosmeticSrc === "string" && cosmeticSrc.trim().startsWith("/assets");
 
   const animateRef = useRef<() => void>(() => {});
 
@@ -128,19 +130,19 @@ const NormalFace: React.FC<NormalFaceProps> = ({ faceState, cosmeticSrc }) => {
       mouth: "/assets/white_face_assets/open-smile.svg",
     },
     arrow: {
-      eyeL: "/assets/white_face_assets/l-happy.svg",
-      eyeR: "/assets/white_face_assets/l-happy.svg",
-      mouth: "/assets/white_face_assets/l-happy.svg",
+      eyeL: "/assets/white_face_assets/L-default.svg",
+      eyeR: "/assets/white_face_assets/R-default.svg",
+      mouth: "/assets/white_face_assets/uparrow-mouth.svg",
     },
     meh: {
-      eyeL: "/assets/white_face_assets/l-happy.svg",
-      eyeR: "/assets/white_face_assets/l-happy.svg",
-      mouth: "/assets/white_face_assets/l-happy.svg",
+      eyeL: "/assets/white_face_assets/L-default.svg",
+      eyeR: "/assets/white_face_assets/R-default.svg",
+      mouth: "/assets/white_face_assets/slant-mouth.svg",
     },
     hungry: {
-      eyeL: "/assets/white_face_assets/l-happy.svg",
-      eyeR: "/assets/white_face_assets/l-happy.svg",
-      mouth: "/assets/white_face_assets/l-happy.svg",
+      eyeL: "/assets/white_face_assets/L-sadslant.svg",
+      eyeR: "/assets/white_face_assets/R-sadslant.svg",
+      mouth: "/assets/white_face_assets/upside-down-w-mouth.svg",
     },
     click: {
       eyeL: "/assets/white_face_assets/L-wink.svg",
@@ -199,11 +201,11 @@ const NormalFace: React.FC<NormalFaceProps> = ({ faceState, cosmeticSrc }) => {
               />
             </>
           )}
-          {cosmeticSrc && (
+          {isCosmeticVisible && (
             <img
               src={cosmeticSrc}
               className="cosmetic"
-              alt="cosmetic"
+              alt=""
               ref={cosmeticRef}
             />
           )}

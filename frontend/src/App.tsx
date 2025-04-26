@@ -39,7 +39,7 @@ const App = () => {
   );
   const [faceState, setFaceState] = useState<
     "default" | "happy" | "arrow" | "meh" | "hungry"
-  >("default");
+  >("meh");
 
   const { isLoggedIn } = useAuth();
   const [showModal, setShowModal] = useState(false);
@@ -68,6 +68,7 @@ const App = () => {
 
   const handleCosmeticChange = (newCosmetic: string) => {
     setCosmetic(newCosmetic);
+  };
   const handleFaceStateChange = (newFaceState: typeof faceState) =>
     setFaceState(newFaceState);
 
