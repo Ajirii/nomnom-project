@@ -94,6 +94,21 @@
   width: 55em;
 }
 
+.eyebrow {
+  position: absolute;
+  z-index: 2;
+  bottom: 55%;
+  width: 120px;
+}
+
+.eyebrow-l {
+  left: 30%;
+}
+
+.eyebrow-r {
+  left: 50%;
+}
+
 @keyframes bounceFace {
   0% {
     transform: translateY(0);

@@ -3,7 +3,11 @@ import { GoogleLogin } from "@react-oauth/google";
 import axios from "axios";
 import { useAuth } from "../../context/AuthContext";
 
-const Login = () => {
+interface LoginProps {
+  onLoginSuccess: () => void;
+}
+
+const Login = ({ onLoginSuccess }: LoginProps) => {
   const [error, setError] = useState<string>("");
   const [successMessage, setSuccessMessage] = useState<string>("");
   const [user, setUser] = useState<any>(null);
@@ -26,6 +30,7 @@ const Login = () => {
       setUser(user);
       setIsLoggedIn(true);
       setSuccessMessage("Login Successful!");
+      onLoginSuccess();
       setError("");
     } catch (err) {
       setSuccessMessage("");
@@ -54,6 +59,7 @@ const Login = () => {
       setUser(response.data.user);
       setIsLoggedIn(true);
       setSuccessMessage("Login Successful!");
+      onLoginSuccess();
       setError("");
     } catch (err) {
       setSuccessMessage("");
@@ -103,10 +109,12 @@ const Login = () => {
                   Sign Out
                 </button>
               )}
-              <GoogleLogin
-                onSuccess={handleGoogleLogin}
-                onError={() => console.log("Login Failed")}
-              />
+              <div className="google-login-button">
+                <GoogleLogin
+                  onSuccess={handleGoogleLogin}
+                  onError={() => console.log("Login Failed")}
+                />
+              </div>
               {error && <div className="error-message">{error}</div>}
               {successMessage && (
                 <div className="success-message">{successMessage}</div>

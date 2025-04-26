@@ -57,6 +57,7 @@
 .navbar_font {
   letter-spacing: 0.04em;
   line-height: 28px;
+  cursor: pointer;
 }
 
 .navbar_links {
@@ -202,5 +203,8 @@
 @media screen and (max-width: 650px) {
   .navbar {
     padding: 1rem;
+  }
+  .navbar_links {
+    right: 30px;
   }
 }
