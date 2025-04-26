@@ -18,6 +18,7 @@ import Start from "./components/Start/Start";
 import "./components/Start/Start.css";
 import { useAuth } from "./context/AuthContext";
 import ClickableNomNom from "./components/Faces/ClickableNomNom";
+import Modal from "./components/Modal/loginModal";
 
 // import ClickEffects from "./components/MouseEffects/ClickEffects";
 // import "./components/MouseEffects/ClickEffects.css";
@@ -41,15 +42,31 @@ const App = () => {
   >("default");
 
   const { isLoggedIn } = useAuth();
+  const [showModal, setShowModal] = useState(false);
   const [coins, setCoins] = useState<number>(0);
 
   const [unlockedCosmetics, setUnlockedCosmetics] = useState<{
     [key: string]: boolean;
   }>({});
 
-  const handleStartClick = () => setActiveComponent("home");
-  const handleLinkClick = (component: string) => setActiveComponent(component);
-  const handleCosmeticChange = (newCosmetic: string) =>
+  const handleStartClick = () => {
+    setActiveComponent("home");
+  };
+
+  const handleLinkClick = (component: string) => {
+    if (
+      !isLoggedIn &&
+      (component === "companion" ||
+        component === "quests" ||
+        component === "recipes")
+    ) {
+      setShowModal(true);
+      return;
+    }
+    setActiveComponent(component);
+  };
+
+  const handleCosmeticChange = (newCosmetic: string) => {
     setCosmetic(newCosmetic);
   const handleFaceStateChange = (newFaceState: typeof faceState) =>
     setFaceState(newFaceState);
@@ -102,6 +119,12 @@ const App = () => {
           {activeComponent === "recipes" && <Recipes />}
           {!isLoggedIn && activeComponent === "login" && (
             <Login onLoginSuccess={() => setActiveComponent("home")} />
+          )}
+          {showModal && (
+            <Modal
+              message="Please sign in to access this page!"
+              onClose={() => setShowModal(false)}
+            />
           )}
           <Footer />
         </>
