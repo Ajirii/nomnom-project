@@ -10,6 +10,7 @@ export interface JwtUser {
   googleId: string;
   name: string;
   currency: number;
+  hunger: number;
 }
 
 declare global {
