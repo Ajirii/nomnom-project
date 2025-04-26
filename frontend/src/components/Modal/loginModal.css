@@ -1,0 +1,46 @@
+.loginmodal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 999;
+}
+
+.loginmodal {
+  position: relative;
+  bottom: 200px;
+  background: white;
+  padding: 20px 30px;
+  border-radius: 12px;
+  text-align: center;
+  max-width: 400px;
+  font-family: "Press Start 2P", cursive;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.loginmodal p {
+  font-size: 14px;
+}
+
+.loginmodal button {
+  margin-top: 15px;
+  padding: 8px 16px;
+  border: none;
+  background-color: #b85555;
+  color: white;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 10px;
+  font-family: inherit;
+}
+
+.loginmodal button:hover {
+  background-color: #a75050;
+}

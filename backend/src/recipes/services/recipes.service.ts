@@ -64,13 +64,15 @@ export const getRecipeByIngredients = async (
 
     if (user) {
       content.createdBy = user.userId;
+    } else {
+      content.createdBy = null;
     }
 
     if (!content) {
       throw new Error("Received empty response.");
     }
     if (user) {
-      deleteUnfavoritedRecipes(user);
+      await deleteUnfavoritedRecipes(user);
     }
     return await storeRecipe(content);
   } catch (error) {
@@ -89,16 +91,14 @@ export const getRecipeByIngredients = async (
 async function storeRecipe(recipe: Recipe): Promise<Recipe | void> {
   try {
     if (!(await doesRecipeExist(recipe))) {
-      if (recipe.createdBy && recipe.createdBy !== "system") {
+      if (recipe.createdBy) {
         const userExists = await prisma.user.findUnique({
           where: { userId: recipe.createdBy },
         });
 
         if (!userExists) {
-          throw new Error(`User with ID ${recipe.createdBy} does not exist.`);
+          recipe.createdBy = null;
         }
-      } else {
-        recipe.createdBy = null;
       }
 
       const newRecipe: Recipe = await prisma.recipe.create({
@@ -121,8 +121,6 @@ async function storeRecipe(recipe: Recipe): Promise<Recipe | void> {
   } catch (error) {
     console.error("Error creating recipe:", error);
     throw error;
-  } finally {
-    await prisma.$disconnect();
   }
 }
 
@@ -169,7 +167,7 @@ async function doesRecipeExist(recipe: Recipe) {
 }
 
 async function deleteUnfavoritedRecipes(user: User): Promise<void> {
-  if (!user) {
+  if (!user?.userId) {
     return;
   }
 
@@ -204,7 +202,5 @@ async function deleteUnfavoritedRecipes(user: User): Promise<void> {
     }
   } catch (error) {
     console.error("Cannot delete unfavorited records: " + error);
-  } finally {
-    await prisma.$disconnect();
   }
 }

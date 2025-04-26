@@ -3,6 +3,9 @@ import dotenv from "dotenv";
 import cors from "cors";
 import helmet from "helmet";
 import morgan from "morgan";
+import { PrismaClient } from "@prisma/client";
+
+const prisma = new PrismaClient();
 
 const allowedOrigins = [
   "https://nomnom-project.vercel.app",
@@ -47,6 +50,25 @@ app.use("/api/quest", questRoutes);
 
 /* SERVER */
 const port = Number(process.env.PORT) || 3001;
-app.listen(port, "0.0.0.0", () => {
+const server = app.listen(port, "0.0.0.0", () => {
   console.log(`Server running on port ${port}`);
+});
+
+/* SHUTDOWN */
+process.on("SIGINT", async () => {
+  console.log("SIGINT received: closing HTTP server and Prisma...");
+  await prisma.$disconnect();
+  server.close(() => {
+    console.log("HTTP server closed.");
+    process.exit(0);
+  });
+});
+
+process.on("SIGTERM", async () => {
+  console.log("SIGTERM received: closing HTTP server and Prisma...");
+  await prisma.$disconnect();
+  server.close(() => {
+    console.log("HTTP server closed.");
+    process.exit(0);
+  });
 });
