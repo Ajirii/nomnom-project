@@ -16,7 +16,7 @@ const initialQuests: Quest[] = [
     title: "Recipe Adventure",
     description:
       "Cook a dish from a cuisine you've never heard of. Bonus points if you can pronounce it!",
-    rewardCurrency: 30,
+    rewardCurrency: 1000,
     rewardHunger: 40,
     status: "available",
   },
@@ -47,7 +47,13 @@ const initialQuests: Quest[] = [
   },
 ];
 
-export const Quests = ({ coins, setCoins }: { coins: number; setCoins: (value: number) => void }) => {
+export const Quests = ({
+  coins,
+  setCoins,
+}: {
+  coins: number;
+  setCoins: React.Dispatch<React.SetStateAction<number>>;
+}) => {
   const [quests, setQuests] = useState<Quest[]>(initialQuests);
   const [selectedQuest, setSelectedQuest] = useState<Quest | null>(null);
 

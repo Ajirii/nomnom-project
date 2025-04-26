@@ -1,157 +1,182 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import type { Dispatch, SetStateAction } from "react";
+import { fetchCosmetics } from "../../utils/fetchCosmetics"; // Import the function
 
-// Import cosmetics
-import headband from "/assets/cosmetics/headband.png";
-import witchHat from "/assets/cosmetics/witchhat.png";
-import halo from "/assets/cosmetics/halo.png";
-import glasses from "/assets/cosmetics/glasses.png";
-import bowtie from "/assets/cosmetics/bowtie.png";
-import chair from "/assets/cosmetics/chair.png";
-import plant1 from "/assets/cosmetics/plant1.png";
-import plant2 from "/assets/cosmetics/plant2.png";
-import crown from "/assets/cosmetics/crown.png";
-import monocle from "/assets/cosmetics/monocle.png";
-import mustache from "/assets/cosmetics/mustache.png";
-import egg from "/assets/cosmetics/egg.png";
+interface Cosmetic {
+  cosmeticId: string;
+  name: string;
+  description: string;
+  iconUrl: string;
+  price: number;
+}
 
 interface CompanionProps {
   hunger: number;
   coins: number;
   setCoins: (value: number) => void;
   unlockedCosmetics: { [key: string]: boolean };
-  setUnlockedCosmetics: (value: { [key: string]: boolean }) => void;
+  setUnlockedCosmetics: Dispatch<SetStateAction<{ [key: string]: boolean }>>;
   onCosmeticChange: (newCosmetic: string) => void;
 }
 
-const Companion = ({ hunger, coins, setCoins, unlockedCosmetics, setUnlockedCosmetics, onCosmeticChange }: CompanionProps) => {
-  const [activeTab, setActiveTab] = useState(0);
-  const [isSaved, setIsSaved] = useState(false);
-  const [showModal, setShowModal] = useState(false);
+const Companion = ({
+  hunger,
+  coins,
+  setCoins,
+  unlockedCosmetics,
+  setUnlockedCosmetics,
+  onCosmeticChange,
+}: CompanionProps) => {
+  const [cosmetics, setCosmetics] = useState<Cosmetic[]>([]);
   const [message, setMessage] = useState<string | null>(null);
+  const [showModal, setShowModal] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+  const [fetchError, setFetchError] = useState<string | null>(null);
 
-  const tabTitles = ["Head", "Eyes", "Accessories", "Background"];
-
-  const cosmeticsByTab = [
-    [headband, witchHat, halo, crown],
-    [glasses, monocle],
-    [bowtie, mustache, egg],
-    [chair, plant1, plant2],
-  ];
-
-  const getCost = (index: number) => (index + 1) * 10;
-
-  const handleCosmeticClick = (cosmetic: string, index: number) => {
-    const cost = getCost(index);
-    const isAlreadyUnlocked = unlockedCosmetics[cosmetic];
-
-    if (!isAlreadyUnlocked) {
-      if (coins >= cost) {
-        setUnlockedCosmetics((prev) => ({ ...prev, [cosmetic]: true }));
-        setCoins(coins - cost);
-        setMessage(`Unlocked for ${cost} coins!`);
-        onCosmeticChange(cosmetic);
-      } else {
-        setMessage("Not enough coins to unlock this cosmetic.");
+  // Fetch cosmetics data from the database or API
+  useEffect(() => {
+    const fetchCosmeticsData = async () => {
+      try {
+        const data = await fetchCosmetics(); // Fetch all cosmetics
+        setCosmetics(data); // Store the fetched data in state
+      } catch (error) {
+        setFetchError("Failed to load cosmetics. Please try again later.");
+      } finally {
+        setIsLoading(false);
       }
+    };
+
+    fetchCosmeticsData();
+  }, []);
+
+  const handleCosmeticClick = (
+    cosmeticId: string,
+    price: number,
+    iconUrl: string
+  ) => {
+    const isAlreadyUnlocked = unlockedCosmetics[cosmeticId];
+
+    if (isAlreadyUnlocked) {
+      onCosmeticChange(iconUrl); // 👈 pass the image URL, not the ID
+      return;
+    }
+
+    if (coins >= price) {
+      setUnlockedCosmetics((prev) => ({ ...prev, [cosmeticId]: true }));
+      setCoins(coins - price);
+      setMessage(`Unlocked ${cosmeticId} for ${price} coins!`);
+      onCosmeticChange(iconUrl); // 👈 after unlocking, set the equipped image
     } else {
-      onCosmeticChange(cosmetic);
+      setMessage("Not enough coins to unlock this cosmetic.");
     }
   };
 
-  const handleSaveToggle = () => {
-    setIsSaved((prev) => !prev);
-  };
+  if (isLoading) {
+    return <p>Loading cosmetics...</p>;
+  }
 
   return (
-    <div className="recipes-section">
-      <div className="row">
-        <div className="main">
-          <div className="hp-layout">
-            <button className="info-button" onClick={() => setShowModal(true)}>
-              ?
+    <div className="companion-section">
+      {/* HP Info Modal */}
+      {showModal && (
+        <div className="modal-overlay" onClick={() => setShowModal(false)}>
+          <div className="modal" onClick={(e) => e.stopPropagation()}>
+            <h2>HP Bar</h2>
+            <p>
+              The more quests you complete, the more NomNom's HP bar fills. Make
+              sure to keep him well-fed and happy!
+            </p>
+            <button
+              className="close-button"
+              onClick={() => setShowModal(false)}
+              aria-label="Close modal"
+            >
+              Close
             </button>
-            <div className="mood-container">
-              <div className="hp-bar">
-                <div
-                  className="hp-fill"
-                  style={{
-                    width: `${hunger}%`,
-                    backgroundColor: hunger <= 20 ? "red" : "#4CAF50",
-                  }}
+          </div>
+        </div>
+      )}
+
+      {/* General Message Modal */}
+      {message && (
+        <div className="modal-overlay" onClick={() => setMessage(null)}>
+          <div className="modal" onClick={(e) => e.stopPropagation()}>
+            <p>{message}</p>
+            <button
+              className="close-button"
+              onClick={() => setMessage(null)}
+              aria-label="Close message"
+            >
+              OK
+            </button>
+          </div>
+        </div>
+      )}
+
+      {/* HP Bar Section */}
+      <div className="hp-layout">
+        <button
+          className="info-button"
+          onClick={() => setShowModal(true)}
+          aria-label="Info about HP bar"
+        >
+          ?
+        </button>
+
+        <div className="mood-container">
+          <div className="hp-bar">
+            <div
+              className="hp-fill"
+              style={{
+                width: `${hunger}%`,
+                backgroundColor: hunger <= 20 ? "red" : "#4CAF50",
+              }}
+            />
+          </div>
+        </div>
+      </div>
+
+      {/* Cosmetics Section */}
+      <div className="cosmetics-container">
+        <div className="cosmetics-header-row">
+          <h2 className="cosmetics-header">Cosmetics</h2>
+          <p className="coins">
+            <strong>Coins:</strong> {coins}
+          </p>
+        </div>
+        <hr className="cosmetics-divider" />
+
+        {fetchError && (
+          <div className="costume-error-message">
+            <p>{fetchError}</p>
+          </div>
+        )}
+
+        <div className="cosmetics-grid">
+          {cosmetics.map(({ cosmeticId, name, iconUrl, price }) => {
+            const isUnlocked = unlockedCosmetics[cosmeticId];
+
+            return (
+              <div
+                key={cosmeticId}
+                className={`cosmetic-slot ${isUnlocked ? "" : "locked"}`}
+                onClick={() => handleCosmeticClick(cosmeticId, price, iconUrl)}
+                role="button"
+                tabIndex={0}
+                aria-label={`Select ${name} cosmetic`}
+              >
+                <img
+                  src={iconUrl}
+                  alt={name}
+                  className="cosmetic-img"
+                  aria-hidden="true"
                 />
+                {!isUnlocked && (
+                  <div className="locked-overlay">🔒 {price}</div>
+                )}
               </div>
-              <p className="coin-display">
-                <strong>Coins:</strong> {coins} 🪙
-              </p>
-            </div>
-          </div>
-
-          {showModal && (
-            <div className="modal-overlay" onClick={() => setShowModal(false)}>
-              <div className="modal" onClick={(e) => e.stopPropagation()}>
-                <h2>HP Bar</h2>
-                <p>
-                  The more quests you complete, the more NomNom's HP bar fills.
-                  Make sure to keep him well-fed and happy!
-                </p>
-                <button className="close-button" onClick={() => setShowModal(false)}>
-                  Close
-                </button>
-              </div>
-            </div>
-          )}
-
-          {message && (
-            <div className="modal-overlay" onClick={() => setMessage(null)}>
-              <div className="modal" onClick={(e) => e.stopPropagation()}>
-                <p>{message}</p>
-                <button className="close-button" onClick={() => setMessage(null)}>
-                  OK
-                </button>
-              </div>
-            </div>
-          )}
-
-          <div className="cosmetics-container">
-            <div className="cosmetics-tabs">
-              {tabTitles.map((title, index) => (
-                <button
-                  key={index}
-                  className={`cosmetics-tab ${activeTab === index ? "active" : ""}`}
-                  onClick={() => setActiveTab(index)}
-                >
-                  {title}
-                </button>
-              ))}
-            </div>
-            <div className="cosmetics-header-row">
-              <h2 className="cosmetics-header">Cosmetics</h2>
-              <button className="save-button" onClick={handleSaveToggle}>
-                Save
-              </button>
-            </div>
-            <div className="cosmetics-grid">
-              {cosmeticsByTab[activeTab].map((cosmetic, index) => {
-                const isUnlocked = unlockedCosmetics[cosmetic];
-                return (
-                  <div
-                    key={index}
-                    className={`cosmetic-slot ${isUnlocked ? "" : "locked"}`}
-                    onClick={() => handleCosmeticClick(cosmetic, index)}
-                  >
-                    <img
-                      src={cosmetic}
-                      alt={`Cosmetic ${index}`}
-                      className="cosmetic-img"
-                    />
-                    {!isUnlocked && (
-                      <div className="locked-overlay">🔒 {getCost(index)} 🪙</div>
-                    )}
-                  </div>
-                );
-              })}
-            </div>
-          </div>
+            );
+          })}
         </div>
       </div>
     </div>

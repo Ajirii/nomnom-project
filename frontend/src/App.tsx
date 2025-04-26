@@ -29,17 +29,24 @@ const backgrounds: Record<string, string> = {
 const App = () => {
   const [activeComponent, setActiveComponent] = useState<string>("start");
   const [hunger, setHunger] = useState<number>(100);
-  const [cosmetic, setCosmetic] = useState<string>("/assets/white_face_assets/blush.svg");
-  const [faceState, setFaceState] = useState<"default" | "happy" | "arrow" | "meh" | "hungry">("default");
+  const [cosmetic, setCosmetic] = useState<string>(
+    "/assets/white_face_assets/blush.svg"
+  );
+  const [faceState, setFaceState] = useState<
+    "default" | "happy" | "arrow" | "meh" | "hungry"
+  >("default");
   const [coins, setCoins] = useState<number>(0);
 
-  
-  const [unlockedCosmetics, setUnlockedCosmetics] = useState<{ [key: string]: boolean }>({});
+  const [unlockedCosmetics, setUnlockedCosmetics] = useState<{
+    [key: string]: boolean;
+  }>({});
 
   const handleStartClick = () => setActiveComponent("home");
   const handleLinkClick = (component: string) => setActiveComponent(component);
-  const handleCosmeticChange = (newCosmetic: string) => setCosmetic(newCosmetic);
-  const handleFaceStateChange = (newFaceState: typeof faceState) => setFaceState(newFaceState);
+  const handleCosmeticChange = (newCosmetic: string) =>
+    setCosmetic(newCosmetic);
+  const handleFaceStateChange = (newFaceState: typeof faceState) =>
+    setFaceState(newFaceState);
 
   useEffect(() => {
     const interval = setInterval(() => {
