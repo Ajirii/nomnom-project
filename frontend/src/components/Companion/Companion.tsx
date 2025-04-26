@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import type { Dispatch, SetStateAction } from "react";
-import { fetchCosmetics } from "../../utils/fetchCosmetics"; // Import the function
+import { fetchCosmetics } from "../../utils/fetchCosmetics";
 
 interface Cosmetic {
   cosmeticId: string;
@@ -33,12 +33,11 @@ const Companion = ({
   const [isLoading, setIsLoading] = useState(true);
   const [fetchError, setFetchError] = useState<string | null>(null);
 
-  // Fetch cosmetics data from the database or API
   useEffect(() => {
     const fetchCosmeticsData = async () => {
       try {
-        const data = await fetchCosmetics(); // Fetch all cosmetics
-        setCosmetics(data); // Store the fetched data in state
+        const data = await fetchCosmetics();
+        setCosmetics(data);
       } catch (error) {
         setFetchError("Failed to load cosmetics. Please try again later.");
       } finally {
@@ -57,7 +56,7 @@ const Companion = ({
     const isAlreadyUnlocked = unlockedCosmetics[cosmeticId];
 
     if (isAlreadyUnlocked) {
-      onCosmeticChange(iconUrl); // 👈 pass the image URL, not the ID
+      onCosmeticChange(iconUrl);
       return;
     }
 
@@ -65,7 +64,7 @@ const Companion = ({
       setUnlockedCosmetics((prev) => ({ ...prev, [cosmeticId]: true }));
       setCoins(coins - price);
       setMessage(`Unlocked ${cosmeticId} for ${price} coins!`);
-      onCosmeticChange(iconUrl); // 👈 after unlocking, set the equipped image
+      onCosmeticChange(iconUrl);
     } else {
       setMessage("Not enough coins to unlock this cosmetic.");
     }

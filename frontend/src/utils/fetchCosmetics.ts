@@ -10,7 +10,7 @@ const getAuthHeaders = (): HeadersInit => {
 };
 
 export const fetchCosmetics = async () => {
-  const url = `${baseUrl}api/cosmetics`; // Your API endpoint for fetching all cosmetics
+  const url = `${baseUrl}api/cosmetics`;
 
   const res = await fetch(url, {
     method: "GET",
@@ -21,5 +21,5 @@ export const fetchCosmetics = async () => {
     throw new Error("Failed to fetch cosmetics");
   }
 
-  return await res.json(); // Return the JSON response (array of cosmetics)
+  return await res.json();
 };
