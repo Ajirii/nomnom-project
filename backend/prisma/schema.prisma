@@ -13,6 +13,7 @@ model User {
   email         String         @unique
   googleId      String         @unique
   currency      Int            @default(0)
+  hunger        Int            @default(100)
 
   quests        Quest[]
   userCosmetics UserCosmetic[]
