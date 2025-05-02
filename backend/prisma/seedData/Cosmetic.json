@@ -3,14 +3,70 @@
     "cosmeticId": "1",
     "name": "Bulter",
     "description": "Embrace the classic butler style with a monocle, top hat, and a distinguished mustache. Perfect for serving with charm and elegance in the kitchen!",
-    "iconUrl": "/public/cosmetics/bulter-outfit.svg",
+    "iconUrl": "/assets/cosmetics/butler-outfit.svg",
     "price": 100
   },
   {
     "cosmeticId": "2",
     "name": "Blush",
     "description": "Sweet and subtle, this pastel outfit gives you a natural, warm glow. Perfect for adding a soft, charming touch to your look!",
-    "iconUrl": "/public/cosmetics/blush.svg",
+    "iconUrl": "/assets/cosmetics/blush.svg",
     "price": 50
+  },
+  {
+    "cosmeticId": "3",
+    "name": "Witch Costume",
+    "description": "Cast culinary spells in this magical outfit, complete with a starry hat and robe!",
+    "iconUrl": "/assets/cosmetics/witch-costume.svg",
+    "price": 120
+  },
+  {
+    "cosmeticId": "4",
+    "name": "Cat Outfit",
+    "description": "Purrfection in the kitchen! This adorable feline getup includes ears and a fluffy tail.",
+    "iconUrl": "/assets/cosmetics/cat-outfit.svg",
+    "price": 90
+  },
+  {
+    "cosmeticId": "5",
+    "name": "Panda Outfit",
+    "description": "Slow, steady, and sweet! Cook up cute chaos with panda flair.",
+    "iconUrl": "/assets/cosmetics/panda-outfit.svg",
+    "price": 110
+  },
+  {
+    "cosmeticId": "6",
+    "name": "Devil Costume",
+    "description": "Add a pinch of mischief to your dishes with this fiery outfit.",
+    "iconUrl": "/assets/cosmetics/devil-costume.svg",
+    "price": 130
+  },
+  {
+    "cosmeticId": "7",
+    "name": "Pig Costume",
+    "description": "Get your oink on and whip up a feast in this farmyard favorite!",
+    "iconUrl": "/assets/cosmetics/pig-costume.svg",
+    "price": 95
+  },
+  {
+    "cosmeticId": "8",
+    "name": "Oval Glasses",
+    "description": "Smart, sleek, and ready to measure with precision!",
+    "iconUrl": "/assets/cosmetics/oval-glasses.svg",
+    "price": 45
+  },
+  {
+    "cosmeticId": "9",
+    "name": "Bow Tie",
+    "description": "Class up your culinary chaos with this dashing bow tie.",
+    "iconUrl": "/assets/cosmetics/bow-tie.svg",
+    "price": 35
+  },
+  {
+    "cosmeticId": "10",
+    "name": "Daisy Accessory",
+    "description": "Bright and breezy, bring floral charm to your foodie fashion.",
+    "iconUrl": "/assets/cosmetics/daisy.svg",
+    "price": 55
   }
 ]

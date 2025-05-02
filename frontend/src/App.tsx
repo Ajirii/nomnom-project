@@ -6,7 +6,7 @@ import Home from "./components/Home/Home";
 import "./components/Home/Home.css";
 import Companion from "./components/Companion/Companion";
 import "./components/Companion/Companion.css";
-import Quests from "./components/Quests/Quests";
+import { Quests } from "./components/Quests/Quests";
 import "./components/Quests/Quests.css";
 import Recipes from "./components/Recipes/Recipes";
 import "./components/Recipes/Recipes.css";
@@ -41,10 +41,15 @@ const App = () => {
   );
   const [faceState, setFaceState] = useState<
     "default" | "happy" | "arrow" | "meh" | "hungry"
-  >("default");
+  >("meh");
 
   const { isLoggedIn } = useAuth();
   const [showModal, setShowModal] = useState(false);
+  const [coins, setCoins] = useState<number>(0);
+
+  const [unlockedCosmetics, setUnlockedCosmetics] = useState<{
+    [key: string]: boolean;
+  }>({});
 
   const handleStartClick = () => {
     setActiveComponent("home");
@@ -66,12 +71,8 @@ const App = () => {
   const handleCosmeticChange = (newCosmetic: string) => {
     setCosmetic(newCosmetic);
   };
-
-  const handleFaceStateChange = (
-    newFaceState: "default" | "happy" | "arrow" | "meh" | "hungry"
-  ) => {
+  const handleFaceStateChange = (newFaceState: typeof faceState) =>
     setFaceState(newFaceState);
-  };
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -83,7 +84,6 @@ const App = () => {
 
   return (
     <main>
-      {/* Background Image Container */}
       {activeComponent !== "start" && (
         <div
           className="fullscreen-image"
@@ -103,13 +103,22 @@ const App = () => {
           {activeComponent === "home" && (
             <Home onFaceStateChange={handleFaceStateChange} />
           )}
+
           {activeComponent === "companion" && (
             <Companion
               hunger={hunger}
+              coins={coins}
+              setCoins={setCoins}
               onCosmeticChange={handleCosmeticChange}
+              unlockedCosmetics={unlockedCosmetics}
+              setUnlockedCosmetics={setUnlockedCosmetics}
             />
           )}
-          {activeComponent === "quests" && <Quests />}
+
+          {activeComponent === "quests" && (
+            <Quests coins={coins} setCoins={setCoins} />
+          )}
+
           {activeComponent === "recipes" && <Recipes />}
           {!isLoggedIn && activeComponent === "login" && (
             <Login

@@ -26,5 +26,215 @@
     "description": "Make a spicy dish. Not too spicy... Or else...",
     "rewardCurrency": 25,
     "rewardHunger": 25
+  },
+  {
+    "questId": "5",
+    "title": "No Tears Challenge",
+    "description": "Chop an onion without crying. Goggles not allowed!",
+    "rewardCurrency": 10,
+    "rewardHunger": 15
+  },
+  {
+    "questId": "6",
+    "title": "Fusion Frenzy",
+    "description": "Create a fusion dish using ingredients from two different cultures.",
+    "rewardCurrency": 40,
+    "rewardHunger": 35
+  },
+  {
+    "questId": "7",
+    "title": "Dessert Disaster",
+    "description": "Try to bake a souffle. Hope it doesn't collapse!",
+    "rewardCurrency": 25,
+    "rewardHunger": 30
+  },
+  {
+    "questId": "8",
+    "title": "Midnight Munchies",
+    "description": "Prepare a snack using only 3 ingredients from your pantry.",
+    "rewardCurrency": 15,
+    "rewardHunger": 20
+  },
+  {
+    "questId": "9",
+    "title": "Leftovers Remix",
+    "description": "Transform yesterday's meal into something brand new.",
+    "rewardCurrency": 20,
+    "rewardHunger": 25
+  },
+  {
+    "questId": "10",
+    "title": "Salad Sorcery",
+    "description": "Craft a salad that looks like a dragon. Or at least pretend it does.",
+    "rewardCurrency": 30,
+    "rewardHunger": 20
+  },
+  {
+    "questId": "11",
+    "title": "Breakfast Bonanza",
+    "description": "Cook a full breakfast with eggs, toast, and something sweet!",
+    "rewardCurrency": 20,
+    "rewardHunger": 30
+  },
+  {
+    "questId": "12",
+    "title": "One-Pot Wonder",
+    "description": "Make a complete meal using only one pan or pot.",
+    "rewardCurrency": 25,
+    "rewardHunger": 35
+  },
+  {
+    "questId": "13",
+    "title": "Golden Brown",
+    "description": "Achieve the perfect golden crust on anything baked.",
+    "rewardCurrency": 15,
+    "rewardHunger": 25
+  },
+  {
+    "questId": "14",
+    "title": "Mystery Box Madness",
+    "description": "Use 5 random ingredients and cook something edible.",
+    "rewardCurrency": 35,
+    "rewardHunger": 40
+  },
+  {
+    "questId": "15",
+    "title": "Spaghetti Sprint",
+    "description": "Boil pasta perfectly, not too hard and not too soft!",
+    "rewardCurrency": 10,
+    "rewardHunger": 20
+  },
+  {
+    "questId": "16",
+    "title": "Baking Bliss",
+    "description": "Make cookies and don't eat the dough (tempting, right?).",
+    "rewardCurrency": 25,
+    "rewardHunger": 30
+  },
+  {
+    "questId": "17",
+    "title": "Saucy Situation",
+    "description": "Create your own signature sauce. Bonus if it doesn't look weird!",
+    "rewardCurrency": 30,
+    "rewardHunger": 25
+  },
+  {
+    "questId": "18",
+    "title": "Fruit Ninja",
+    "description": "Slice fruit with style. Show off those chopping skills!",
+    "rewardCurrency": 20,
+    "rewardHunger": 15
+  },
+  {
+    "questId": "19",
+    "title": "Microwave Mastery",
+    "description": "Make a delicious meal using only the microwave.",
+    "rewardCurrency": 15,
+    "rewardHunger": 20
+  },
+  {
+    "questId": "20",
+    "title": "5-Star Plating",
+    "description": "Serve a dish that looks straight out of a gourmet magazine.",
+    "rewardCurrency": 35,
+    "rewardHunger": 30
+  },
+  {
+    "questId": "21",
+    "title": "The Garlic Gauntlet",
+    "description": "Use garlic in every component of your meal.",
+    "rewardCurrency": 25,
+    "rewardHunger": 20
+  },
+  {
+    "questId": "22",
+    "title": "Unburnt",
+    "description": "Successfully toast bread without burning it. We believe in you.",
+    "rewardCurrency": 5,
+    "rewardHunger": 10
+  },
+  {
+    "questId": "23",
+    "title": "Sweet Tooth",
+    "description": "Make a dessert with zero added sugar. Challenge mode!",
+    "rewardCurrency": 20,
+    "rewardHunger": 25
+  },
+  {
+    "questId": "24",
+    "title": "The Herbivore's Delight",
+    "description": "Make a hearty vegetarian meal even meat lovers would love.",
+    "rewardCurrency": 25,
+    "rewardHunger": 30
+  },
+  {
+    "questId": "25",
+    "title": "Bento Box Beauty",
+    "description": "Prepare a visually stunning bento box lunch.",
+    "rewardCurrency": 30,
+    "rewardHunger": 35
+  },
+  {
+    "questId": "26",
+    "title": "Just Add Water",
+    "description": "Boil, steam, or poach something. Water is the hero here.",
+    "rewardCurrency": 10,
+    "rewardHunger": 15
+  },
+  {
+    "questId": "27",
+    "title": "Meal of the Day",
+    "description": "Recreate your favorite restaurant meal at home.",
+    "rewardCurrency": 40,
+    "rewardHunger": 40
+  },
+  {
+    "questId": "28",
+    "title": "Sauce Boss",
+    "description": "Make three different sauces to go with one dish.",
+    "rewardCurrency": 35,
+    "rewardHunger": 25
+  },
+  {
+    "questId": "29",
+    "title": "Satisfy the Critics",
+    "description": "Cook a meal for a picky friend and win them over.",
+    "rewardCurrency": 25,
+    "rewardHunger": 30
+  },
+  {
+    "questId": "30",
+    "title": "Utensil Artist",
+    "description": "Use every utensil in your drawer. Carefully.",
+    "rewardCurrency": 20,
+    "rewardHunger": 15
+  },
+  {
+    "questId": "31",
+    "title": "Kitchen DJ",
+    "description": "Cook a full meal while dancing. Bonus: clean up while grooving.",
+    "rewardCurrency": 10,
+    "rewardHunger": 20
+  },
+  {
+    "questId": "32",
+    "title": "Ultimate Smoothie",
+    "description": "Blend a smoothie with at least 4 fruits and one unexpected twist.",
+    "rewardCurrency": 15,
+    "rewardHunger": 25
+  },
+  {
+    "questId": "33",
+    "title": "Zero Waste",
+    "description": "Cook a meal using leftover scraps so nothing goes to waste!",
+    "rewardCurrency": 20,
+    "rewardHunger": 20
+  },
+  {
+    "questId": "34",
+    "title": "Mini Masterchef",
+    "description": "Make an entire meal that can fit into a single lunchbox.",
+    "rewardCurrency": 20,
+    "rewardHunger": 30
   }
 ]
