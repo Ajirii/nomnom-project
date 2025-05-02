@@ -5,9 +5,10 @@ import { useAuth } from "../../context/AuthContext";
 
 interface LoginProps {
   onLoginSuccess: () => void;
+  setActiveComponent: (component: string) => void;
 }
 
-const Login = ({ onLoginSuccess }: LoginProps) => {
+const Login = ({ onLoginSuccess, setActiveComponent }: LoginProps) => {
   const [error, setError] = useState<string>("");
   const [successMessage, setSuccessMessage] = useState<string>("");
   const [user, setUser] = useState<any>(null);
@@ -30,6 +31,13 @@ const Login = ({ onLoginSuccess }: LoginProps) => {
       setUser(user);
       setIsLoggedIn(true);
       setSuccessMessage("Login Successful!");
+
+      if (user.googleId) {
+        setSuccessMessage(
+          "Your Google account has been linked to your existing account."
+        );
+      }
+
       onLoginSuccess();
       setError("");
     } catch (err) {
@@ -45,25 +53,38 @@ const Login = ({ onLoginSuccess }: LoginProps) => {
     const password = (document.getElementById("password") as HTMLInputElement)
       .value;
 
-    // if (!email || !password) {
-    //   setSuccessMessage("");
-    //   setError("Email and password are required");
-    //   return;
-    // }
+    if (!email || !password) {
+      setSuccessMessage("");
+      setError("Email and password are required");
+      return;
+    }
 
     try {
       const response = await axios.post(
         `${import.meta.env.VITE_API_BASE_URL}api/login/email`,
         { email, password }
       );
+
+      if (
+        response.data.message ===
+        "This email is associated with a Google account. Please log in with Google."
+      ) {
+        setError(
+          "This email is associated with a Google account. Please log in with Google."
+        );
+        return;
+      }
+
       setUser(response.data.user);
+      localStorage.setItem("token", response.data.token);
       setIsLoggedIn(true);
       setSuccessMessage("Login Successful!");
       onLoginSuccess();
       setError("");
-    } catch (err) {
+    } catch (err: any) {
       setSuccessMessage("");
-      // setError("Incorrect username or password");
+      const message = err.response?.data?.message || "Login failed";
+      setError(message);
       console.error("Login error:", err);
     }
   };
@@ -78,7 +99,7 @@ const Login = ({ onLoginSuccess }: LoginProps) => {
   };
 
   return (
-    <div className="recipes-section">
+    <div className="login-section">
       <div className="row">
         <div className="main">
           <div className="login-container">
@@ -89,12 +110,14 @@ const Login = ({ onLoginSuccess }: LoginProps) => {
                 type="email"
                 id="email"
                 placeholder="Email"
+                required
               />
               <input
                 className="login-input"
                 type="password"
                 id="password"
                 placeholder="Password"
+                required
               />
               {!user ? (
                 <button className="sign-in" type="submit">
@@ -109,12 +132,19 @@ const Login = ({ onLoginSuccess }: LoginProps) => {
                   Sign Out
                 </button>
               )}
-              <div className="google-login-button">
-                <GoogleLogin
-                  onSuccess={handleGoogleLogin}
-                  onError={() => console.log("Login Failed")}
-                />
-              </div>
+              <GoogleLogin
+                onSuccess={handleGoogleLogin}
+                onError={() => console.log("Login Failed")}
+              />
+              <p className="sign-up">
+                Don’t have an account?{" "}
+                <span
+                  className="link"
+                  onClick={() => setActiveComponent("signup")}
+                >
+                  Sign Up
+                </span>
+              </p>
               {error && <div className="error-message">{error}</div>}
               {successMessage && (
                 <div className="success-message">{successMessage}</div>
