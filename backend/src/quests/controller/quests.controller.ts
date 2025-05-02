@@ -71,7 +71,7 @@ export const postUserQuest = async (req: Request, res: Response): Promise<void> 
     }
 }
 
-export const fetchRandomQuests = async (res: Response): Promise<void> => {
+export const fetchRandomQuests = async (req: Request, res: Response): Promise<void> => {
    try {
         const quests = await getRandomQuests();
         if (!quests || quests.length === 0){
