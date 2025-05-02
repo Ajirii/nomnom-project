@@ -43,7 +43,7 @@ export const loginWithEmail = async (
     const isMatch = await bcrypt.compare(password, user.password);
 
     if (!isMatch) {
-      res.status(401).json({ message: "Invalid credentials" });
+      res.status(401).json({ message: "Invalid email or password." });
       return;
     }
 
