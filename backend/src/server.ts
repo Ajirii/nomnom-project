@@ -13,6 +13,7 @@ const allowedOrigins = [
 import recipeRoutes from "./recipes/routes/recipes.routes";
 import googleRoutes from "./login/auth.routes";
 import questRoutes from "./quests/routes/quests.routes";
+import cosmeticRoutes from "./cosmetics/routes/cosmetics.routes";
 
 /* CONFIGURATIONS */
 dotenv.config();
@@ -30,7 +31,7 @@ app.use(
     crossOriginOpenerPolicy: false,
   })
 );
-app.use(helmet.crossOriginResourcePolicy({ policy: "cross-origin" })); // Allow cross-origin resources
+app.use(helmet.crossOriginResourcePolicy({ policy: "cross-origin" }));
 app.use(morgan("common"));
 app.use(
   cors({
@@ -44,6 +45,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use("/api/recipes", recipeRoutes);
 app.use("/api/login", googleRoutes);
 app.use("/api/quest", questRoutes);
+app.use("/api/cosmetics", cosmeticRoutes)
 
 /* SERVER */
 const port = Number(process.env.PORT) || 3001;

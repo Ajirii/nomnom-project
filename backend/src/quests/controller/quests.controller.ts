@@ -1,5 +1,5 @@
-import { Request, Response, RequestHandler } from "express";
-import { getQuestById, setUserQuest, getUserQuests } from "../services/quests.service"
+import { Request, Response } from "express";
+import { getQuestById, setUserQuest, getUserQuests, getRandomQuests } from "../services/quests.service"
 
 export const fetchQuest = async (req: Request, res: Response): Promise<void> => {
     try{
@@ -69,4 +69,20 @@ export const postUserQuest = async (req: Request, res: Response): Promise<void> 
             res.status(500).json({ error: "Internal server error" });
         }
     }
+}
+
+export const fetchRandomQuests = async (res: Response): Promise<void> => {
+   try {
+        const quests = await getRandomQuests();
+        if (!quests || quests.length === 0){
+            res.status(404).json({error: "No quest found."});
+            return;
+        }
+        res.status(200).json(quests);
+    }
+    catch (err){
+        if (!res.headersSent) {
+            res.status(500).json({ error: "Internal server error" });
+        }
+   }
 }

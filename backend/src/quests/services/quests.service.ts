@@ -52,3 +52,24 @@ export async function setUserQuest(userId: string, questId: string){
         throw error;
     }
 }
+
+function shuffleArray<T>(array: T[]): T[] {
+    const shuffled = [...array];
+    for (let i = shuffled.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+    }
+    return shuffled;
+  }
+  
+  export const getRandomQuests = async () => {
+    try {
+      const quests = await prisma.quest.findMany();
+      const shuffled = shuffleArray(quests);
+      return shuffled;
+    } 
+    catch (error) {
+        console.error("Error getting random quests:", error);
+    }
+  };
+  
