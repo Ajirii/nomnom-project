@@ -36,6 +36,8 @@ export const googleLogin = async (
         data: {
           googleId,
           email: email ?? "",
+          currency: 0,
+          hunger: 100,
         },
       });
     } else {
