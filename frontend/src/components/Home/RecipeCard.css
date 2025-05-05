@@ -1,15 +1,14 @@
 .recipe-home-card {
   width: 100%;
-  max-width: 1000px; /* Makes sure the card doesn't get too wide */
-  background-color: #fff; /* White background for recipe card */
-  padding: 60px; /* Padding inside the card */
-  border-radius: 12px; /* Rounded corners for the card */
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Shadow effect */
-  text-align: center; /* Centers the text */
-  text-align: center; /* Center the text */
+  max-width: 1000px;
+  background-color: #fff;
+  padding: 40px; /* reduced from 60px to 40px */
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  margin-top: -20px; /* pull it upward to reduce space under image */
 }
 
-/* recipe-home title */
 .recipe-home-title {
   font-size: 24px;
   font-weight: 700;
@@ -17,14 +16,12 @@
   color: #000000;
 }
 
-/* recipe-home description */
 .recipe-home-description {
   font-size: 16px;
   color: #6d6d6d;
   margin-bottom: 20px;
 }
 
-/* Meta data like cooking time and servings */
 .recipe-home-meta {
   font-size: 14px;
   color: #6d6d6d;
@@ -32,10 +29,9 @@
 }
 
 .recipe-home-meta strong {
-  color: #000000; /* Darker color */
+  color: #000000;
 }
 
-/* Ingredients and steps sections */
 .recipe-home-ingredients,
 .recipe-home-steps {
   text-align: left;
@@ -62,3 +58,4 @@
   line-height: 1.5;
   color: #6d6d6d;
 }
+
