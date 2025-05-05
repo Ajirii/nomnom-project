@@ -110,54 +110,14 @@ const Quests = () => {
   const completedCount = groupedQuests.completed.length;
 
   const achievements = [
-    {
-      threshold: 1,
-      label: "🏅",
-      title: "Novice Chef",
-      desc: "Completed your first quest",
-    },
-    {
-      threshold: 3,
-      label: "💪",
-      title: "Committed Cook",
-      desc: "Completed 3 quests",
-    },
-    {
-      threshold: 5,
-      label: "🔥",
-      title: "Culinary Challenger",
-      desc: "Completed 5 quests",
-    },
-    {
-      threshold: 10,
-      label: "⭐",
-      title: "Kitchen Pro",
-      desc: "Completed 10 quests",
-    },
-    {
-      threshold: 15,
-      label: "🏆",
-      title: "Master of Meals",
-      desc: "Completed 15 quests",
-    },
-    {
-      threshold: 20,
-      label: "🍽️",
-      title: "Dining Dynamo",
-      desc: "Completed 20 quests",
-    },
-    {
-      threshold: 25,
-      label: "🥘",
-      title: "Feast Commander",
-      desc: "Completed 25 quests",
-    },
-    {
-      threshold: 30,
-      label: "👨‍🍳",
-      title: "Legendary Chef",
-      desc: "Completed 30 quests",
-    },
+    { threshold: 1, label: "🏅", title: "Novice Chef", desc: "Completed your first quest" },
+    { threshold: 3, label: "💪", title: "Committed Cook", desc: "Completed 3 quests" },
+    { threshold: 5, label: "🔥", title: "Culinary Challenger", desc: "Completed 5 quests" },
+    { threshold: 10, label: "⭐", title: "Kitchen Pro", desc: "Completed 10 quests" },
+    { threshold: 15, label: "🏆", title: "Master of Meals", desc: "Completed 15 quests" },
+    { threshold: 20, label: "🍽️", title: "Dining Dynamo", desc: "Completed 20 quests" },
+    { threshold: 25, label: "🥘", title: "Feast Commander", desc: "Completed 25 quests" },
+    { threshold: 30, label: "👨‍🍳", title: "Legendary Chef", desc: "Completed 30 quests" },
   ];
 
   const getQuestItemClass = (quest: Quest) => {
@@ -172,10 +132,7 @@ const Quests = () => {
     <div className="recipes-section">
       {showModal && (
         <div className="modal-overlay" onClick={() => setShowModal(false)}>
-          <div
-            className="modal-content achievements-grid"
-            onClick={(e) => e.stopPropagation()}
-          >
+          <div className="modal-content achievements-grid" onClick={(e) => e.stopPropagation()}>
             <h2 className="achievement-heading">Achievements</h2>
             <div className="achievement-boxes">
               {achievements.map((a, index) => (
@@ -191,10 +148,7 @@ const Quests = () => {
                 </div>
               ))}
             </div>
-            <button
-              className="close-button"
-              onClick={() => setShowModal(false)}
-            >
+            <button className="close-button" onClick={() => setShowModal(false)}>
               Close
             </button>
           </div>
@@ -206,7 +160,7 @@ const Quests = () => {
           View Achievements 🏆
         </button>
 
-        <div className="quest-container">
+        <div className={`quest-container ${selectedQuest ? "expanded" : ""}`}>
           <div className="master">
             <h2>
               Quest Log
