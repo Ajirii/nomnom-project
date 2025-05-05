@@ -34,27 +34,27 @@
   color: rgb(255, 255, 255);
   font-family: "Courier New", Courier, monospace;
 
-  border: 8px solid #222;
+  border: 0.5em solid #222;
   border-radius: 0.5em;
 
-  box-shadow: 0 0 0 4px #000, 0 0 30px rgb(255, 255, 255),
-    inset 0 0 5px rgb(255, 255, 255), 0 10px 20px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 0 0 0.3em #000, 0 0 2em rgb(255, 255, 255),
+    inset 0 0 0.3em rgb(255, 255, 255), 0 0.6em 1em rgba(0, 0, 0, 0.5);
 
   image-rendering: pixelated;
-  outline: 2px solid #333;
+  outline: 0.15em solid #333;
   backdrop-filter: blur(2px);
 }
 
 .nomnom-face::before {
   content: "";
   position: absolute;
-  top: 0.5em;
-  left: 0.5em;
-  width: 0.75em;
-  height: 0.75em;
+  top: 2%;
+  left: 2%;
+  width: 3%;
+  height: 3%;
   background-color: #a55;
   border-radius: 50%;
-  box-shadow: 1.25em 0 0 #aa9, 2.5em 0 0 #5a7;
+  box-shadow: 0.75em 0 0 #aa9, 1.5em 0 0 #5a7;
   opacity: 0.6;
   filter: brightness(0.9);
 }
@@ -94,18 +94,62 @@
   width: 55em;
 }
 
+@media (max-width: 1024px) {
+  .container {
+    top: 45%;
+  }
+  .nomnom-face {
+    width: 80vw;
+    height: 40vw;
+  }
+  .eye-l,
+  .eye-r,
+  .mouth {
+    width: 16vw;
+    height: 16vw;
+  }
+  .blush {
+    width: 110vw;
+    height: 110vw;
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    top: 55%;
+  }
+  .nomnom-face {
+    width: 90vw;
+    height: 45vw;
+  }
+  .eye-l,
+  .eye-r,
+  .mouth {
+    width: 18vw;
+    height: 18vw;
+  }
+  .blush {
+    width: 120vw;
+    height: 120vw;
+  }
+}
+
 @media (max-width: 640px) {
   .container {
     top: 60%;
   }
-}
-@media (max-width: 768px) {
-  .container {
-    top: 60%;
+  .nomnom-face {
+    width: 95vw;
+    height: 50vw;
   }
-}
-@media (max-width: 1024px) {
-  .container {
-    top: 45%;
+  .eye-l,
+  .eye-r,
+  .mouth {
+    width: 20vw;
+    height: 20vw;
+  }
+  .blush {
+    width: 130vw;
+    height: 130vw;
   }
 }
