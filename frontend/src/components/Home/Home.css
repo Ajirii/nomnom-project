@@ -1,5 +1,9 @@
 /* Input Container */
 .input-container {
+  position: absolute;
+  top: -80px; /* Adjust this value to move the container up further */
+  left: 50%;
+  transform: translateX(-50%);
   background-color: #fff;
   display: flex;
   flex-direction: column;
@@ -9,9 +13,8 @@
   width: 100%;
   max-width: 600px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  margin-bottom: 20px; /* Adjust space between input and recipe */
+  margin-bottom: 20px;
   border-radius: 12px;
-  position: relative;
 }
 
 /* Recipe Container */
@@ -214,3 +217,66 @@
     font-size: 18px;
   }
 }
+/* Mobile Styles */
+@media (max-width: 300px) {
+  .retro-message {
+    font-size: 14px;
+  }
+}
+
+/* Tablet Styles */
+@media (min-width: 480px) and (max-width: 767px) {
+  .retro-message {
+    font-size: 16px;
+  }
+}
+
+/* Desktop Styles */
+@media (min-width: 768px) {
+  .retro-message {
+    font-size: 18px;
+  }
+}
+/* Mobile */
+@media (max-width: 479px) {
+  .ingredient-tag {
+    font-size: 12px;
+  }
+}
+
+/* Tablet */
+@media (min-width: 480px) and (max-width: 767px) {
+  .ingredient-tag {
+    font-size: 13px;
+  }
+}
+
+/* Desktop */
+@media (min-width: 768px) {
+  .ingredient-tag {
+    font-size: 14px;
+  }
+}
+.remove-tag {
+  font-size: 14px;
+}
+
+@media (max-width: 479px) {
+  .remove-tag {
+    font-size: 12px;
+  }
+}
+
+@media (min-width: 480px) and (max-width: 767px) {
+  .remove-tag {
+    font-size: 13px;
+  }
+}
+
+@media (min-width: 768px) {
+  .remove-tag {
+    font-size: 14px;
+  }
+}
+
+
