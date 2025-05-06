@@ -1,6 +1,5 @@
 import express from "express";
-import { fetchRecipe } from "../controllers/recipes.controller";
-import { fetchAllRecipes } from "../controllers/recipesAll.controller";
+import { fetchRecipe, fetchAllRecipes, fetchRecipeById } from "../controllers/recipes.controller";
 import { authenticateJWT } from "../../middleware/jwt";
 const router = express.Router();
 
@@ -10,5 +9,5 @@ router.get("/protected", authenticateJWT, (req, res) => {
 
 router.get("/", fetchRecipe);
 router.get("/all", authenticateJWT, fetchAllRecipes);
-
+router.get("/:id", authenticateJWT, fetchRecipeById)
 export default router;

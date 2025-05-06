@@ -202,5 +202,16 @@ async function deleteUnfavoritedRecipes(user: User): Promise<void> {
     }
   } catch (error) {
     console.error("Cannot delete unfavorited records: " + error);
+  } finally {
+    await prisma.$disconnect();
   }
 }
+
+export const getRecipeById = async (id: string): Promise<Recipe> => {
+  const recipe: Recipe = await prisma.recipe.findUnique({
+    where: {
+      id,
+    },
+  });
+  return recipe;
+};
