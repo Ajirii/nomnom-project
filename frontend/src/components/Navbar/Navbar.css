@@ -1,5 +1,5 @@
 .navbar {
-  width: 100%;
+  width: 100vw;
   padding: 2px;
   display: flex;
   justify-content: space-between;
@@ -9,6 +9,8 @@
   position: sticky;
   top: 0;
   z-index: 5;
+  left: 0;
+  right: 0;
 }
 
 .navbar_heading {
@@ -89,6 +91,7 @@
   display: flex;
   justify-content: flex-end;
   align-items: center;
+  padding-left: 120px;
 }
 
 .navbar_login a {

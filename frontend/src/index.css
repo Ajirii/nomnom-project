@@ -6,11 +6,13 @@
   box-sizing: border-box;
 }
 
+html,
 body {
   font-family: "Press Start 2P", cursive;
   overflow-x: hidden;
   margin: 0;
-  height: 100%;
+  padding: 0;
+  width: 100vw;
 }
 
 main {
