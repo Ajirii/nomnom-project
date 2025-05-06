@@ -118,6 +118,8 @@ const Home = ({
               <option value="middle-eastern">Middle Eastern</option>
               <option value="korean">Korean</option>
               <option value="spanish">Spanish</option>
+              <option value="american">American</option>
+              <option value="vietnamese">Vietnamese</option>
               <option value="no-preference">No Preference</option>
             </select>
             <button
