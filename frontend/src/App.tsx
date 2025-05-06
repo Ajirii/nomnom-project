@@ -12,6 +12,7 @@ import Recipes from "./components/Recipes/Recipes";
 import "./components/Recipes/Recipes.css";
 import Login from "./components/Login/Login";
 import "./components/Login/Login.css";
+import SignUp from "./components/SignUp/SignUp";
 import Footer from "./components/Footer/Footer";
 import "./components/Footer/Footer.css";
 import Start from "./components/Start/Start";
@@ -29,6 +30,7 @@ const backgrounds: Record<string, string> = {
   recipes: "/assets/background/flyingship.png",
   companion: "/assets/background/sunflower.png",
   login: "/assets/background/shipwreck.png",
+  signup: "/assets/background/spikes.png",
 };
 
 const App = () => {
@@ -119,7 +121,13 @@ const App = () => {
 
           {activeComponent === "recipes" && <Recipes />}
           {!isLoggedIn && activeComponent === "login" && (
-            <Login onLoginSuccess={() => setActiveComponent("home")} />
+            <Login
+              onLoginSuccess={() => setActiveComponent("home")}
+              setActiveComponent={setActiveComponent}
+            />
+          )}
+          {!isLoggedIn && activeComponent === "signup" && (
+            <SignUp onSignUpSuccess={() => setActiveComponent("home")} />
           )}
           {showModal && (
             <Modal

@@ -9,9 +9,9 @@ datasource db {
 
 model User {
   userId        String         @id @default(uuid())
-  name          String
   email         String         @unique
-  googleId      String         @unique
+  password      String?        
+  googleId      String?        @unique
   currency      Int            @default(0)
   hunger        Int            @default(100)
 

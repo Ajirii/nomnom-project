@@ -7,8 +7,8 @@ export interface AuthenticatedRequest extends Request {
 export interface JwtUser {
   userId: string;
   email: string;
+  password: string?;
   googleId: string;
-  name: string;
   currency: number;
   hunger: number;
 }

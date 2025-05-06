@@ -20,7 +20,7 @@ const Navbar = ({ onLinkClick }: NavbarProps) => {
   const handleSignOut = () => {
     localStorage.removeItem("token");
     setIsLoggedIn(false);
-    onLinkClick("home");
+    onLinkClick("login");
   };
 
   return (

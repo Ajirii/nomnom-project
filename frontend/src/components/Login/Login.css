@@ -1,3 +1,15 @@
+.login-section {
+  margin-top: 350px;
+  padding: 60px 20px;
+  text-align: center;
+}
+
+.signup-section {
+  margin-top: 280px;
+  padding: 60px 20px;
+  text-align: center;
+}
+
 .login-container {
   border: none;
   border-radius: 10px;
@@ -44,11 +56,27 @@
   font-family: inherit;
 }
 
-.google-login-button > div {
-  width: 100% !important;
-  max-width: 100%;
-  display: flex;
-  justify-content: center;
+.sign-in:hover,
+.sign-out:hover {
+  background-color: #a23838;
+  border: 2px solid #a23838;
+}
+
+.sign-up {
+  font-size: 9px;
+  font-family: inherit;
+  margin-top: 15px;
+}
+
+.link {
+  cursor: pointer;
+  font-style: italic;
+  color: #007bff;
+  text-decoration: underline;
+}
+
+.link:hover {
+  color: #0056b3;
 }
 
 .google-login-button iframe {

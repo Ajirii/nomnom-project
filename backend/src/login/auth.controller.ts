@@ -27,25 +27,32 @@ export const googleLogin = async (
     const payload = ticket.getPayload();
     if (!payload) throw new Error("Invalid token");
 
-    const { sub: googleId, email, name } = payload;
+    const { sub: googleId, email } = payload;
 
-    let user = await prisma.user.findUnique({ where: { googleId } });
+    let user = await prisma.user.findUnique({ where: { email } });
 
     if (!user) {
       user = await prisma.user.create({
         data: {
           googleId,
           email: email ?? "",
-          name: name ?? "Unknown",
+          currency: 0,
+          hunger: 100,
         },
       });
+    } else {
+      if (!user.googleId) {
+        user = await prisma.user.update({
+          where: { email },
+          data: { googleId },
+        });
+      }
     }
 
     const token = jwt.sign(
       {
         userId: user.userId,
         email: user.email,
-        name: user.name,
       },
       JWT_SECRET,
       { expiresIn: "7d" }

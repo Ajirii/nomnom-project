@@ -15,6 +15,7 @@ const allowedOrigins = [
 /* ROUTE IMPORT */
 import recipeRoutes from "./recipes/routes/recipes.routes";
 import googleRoutes from "./login/auth.routes";
+import loginRoutes from "./login/email.routes";
 import questRoutes from "./quests/routes/quests.routes";
 import cosmeticRoutes from "./cosmetics/routes/cosmetics.routes";
 
@@ -47,6 +48,7 @@ app.use(express.urlencoded({ extended: true }));
 /* ROUTES */
 app.use("/api/recipes", recipeRoutes);
 app.use("/api/login", googleRoutes);
+app.use("/api/login", loginRoutes);
 app.use("/api/quest", questRoutes);
 app.use("/api/cosmetics", cosmeticRoutes);
 
