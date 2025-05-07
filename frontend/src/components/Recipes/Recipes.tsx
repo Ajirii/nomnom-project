@@ -80,8 +80,6 @@ const Recipes = () => {
         <img src={eggIcon} alt="fried egg" className="recipes-icon" />
       </div>
 
-      <p className="recipes-subtitle">Explore recipes</p>
-
       <div className="search-bar">
         <input
           type="text"

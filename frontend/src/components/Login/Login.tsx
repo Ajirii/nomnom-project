@@ -100,8 +100,8 @@ const Login = ({ onLoginSuccess, setActiveComponent }: LoginProps) => {
 
   return (
     <div className="login-section">
-      <div className="row">
-        <div className="main">
+      <div className="login-row">
+        <div className="login-main">
           <div className="login-container">
             <h2>Login</h2>
             <form onSubmit={handleSignIn}>

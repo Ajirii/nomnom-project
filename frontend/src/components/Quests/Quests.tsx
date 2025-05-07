@@ -88,76 +88,74 @@ export const Quests = ({
   };
 
   return (
-    <div className="recipes-section">
-      <div className="row">
-        <div className="main">
-          <div className="quest-container">
-            <div className="master">
-              <h2>
-                Quest Log
-                <img src={orange} alt="orange" className="quest-icon" />
-              </h2>
-              <p>
-                <strong>Total Coins:</strong> {coins} 🪙
-              </p>
-              {Object.entries(groupedQuests).map(([status, quests]) => (
-                <div key={status}>
-                  <h3 className="quest-section-heading">
-                    {status.charAt(0).toUpperCase() + status.slice(1)}
-                  </h3>
-                  <ul>
-                    {quests.map((quest) => (
-                      <li
-                        key={quest.questId}
-                        onClick={() => setSelectedQuest(quest)}
-                        className={getQuestItemClass(quest)}
-                      >
-                        {quest.title}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              ))}
-            </div>
+    <div className="quest-row">
+      <div className="quest-main">
+        <div className="quest-container">
+          <div className="master">
+            <h2>
+              Quest Log
+              <img src={orange} alt="orange" className="quest-icon" />
+            </h2>
+            <p>
+              <strong>Total Coins:</strong> {coins} 🪙
+            </p>
+            {Object.entries(groupedQuests).map(([status, quests]) => (
+              <div key={status}>
+                <h3 className="quest-section-heading">
+                  {status.charAt(0).toUpperCase() + status.slice(1)}
+                </h3>
+                <ul>
+                  {quests.map((quest) => (
+                    <li
+                      key={quest.questId}
+                      onClick={() => setSelectedQuest(quest)}
+                      className={getQuestItemClass(quest)}
+                    >
+                      {quest.title}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
 
-            <div className="detail">
-              {selectedQuest ? (
-                <div>
-                  <h2>{selectedQuest.title}</h2>
-                  <p>
-                    <strong>Description:</strong> {selectedQuest.description}
-                  </p>
-                  <p>
-                    <strong>Hunger Reward:</strong> {selectedQuest.rewardHunger}
-                  </p>
-                  <p>
-                    <strong>Coins:</strong> {selectedQuest.rewardCurrency} 🪙
-                  </p>
-                  {selectedQuest.status !== "completed" && (
-                    <div className="button-wrapper">
-                      {selectedQuest.status !== "accepted" && (
-                        <button
-                          className="quest-btn quest-btn-accept"
-                          onClick={() => handleAccept(selectedQuest.questId)}
-                        >
-                          Accept
-                        </button>
-                      )}
-                      {selectedQuest.status === "accepted" && (
-                        <button
-                          className="quest-btn quest-btn-complete"
-                          onClick={() => handleComplete(selectedQuest.questId)}
-                        >
-                          Complete
-                        </button>
-                      )}
-                    </div>
-                  )}
-                </div>
-              ) : (
-                <p className="placeholder">Select a quest to view details</p>
-              )}
-            </div>
+          <div className="detail">
+            {selectedQuest ? (
+              <div>
+                <h2>{selectedQuest.title}</h2>
+                <p>
+                  <strong>Description:</strong> {selectedQuest.description}
+                </p>
+                <p>
+                  <strong>Hunger Reward:</strong> {selectedQuest.rewardHunger}
+                </p>
+                <p>
+                  <strong>Coins:</strong> {selectedQuest.rewardCurrency} 🪙
+                </p>
+                {selectedQuest.status !== "completed" && (
+                  <div className="button-wrapper">
+                    {selectedQuest.status !== "accepted" && (
+                      <button
+                        className="quest-btn quest-btn-accept"
+                        onClick={() => handleAccept(selectedQuest.questId)}
+                      >
+                        Accept
+                      </button>
+                    )}
+                    {selectedQuest.status === "accepted" && (
+                      <button
+                        className="quest-btn quest-btn-complete"
+                        onClick={() => handleComplete(selectedQuest.questId)}
+                      >
+                        Complete
+                      </button>
+                    )}
+                  </div>
+                )}
+              </div>
+            ) : (
+              <p className="placeholder">Select a quest to view details</p>
+            )}
           </div>
         </div>
       </div>

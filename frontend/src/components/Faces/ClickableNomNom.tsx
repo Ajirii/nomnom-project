@@ -23,10 +23,15 @@ const ClickableNomNom: React.FC<ClickableNomNomProps> = ({
   const [faceState, setFaceState] = useState<FaceState>(baseFaceState);
   const [clickCount, setClickCount] = useState(0);
   const [lastClickTime, setLastClickTime] = useState<number>(0);
-  const timeoutRef = useRef<NodeJS.Timeout | null>(null);
+
   const resetDelay = 5000;
   const clickWindow = 3000;
   const displayTime = 1000;
+
+  const transientStates = new Set(["click", "more_click", "pout"]);
+
+  const clickResetTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const clickDisplayTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   const handleClick = () => {
     const currentTime = Date.now();
@@ -48,12 +53,17 @@ const ClickableNomNom: React.FC<ClickableNomNomProps> = ({
 
     setLastClickTime(currentTime);
 
-    setTimeout(() => {
+    if (clickDisplayTimeoutRef.current)
+      clearTimeout(clickDisplayTimeoutRef.current);
+
+    clickDisplayTimeoutRef.current = setTimeout(() => {
       setFaceState(baseFaceState);
     }, displayTime);
 
-    if (timeoutRef.current) clearTimeout(timeoutRef.current);
-    timeoutRef.current = setTimeout(() => {
+    if (clickResetTimeoutRef.current)
+      clearTimeout(clickResetTimeoutRef.current);
+
+    clickResetTimeoutRef.current = setTimeout(() => {
       setClickCount(0);
       setFaceState(baseFaceState);
     }, resetDelay);
@@ -61,13 +71,26 @@ const ClickableNomNom: React.FC<ClickableNomNomProps> = ({
 
   useEffect(() => {
     return () => {
-      if (timeoutRef.current) clearTimeout(timeoutRef.current);
+      if (clickResetTimeoutRef.current)
+        clearTimeout(clickResetTimeoutRef.current);
+      if (clickDisplayTimeoutRef.current)
+        clearTimeout(clickDisplayTimeoutRef.current);
     };
   }, []);
 
+  useEffect(() => {
+    if (!transientStates.has(faceState)) {
+      setFaceState(baseFaceState);
+    }
+  }, [baseFaceState]);
+
   return (
-    <div onClick={handleClick} style={{ cursor: "pointer" }}>
-      <NormalFace faceState={faceState} cosmeticSrc={cosmeticSrc} />
+    <div className="nomnom-wrapper">
+      <NormalFace
+        faceState={faceState}
+        cosmeticSrc={cosmeticSrc}
+        onClick={handleClick}
+      />
     </div>
   );
 };

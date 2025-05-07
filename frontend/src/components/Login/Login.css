@@ -1,3 +1,19 @@
+.login-row {
+  display: flex;
+  flex-wrap: wrap;
+  flex: 1;
+}
+
+.login-main {
+  flex: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  position: relative;
+  margin-top: 22em;
+}
+
 .login-section {
   margin-top: 350px;
   padding: 60px 20px;
@@ -96,4 +112,24 @@
   font-size: 14px;
   text-align: center;
   padding-top: 30px;
+}
+
+@media (max-width: 768px) {
+  .login-section {
+    margin-top: 8em;
+  }
+
+  .signup-section {
+    margin-top: 4em;
+  }
+}
+
+@media (max-width: 480px) {
+  .login-section {
+    margin-top: 8em;
+  }
+
+  .signup-section {
+    margin-top: 4em;
+  }
 }
