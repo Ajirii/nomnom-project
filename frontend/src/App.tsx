@@ -77,6 +77,9 @@ const App = () => {
     if (isLoggedIn) {
       loadCosmetics();
     }
+    if (!isLoggedIn) {
+      setCosmetic("");
+    }
   }, [isLoggedIn]);
 
   const handleStartClick = () => {
@@ -120,7 +123,10 @@ const App = () => {
       ) : (
         <>
           <Navbar onLinkClick={handleLinkClick} />
-          <ClickableNomNom baseFaceState={faceState} cosmeticSrc={cosmetic} />
+          <ClickableNomNom
+            baseFaceState={faceState}
+            cosmeticSrc={isLoggedIn ? cosmetic : undefined}
+          />
 
           {activeComponent === "home" && (
             <Home onFaceStateChange={handleFaceStateChange} />
