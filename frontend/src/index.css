@@ -6,11 +6,13 @@
   box-sizing: border-box;
 }
 
+html,
 body {
   font-family: "Press Start 2P", cursive;
   overflow-x: hidden;
   margin: 0;
-  height: 100%;
+  padding: 0;
+  width: 100vw;
 }
 
 main {
@@ -29,6 +31,13 @@ main {
   background-position: center;
   background-attachment: fixed;
   z-index: -1;
+}
+
+.dark-overlay::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.1);
 }
 
 :root {

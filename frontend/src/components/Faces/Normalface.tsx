@@ -13,9 +13,14 @@ type FaceState =
 interface NormalFaceProps {
   faceState: FaceState;
   cosmeticSrc?: string;
+  onClick?: () => void;
 }
 
-const NormalFace: React.FC<NormalFaceProps> = ({ faceState, cosmeticSrc }) => {
+const NormalFace: React.FC<NormalFaceProps> = ({
+  faceState,
+  cosmeticSrc,
+  onClick,
+}) => {
   const faceRef = useRef<HTMLDivElement | null>(null);
   const eyeLRef = useRef<HTMLImageElement | null>(null);
   const eyeRRef = useRef<HTMLImageElement | null>(null);
@@ -29,17 +34,27 @@ const NormalFace: React.FC<NormalFaceProps> = ({ faceState, cosmeticSrc }) => {
   const animateRef = useRef<() => void>(() => {});
 
   const [bounce, setBounce] = useState(false);
+  const [cosmeticVisible, setCosmeticVisible] = useState(true);
+  const prevFaceState = useRef<FaceState>("default");
 
   useEffect(() => {
-    if (faceState === "happy") {
-      setBounce(true);
+    if (prevFaceState.current !== "happy" && faceState === "happy") {
+      setBounce(false);
+
+      requestAnimationFrame(() => {
+        setBounce(true);
+      });
+
       const timeout = setTimeout(() => {
         setBounce(false);
       }, 600);
+
+      prevFaceState.current = faceState;
+
       return () => clearTimeout(timeout);
-    } else {
-      setBounce(false);
     }
+
+    prevFaceState.current = faceState;
   }, [faceState]);
 
   useEffect(() => {
@@ -166,7 +181,11 @@ const NormalFace: React.FC<NormalFaceProps> = ({ faceState, cosmeticSrc }) => {
   return (
     <div className="container">
       <div className="face-container">
-        <div className={`nomnom-face ${bounce ? "bounce" : ""}`} ref={faceRef}>
+        <div
+          className={`nomnom-face ${bounce ? "bounce" : ""}`}
+          ref={faceRef}
+          onClick={onClick}
+        >
           <img
             src={currentAssets.eyeL}
             className="eye eye-l"
@@ -201,12 +220,13 @@ const NormalFace: React.FC<NormalFaceProps> = ({ faceState, cosmeticSrc }) => {
               />
             </>
           )}
-          {isCosmeticVisible && (
+          {isCosmeticVisible && cosmeticVisible && (
             <img
               src={cosmeticSrc}
               className="cosmetic"
               alt=""
               ref={cosmeticRef}
+              onError={() => setCosmeticVisible(false)}
             />
           )}
         </div>

@@ -25,9 +25,9 @@ const backgrounds: Record<string, string> = {
   home: "/assets/background/Summer2.png",
   quests: "/assets/background/nightcity.png",
   recipes: "/assets/background/flyingship.png",
-  companion: "/assets/background/sunflower.png",
-  login: "/assets/background/shipwreck.png",
-  signup: "/assets/background/spikes.png",
+  companion: "/assets/background/sunsetcloud.png",
+  login: "/assets/background/winterbirch.png",
+  signup: "/assets/background/Summer8.png",
 };
 
 const App = () => {
@@ -73,7 +73,9 @@ const App = () => {
     <main>
       {activeComponent !== "start" && (
         <div
-          className="fullscreen-image"
+          className={`fullscreen-image ${
+            activeComponent === "recipes" ? "dark-overlay" : ""
+          }`}
           style={{
             backgroundImage: `url(${backgrounds[activeComponent]})`,
           }}

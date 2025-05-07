@@ -81,9 +81,10 @@ export const getRecipeByIngredients = async (
       title: "Error",
       ingredients: [],
       instructions: ["Failed to generate a recipe. Please try again."],
-      cookingMinutes: "N/A",
+      cookingMinutes: 0,
       servings: 0,
       notes: "Error occurred while fetching the recipe.",
+      cuisine: "",
     };
   }
 };

@@ -1,5 +1,5 @@
 .container {
-  height: 20em;
+  height: 20ox;
   width: 20em;
   position: absolute;
   transform: translate(-50%, -50%);
@@ -22,27 +22,34 @@
   }
 }
 
+.nomnom-wrapper {
+  position: relative;
+  height: 10em;
+  max-height: 100vh;
+  top: 14em;
+}
+
 .nomnom-face {
   height: 20em;
   width: 40em;
-  position: relative;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   display: flex;
   justify-content: center;
   align-items: center;
-
   background-color: rgba(0, 0, 0, 0.5);
   color: rgb(255, 255, 255);
   font-family: "Courier New", Courier, monospace;
-
   border: 8px solid #222;
   border-radius: 0.5em;
-
   box-shadow: 0 0 0 4px #000, 0 0 30px rgb(255, 255, 255),
     inset 0 0 5px rgb(255, 255, 255), 0 10px 20px rgba(0, 0, 0, 0.5);
-
   image-rendering: pixelated;
   outline: 2px solid #333;
   backdrop-filter: blur(2px);
+  cursor: pointer;
 }
 
 .nomnom-face::before {
@@ -87,6 +94,16 @@
   width: 8em;
 }
 
+/* .cosmetic {
+  position: absolute;
+  pointer-events: none;
+  height: 100%;
+  width: 100%;
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  overflow: hidden;
+} */
 .cosmetic {
   position: absolute;
   pointer-events: none;
@@ -111,38 +128,68 @@
 
 @keyframes bounceFace {
   0% {
-    transform: translateY(0);
+    transform: translate(-50%, -50%) translateY(0);
   }
   30% {
-    transform: translateY(-15px);
+    transform: translate(-50%, -50%) translateY(-15px);
   }
   50% {
-    transform: translateY(0);
+    transform: translate(-50%, -50%) translateY(0);
   }
   70% {
-    transform: translateY(-7px);
+    transform: translate(-50%, -50%) translateY(-7px);
   }
   100% {
-    transform: translateY(0);
+    transform: translate(-50%, -50%) translateY(0);
   }
 }
 
 .bounce {
   animation: bounceFace 0.5s ease;
+  animation-fill-mode: both;
 }
 
-@media (max-width: 640px) {
-  .container {
-    top: 60%;
-  }
-}
 @media (max-width: 768px) {
-  .container {
-    top: 60%;
+  .nomnom-wrapper {
+    top: 8em;
+  }
+
+  .nomnom-face {
+    width: 24em;
+    height: 12em;
+  }
+
+  .eye-l,
+  .eye-r,
+  .mouth {
+    width: 5em;
+    height: 5em;
+  }
+
+  .eyebrow {
+    width: 80px;
   }
 }
-@media (max-width: 1024px) {
-  .container {
-    top: 45%;
+
+@media (max-width: 480px) {
+  .nomnom-face {
+    width: 18em;
+    height: 10em;
+  }
+
+  .eye-l,
+  .eye-r {
+    width: 4em;
+    height: 4em;
+  }
+
+  .mouth {
+    width: 4em;
+    height: 4em;
+    left: 6.8em;
+  }
+
+  .eyebrow {
+    width: 60px;
   }
 }
