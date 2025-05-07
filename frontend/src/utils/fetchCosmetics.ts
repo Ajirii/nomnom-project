@@ -52,7 +52,6 @@ export const fetchCosmetics = async (): Promise<FetchCosmeticsResult> => {
   }
 
   const userData = await unlockedRes.json();
-  console.log("userData:", userData);
 
   const unlockedMap: Record<string, boolean> = {};
   const userCosmetics = userData.cosmetics as UserCosmeticEntry[];

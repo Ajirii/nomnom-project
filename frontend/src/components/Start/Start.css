@@ -152,24 +152,25 @@
 }
 
 .s-container .z-1 {
-  bottom: 50px;
-  right: 10em;
+  bottom: 30px;
+  right: 9em;
   animation-delay: 7s;
   color: white;
   z-index: 10;
 }
 
 .s-container .z-2 {
-  bottom: 4em;
-  right: 13em;
-  animation-delay: 1s;
+  bottom: 2em;
+  right: 12em;
+  animation-delay: 5s;
   color: white;
   z-index: 10;
 }
 
 .s-container .z-3 {
-  bottom: 1em;
-  right: 12em;
+  bottom: 0.1em;
+  right: 11em;
+  animation-delay: 1s;
   color: white;
   z-index: 10;
 }

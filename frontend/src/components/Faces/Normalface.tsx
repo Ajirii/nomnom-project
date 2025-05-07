@@ -63,7 +63,7 @@ const NormalFace: React.FC<NormalFaceProps> = ({
     const mouth = mouthRef.current;
     const cosmetic = cosmeticRef.current;
 
-    if (!face || eyes.some((e) => !e) || !mouth) {
+    if (!face || eyes.some((e) => !e)) {
       console.error("Face or facial features not found!");
       return;
     }
@@ -198,12 +198,16 @@ const NormalFace: React.FC<NormalFaceProps> = ({
             alt="right eye"
             ref={eyeRRef}
           />
-          <img
-            src={currentAssets.mouth}
-            className="mouth"
-            alt="mouth"
-            ref={mouthRef}
-          />
+          {!cosmeticSrc?.includes("butler") &&
+            !cosmeticSrc?.includes("pig") && (
+              <img
+                src={currentAssets.mouth}
+                className="mouth"
+                alt="mouth"
+                ref={mouthRef}
+              />
+            )}
+
           {faceState === "pout" && (
             <>
               <img
