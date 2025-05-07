@@ -79,7 +79,6 @@ const Companion = ({
       onCosmeticChange(iconUrl);
       await equipCosmetic(cosmeticId);
       setEquippedCosmeticId(cosmeticId);
-      console.log("Successfully equipped cosmetic:", cosmeticId);
       return;
     }
 
