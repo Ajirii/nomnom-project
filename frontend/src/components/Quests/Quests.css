@@ -65,16 +65,19 @@
 
 .detail {
   width: 60%;
-  padding: 20px;
+  padding: 40px;
   text-align: center;
 }
 
 .detail h2 {
-  color: #333;
+  color: #222222;
+  padding-bottom: 15px;
 }
 
 .detail p {
+  color: #3f3f3f;
   margin: 10px 0;
+  padding-bottom: 5px;
 }
 
 .placeholder {

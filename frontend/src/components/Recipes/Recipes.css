@@ -248,30 +248,30 @@
   width: 80%;
   max-width: 880px;
   font-size: 16px;
-  border: 3px solid #565656;
+  border: 3px solid #ffffff;
   border-radius: 30px;
   outline: none;
   font-family: "Press Start 2P", cursive;
   text-align: center;
-  background-color: rgba(255, 255, 255, 0.784);
+  background-color: rgba(150, 150, 150, 0.452);
   color: #565656;
-  backdrop-filter: blur(5px);
-  -webkit-backdrop-filter: blur(5px);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   box-shadow: 0 4px 8px rgba(255, 255, 255, 0.08);
   transition: all 0.2s ease-in-out;
   margin-bottom: 10px;
 }
 
 .search-bar input::placeholder {
-  color: #565656;
+  color: #ffffff;
   font-size: 16px;
   text-align: left;
 }
 
 .search-bar input:focus {
-  border-color: #565656;
-  background-color: rgba(255, 255, 255, 0.611);
-  color: #565656;
+  border-color: #d8d8d8;
+  background-color: rgba(122, 122, 122, 0.452);
+  color: #ffffff;
 }
 
 .recipes-header {

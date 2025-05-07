@@ -62,21 +62,19 @@
 .s-eye-l,
 .s-eye-r {
   position: absolute;
-  background-color: #ffffff;
-  height: 0.5em;
-  width: 4.12em;
-  /* height: 2.25em;
-  width: 4.12em;
-  border-radius: 0 0 2.93em 2.93em; */
-  top: 50%;
-  transform: translateY(-50%);
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  pointer-events: none;
+  top: 45%;
+  height: 8em;
+  width: 8em;
 }
 .s-eye-l {
-  left: 30%;
+  left: 38%;
 }
 
 .s-eye-r {
-  left: 55%;
+  left: 62%;
 }
 
 /* .eye-l::after,
@@ -101,13 +99,11 @@
 } */
 
 .s-mouth {
-  height: 1.7em;
-  width: 1.45em;
-  background-color: #ffffff;
-  border-radius: 50%;
   position: absolute;
-  left: 18em;
-  top: 10em;
+  top: 30%;
+  pointer-events: none;
+  height: 8em;
+  width: 8em;
   animation: snoore 5s infinite;
 }
 
@@ -145,24 +141,25 @@
 }
 
 .s-container .z-1 {
-  bottom: 50px;
-  right: 10em;
+  bottom: 30px;
+  right: 9em;
   animation-delay: 7s;
   color: white;
   z-index: 10;
 }
 
 .s-container .z-2 {
-  bottom: 4em;
-  right: 13em;
-  animation-delay: 1s;
+  bottom: 2em;
+  right: 12em;
+  animation-delay: 5s;
   color: white;
   z-index: 10;
 }
 
 .s-container .z-3 {
-  bottom: 1em;
-  right: 12em;
+  bottom: 0.1em;
+  right: 11em;
+  animation-delay: 1s;
   color: white;
   z-index: 10;
 }
@@ -206,6 +203,25 @@
 }
 
 @media (max-width: 768px) {
+  .s-container span {
+    font-size: 1.2em;
+  }
+
+  .s-container .z-1 {
+    bottom: 30px;
+    right: 12em;
+  }
+
+  .s-container .z-2 {
+    bottom: 0.7em;
+    right: 14em;
+  }
+
+  .s-container .z-3 {
+    bottom: 0.1em;
+    right: 13em;
+  }
+
   .start-button {
     top: 25em;
   }
@@ -215,20 +231,38 @@
     height: 12em;
   }
 
-  .eye-l,
-  .eye-r {
+  .s-eye-l,
+  .s-eye-r {
     width: 5em;
     height: 5em;
   }
 
-  .mouth {
+  .s-mouth {
     width: 4em;
     height: 4em;
-    left: 6.8em;
   }
 }
 
 @media (max-width: 480px) {
+  .s-container span {
+    font-size: 1em;
+  }
+
+  .s-container .z-1 {
+    bottom: 30px;
+    right: 14em;
+  }
+
+  .s-container .z-2 {
+    bottom: 0.7em;
+    right: 16em;
+  }
+
+  .s-container .z-3 {
+    bottom: 0.1em;
+    right: 15em;
+  }
+
   .start-button {
     top: 25em;
     font-size: 25px;
@@ -239,15 +273,14 @@
     height: 10em;
   }
 
-  .eye-l,
-  .eye-r {
+  .s-eye-l,
+  .s-eye-r {
     width: 4em;
     height: 4em;
   }
 
-  .mouth {
+  .s-mouth {
     width: 4em;
     height: 4em;
-    left: 6.8em;
   }
 }

@@ -1,4 +1,9 @@
 const Start = ({ onStartClick }: { onStartClick: () => void }) => {
+  const iconUrls = {
+    eyeL: "/assets/white_face_assets/L-sleep.svg",
+    eyeR: "/assets/white_face_assets/R-sleep.svg",
+    mouth: "/assets/white_face_assets/oval-mouth.svg",
+  };
   return (
     <div className="s-main">
       <div className="s-container">
@@ -7,9 +12,9 @@ const Start = ({ onStartClick }: { onStartClick: () => void }) => {
         <span className="z-3">Z</span>
         <div className="face-container">
           <div className="sleepy-nomnom-face">
-            <div className="s-eye-l"></div>
-            <div className="s-eye-r"></div>
-            <div className="s-mouth"></div>
+            <img src={iconUrls.eyeL} alt="Left Eye" className="s-eye-l" />
+            <img src={iconUrls.eyeR} alt="Right Eye" className="s-eye-r" />
+            <img src={iconUrls.mouth} alt="Mouth" className="s-mouth" />
           </div>
         </div>
       </div>
