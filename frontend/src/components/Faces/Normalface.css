@@ -160,14 +160,27 @@
   }
 
   .eye-l,
-  .eye-r,
-  .mouth {
+  .eye-r {
     width: 5em;
     height: 5em;
   }
 
+  .mouth {
+    width: 4em;
+    height: 4em;
+    left: 6.1em;
+  }
+
   .eyebrow {
     width: 80px;
+  }
+
+  .cosmetic {
+    width: 26em;
+    height: 26em;
+    position: relative;
+    top: 5px;
+    left: 4px;
   }
 }
 
@@ -186,10 +199,18 @@
   .mouth {
     width: 4em;
     height: 4em;
-    left: 6.8em;
+    left: 6.3em;
   }
 
   .eyebrow {
     width: 60px;
+  }
+
+  .cosmetic {
+    width: 26em;
+    height: 26em;
+    position: relative;
+    top: 5px;
+    left: 4px;
   }
 }

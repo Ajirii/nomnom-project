@@ -23,6 +23,7 @@ import Modal from "./components/Modal/loginModal";
 import { fetchCosmetics } from "./utils/fetchCosmetics";
 
 const backgrounds: Record<string, string> = {
+  start: "/assets/background/nightcloud.png",
   home: "/assets/background/Summer2.png",
   quests: "/assets/background/nightcity.png",
   recipes: "/assets/background/flyingship.png",
@@ -93,16 +94,14 @@ const App = () => {
 
   return (
     <main>
-      {activeComponent !== "start" && (
-        <div
-          className={`fullscreen-image ${
-            activeComponent === "recipes" ? "dark-overlay" : ""
-          }`}
-          style={{
-            backgroundImage: `url(${backgrounds[activeComponent]})`,
-          }}
-        />
-      )}
+      <div
+        className={`fullscreen-image ${
+          activeComponent === "recipes" ? "dark-overlay" : ""
+        }`}
+        style={{
+          backgroundImage: `url(${backgrounds[activeComponent] || ""})`,
+        }}
+      />
 
       {activeComponent === "start" ? (
         <Start onStartClick={handleStartClick} />
@@ -148,10 +147,9 @@ const App = () => {
               onClose={() => setShowModal(false)}
             />
           )}
-
-          <Footer />
         </>
       )}
+      <Footer />
     </main>
   );
 };
