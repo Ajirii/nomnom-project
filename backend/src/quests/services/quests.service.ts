@@ -124,7 +124,7 @@ export const getRandomQuests = async (userId: string) => {
 export const completeUserQuest = async (
   userId: string,
   questId: string,
-  rewardCurrency: number = 10
+  rewardCurrency: number
 ) => {
   const userQuest = await prisma.userQuest.findUnique({
     where: {

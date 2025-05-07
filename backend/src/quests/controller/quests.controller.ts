@@ -134,14 +134,25 @@ export const completeQuest = async (
   res: Response
 ): Promise<void> => {
   try {
-    const { userId, questId, reward } = req.body;
+    const { userId, questId } = req.body;
 
     if (!userId || !questId) {
       res.status(400).json({ error: "Missing userId or questId." });
       return;
     }
 
-    const result = await completeUserQuest(userId, questId, reward || 10);
+    const quest = await getQuestById(questId);
+    if (!quest) {
+      res.status(404).json({ error: "Quest not found." });
+      return;
+    }
+
+    const result = await completeUserQuest(
+      userId,
+      questId,
+      quest.rewardCurrency
+    );
+
     res.status(200).json({
       currency: result.currency,
       completedQuests: result.completedQuests,
