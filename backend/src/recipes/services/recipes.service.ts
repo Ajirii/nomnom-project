@@ -97,8 +97,9 @@ async function storeRecipe(recipe: Recipe): Promise<Recipe | void> {
         if (!userExists) {
           throw new Error(`User with ID ${recipe.createdBy} does not exist.`);
         }
-      } else {
-        recipe.createdBy = null;
+      } 
+      else {
+        recipe.createdBy = "system";
       }
 
       const newRecipe: Recipe = await prisma.recipe.create({
@@ -118,10 +119,12 @@ async function storeRecipe(recipe: Recipe): Promise<Recipe | void> {
       console.log("New user recipe:", newRecipe);
       return newRecipe;
     }
-  } catch (error) {
+  } 
+  catch (error) {
     console.error("Error creating recipe:", error);
     throw error;
-  } finally {
+  } 
+  finally {
     await prisma.$disconnect();
   }
 }
