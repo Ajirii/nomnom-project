@@ -24,6 +24,8 @@ interface FetchCosmeticsResult {
   coins: number;
   hunger: number;
   userId: string;
+  currentCosmeticId: string | null;
+  equippedCosmetic: Cosmetic | null;
 }
 
 interface UserCosmeticEntry {
@@ -39,6 +41,7 @@ export const fetchCosmetics = async (): Promise<FetchCosmeticsResult> => {
   const userId = decodedToken.userId;
   if (!userId) throw new Error("User ID not found in token");
 
+  // Fetch the user's unlocked cosmetics and other user data
   const unlockedRes = await fetch(`${baseUrl}api/cosmetics/user/${userId}`, {
     headers: getAuthHeaders(),
   });
@@ -50,6 +53,7 @@ export const fetchCosmetics = async (): Promise<FetchCosmeticsResult> => {
   }
 
   const userData = await unlockedRes.json();
+  console.log("userData:", userData);
 
   const unlockedMap: Record<string, boolean> = {};
   const userCosmetics = userData.cosmetics as UserCosmeticEntry[];
@@ -57,6 +61,7 @@ export const fetchCosmetics = async (): Promise<FetchCosmeticsResult> => {
     unlockedMap[entry.cosmeticId] = entry.isUnlocked;
   });
 
+  // Fetch all available cosmetics (including the equipped cosmetic iconUrl)
   const allRes = await fetch(`${baseUrl}api/cosmetics`, {
     headers: getAuthHeaders(),
   });
@@ -77,6 +82,7 @@ export const fetchCosmetics = async (): Promise<FetchCosmeticsResult> => {
     throw new Error("Invalid cosmetics format");
   }
 
+  // Filter out invalid cosmetics
   const allCosmetics: Cosmetic[] = allCosmeticsRaw.filter((c, index) => {
     const isValid =
       c &&
@@ -90,12 +96,21 @@ export const fetchCosmetics = async (): Promise<FetchCosmeticsResult> => {
     return isValid;
   });
 
+  // Now, include the equipped cosmetic details (if any)
+  const equippedCosmetic = userData.equippedCosmeticId
+    ? allCosmetics.find(
+        (cosmetic) => cosmetic.cosmeticId === userData.equippedCosmeticId
+      ) || null // If not found, explicitly return null
+    : null;
+
   return {
     allCosmetics,
     unlockedMap,
     coins: userData.currency ?? 0,
     hunger: userData.hunger ?? 0,
     userId,
+    currentCosmeticId: userData.equippedCosmeticId ?? null,
+    equippedCosmetic, // Now this is of type 'Cosmetic | null'
   };
 };
 
@@ -121,4 +136,24 @@ export const purchaseCosmetic = async (cosmeticId: string): Promise<any> => {
 
   const purchasedCosmetic = await res.json();
   return purchasedCosmetic;
+};
+
+export const equipCosmetic = async (cosmeticId: string): Promise<void> => {
+  const token = localStorage.getItem("token");
+  if (!token) throw new Error("User not authenticated");
+
+  const decodedToken: any = jwtDecode(token);
+  const userId = decodedToken.userId;
+
+  const res = await fetch(`${baseUrl}api/cosmetics/use/equip`, {
+    method: "POST",
+    headers: getAuthHeaders(),
+    body: JSON.stringify({ userId, cosmeticId }),
+  });
+
+  if (!res.ok) {
+    const errText = await res.text();
+    console.error("Error equipping cosmetic:", errText);
+    throw new Error("Failed to equip cosmetic");
+  }
 };

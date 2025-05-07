@@ -8,19 +8,22 @@ datasource db {
 }
 
 model User {
-  userId        String         @id @default(uuid())
-  email         String         @unique
-  password      String?        
-  googleId      String?        @unique
-  currency      Int            @default(0)
-  hunger        Int            @default(100)
-  lastHungerUpdate DateTime @default(now())
+  userId             String   @id @default(uuid())
+  email              String   @unique
+  password           String?
+  googleId           String?  @unique
+  currency           Int      @default(0)
+  hunger             Int      @default(100)
+  lastHungerUpdate   DateTime @default(now())
+  equippedCosmeticId String?
 
   quests        Quest[]
   userCosmetics UserCosmetic[]
   UserQuest     UserQuest[]
   recipes       Recipe[]
-  achievements    Achievement[]
+  achievements  Achievement[]
+
+  equippedCosmetic Cosmetic? @relation(fields: [equippedCosmeticId], references: [cosmeticId])
 }
 
 model Recipe {
@@ -33,21 +36,21 @@ model Recipe {
   cuisine        String
   notes          String
   favorite       Boolean  @default(false)
-  user           User? @relation(fields: [createdBy], references: [userId])
-  createdBy      String? @default("system")
+  user           User?    @relation(fields: [createdBy], references: [userId])
+  createdBy      String?  @default("system")
   createdAt      DateTime @default(now())
 }
 
 model Quest {
-  questId     String @id @default(uuid())
-  title       String
-  description String
-  rewardCurrency Int @default(0)
-  rewardHunger   Int @default(0)
+  questId        String @id @default(uuid())
+  title          String
+  description    String
+  rewardCurrency Int    @default(0)
+  rewardHunger   Int    @default(0)
 
-  userQuests  UserQuest[]
-  User        User?       @relation(fields: [userUserId], references: [userId])
-  userUserId  String?
+  userQuests UserQuest[]
+  User       User?       @relation(fields: [userUserId], references: [userId])
+  userUserId String?
 }
 
 enum QuestStatus {
@@ -57,26 +60,27 @@ enum QuestStatus {
 }
 
 model UserQuest {
-  userQuestId   String    @id @default(uuid())
-  userId        String
-  questId       String
-  assignedDate  DateTime  @default(now())
-  status        QuestStatus @default(AVAILABLE)
+  userQuestId  String      @id @default(uuid())
+  userId       String
+  questId      String
+  assignedDate DateTime    @default(now())
+  status       QuestStatus @default(AVAILABLE)
 
-  user          User     @relation(fields: [userId], references: [userId])
-  quest         Quest    @relation(fields: [questId], references: [questId])
+  user  User  @relation(fields: [userId], references: [userId])
+  quest Quest @relation(fields: [questId], references: [questId])
 
   @@unique([userId, questId])
 }
 
 model Cosmetic {
-  cosmeticId     String         @id @default(uuid())
-  name           String
-  description    String
-  iconUrl        String?
-  price          Int
+  cosmeticId  String  @id @default(uuid())
+  name        String
+  description String
+  iconUrl     String?
+  price       Int
 
-  userCosmetics  UserCosmetic[]
+  userCosmetics UserCosmetic[]
+  User          User[]
 }
 
 model UserCosmetic {

@@ -4,7 +4,11 @@ import {
   getCosmeticsByUser,
   getCosmeticById,
   handlePurchase,
+  updateEquippedCosmetic,
 } from "../services/cosmetics.service";
+import { PrismaClient } from "@prisma/client";
+
+const prisma = new PrismaClient();
 
 export const fetchAllCosmetics = async (
   req: Request,
@@ -33,6 +37,14 @@ export const fetchCostmeticsByUser = async (
       return;
     }
 
+    // Fetch the iconUrl of the equipped cosmetic using the equippedCosmeticId
+    const equippedCosmetic = data.user.equippedCosmeticId
+      ? await prisma.cosmetic.findUnique({
+          where: { cosmeticId: data.user.equippedCosmeticId },
+          select: { iconUrl: true, name: true, description: true }, // You can add more fields if needed
+        })
+      : null;
+
     res.status(200).json({
       cosmetics: data.cosmetics.map((entry: any) => ({
         cosmeticId: entry.cosmetic.cosmeticId,
@@ -40,6 +52,8 @@ export const fetchCostmeticsByUser = async (
       })),
       currency: data.user.currency,
       hunger: data.user.hunger,
+      equippedCosmeticId: data.user.equippedCosmeticId,
+      equippedCosmetic: equippedCosmetic, // Return the full cosmetic data
     });
   } catch (error) {
     if (!res.headersSent) {
@@ -100,5 +114,42 @@ export const buyCosmetic = async (
     if (!res.headersSent) {
       res.status(500).json({ error: "Internal server error" });
     }
+  }
+};
+
+export const equipCosmetic = async (
+  req: Request,
+  res: Response
+): Promise<void> => {
+  try {
+    const { userId, cosmeticId } = req.body;
+
+    if (!userId || !cosmeticId) {
+      res.status(400).json({ error: "User ID and Cosmetic ID are required." });
+      return;
+    }
+
+    // Ensure cosmetic is unlocked for the user
+    const updatedUser = await updateEquippedCosmetic(userId, cosmeticId);
+
+    // Fetch the full cosmetic details
+    const equippedCosmetic = await prisma.cosmetic.findUnique({
+      where: { cosmeticId },
+    });
+
+    if (!equippedCosmetic) {
+      res.status(404).json({ error: "Cosmetic not found." });
+      return;
+    }
+
+    // Send the equipped cosmetic details to the frontend
+    res.status(200).json({
+      message: "Cosmetic equipped.",
+      equippedCosmeticId: updatedUser.equippedCosmeticId,
+      equippedCosmetic: equippedCosmetic, // Send the cosmetic details
+    });
+  } catch (error) {
+    console.error("Error in equipCosmetic:", error);
+    res.status(500).json({ error: "Failed to equip cosmetic." });
   }
 };

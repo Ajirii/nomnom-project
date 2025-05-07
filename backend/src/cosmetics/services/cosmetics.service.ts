@@ -26,6 +26,7 @@ export const getCosmeticsByUser = async (id: string) => {
         select: {
           currency: true,
           hunger: true,
+          equippedCosmeticId: true,
         },
       }),
     ]);
@@ -98,5 +99,38 @@ export const handlePurchase = async (userId: string, cosmeticId: string) => {
   } catch (error) {
     console.error("Purchase failed:", error);
     throw new Error("Purchase could not be completed.");
+  }
+};
+
+export const updateEquippedCosmetic = async (
+  userId: string,
+  cosmeticId: string
+) => {
+  try {
+    console.log(
+      `Attempting to equip cosmetic ${cosmeticId} for user ${userId}`
+    );
+
+    const userCosmetic = await prisma.userCosmetic.findUnique({
+      where: { userId_cosmeticId: { userId, cosmeticId } },
+    });
+
+    if (!userCosmetic || !userCosmetic.isUnlocked) {
+      throw new Error("Cosmetic not unlocked.");
+    }
+
+    console.log(`User ${userId} has unlocked cosmetic ${cosmeticId}`);
+
+    // Update the User table with the equipped cosmetic
+    const updatedUser = await prisma.user.update({
+      where: { userId },
+      data: { equippedCosmeticId: cosmeticId },
+    });
+
+    console.log(`User ${userId} equipped cosmetic with ID: ${cosmeticId}`);
+    return updatedUser;
+  } catch (error) {
+    console.error("Failed to equip cosmetic:", error);
+    throw error;
   }
 };

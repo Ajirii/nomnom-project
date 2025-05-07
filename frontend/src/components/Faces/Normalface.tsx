@@ -226,7 +226,10 @@ const NormalFace: React.FC<NormalFaceProps> = ({
               className="cosmetic"
               alt=""
               ref={cosmeticRef}
-              onError={() => setCosmeticVisible(false)}
+              onError={() => {
+                console.error("Cosmetic failed to load:", cosmeticSrc);
+                setCosmeticVisible(false);
+              }}
             />
           )}
         </div>

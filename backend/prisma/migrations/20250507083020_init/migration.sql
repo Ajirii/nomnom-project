@@ -10,6 +10,7 @@ CREATE TABLE "User" (
     "currency" INTEGER NOT NULL DEFAULT 0,
     "hunger" INTEGER NOT NULL DEFAULT 100,
     "lastHungerUpdate" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "equippedCosmeticId" TEXT,
 
     CONSTRAINT "User_pkey" PRIMARY KEY ("userId")
 );
@@ -91,6 +92,9 @@ CREATE UNIQUE INDEX "UserQuest_userId_questId_key" ON "UserQuest"("userId", "que
 
 -- CreateIndex
 CREATE UNIQUE INDEX "UserCosmetic_userId_cosmeticId_key" ON "UserCosmetic"("userId", "cosmeticId");
+
+-- AddForeignKey
+ALTER TABLE "User" ADD CONSTRAINT "User_equippedCosmeticId_fkey" FOREIGN KEY ("equippedCosmeticId") REFERENCES "Cosmetic"("cosmeticId") ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "Recipe" ADD CONSTRAINT "Recipe_createdBy_fkey" FOREIGN KEY ("createdBy") REFERENCES "User"("userId") ON DELETE SET NULL ON UPDATE CASCADE;

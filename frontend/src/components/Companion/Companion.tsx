@@ -1,6 +1,10 @@
 import { useState, useEffect } from "react";
 import type { Dispatch, SetStateAction } from "react";
-import { fetchCosmetics, purchaseCosmetic } from "../../utils/fetchCosmetics";
+import {
+  fetchCosmetics,
+  purchaseCosmetic,
+  equipCosmetic,
+} from "../../utils/fetchCosmetics";
 
 interface Cosmetic {
   cosmeticId: string;
@@ -25,9 +29,12 @@ const Companion = ({
   setUnlockedCosmetics,
   onCosmeticChange,
 }: CompanionProps) => {
-  const [cosmetics, setCosmetics] = useState<Cosmetic[]>([]);
   const [message, setMessage] = useState<string | null>(null);
   const [showModal, setShowModal] = useState(false);
+  const [equippedCosmeticId, setEquippedCosmeticId] = useState<string | null>(
+    null
+  );
+  const [cosmetics, setCosmetics] = useState<Cosmetic[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [fetchError, setFetchError] = useState<string | null>(null);
   const [hunger, setHunger] = useState<number>(100);
@@ -35,12 +42,21 @@ const Companion = ({
   useEffect(() => {
     const loadCosmetics = async () => {
       try {
-        const { allCosmetics, unlockedMap, coins, hunger } =
+        const { allCosmetics, unlockedMap, coins, hunger, currentCosmeticId } =
           await fetchCosmetics();
+
         setCosmetics(allCosmetics);
         setUnlockedCosmetics(unlockedMap);
         setCoins(coins);
         setHunger(hunger);
+        setEquippedCosmeticId(currentCosmeticId);
+
+        const equipped = allCosmetics.find(
+          (c) => c.cosmeticId === currentCosmeticId
+        );
+        if (equipped) {
+          onCosmeticChange(equipped.iconUrl);
+        }
       } catch (error) {
         console.error(error);
         setFetchError("Failed to load cosmetics.");
@@ -50,7 +66,7 @@ const Companion = ({
     };
 
     loadCosmetics();
-  }, [setCoins, setUnlockedCosmetics]);
+  }, [equippedCosmeticId]);
 
   const handleCosmeticClick = async (
     cosmeticId: string,
@@ -61,6 +77,9 @@ const Companion = ({
 
     if (isAlreadyUnlocked) {
       onCosmeticChange(iconUrl);
+      await equipCosmetic(cosmeticId);
+      setEquippedCosmeticId(cosmeticId);
+      console.log("Successfully equipped cosmetic:", cosmeticId);
       return;
     }
 
@@ -164,11 +183,14 @@ const Companion = ({
         <div className="cosmetics-grid">
           {cosmetics.map(({ cosmeticId, name, iconUrl, price }) => {
             const isUnlocked = unlockedCosmetics[cosmeticId];
+            const isEquipped = cosmeticId === equippedCosmeticId;
 
             return (
               <div
                 key={cosmeticId}
-                className={`cosmetic-slot ${isUnlocked ? "" : "locked"}`}
+                className={`cosmetic-slot ${isUnlocked ? "" : "locked"} ${
+                  isEquipped ? "equipped" : ""
+                }`}
                 onClick={() => handleCosmeticClick(cosmeticId, price, iconUrl)}
                 role="button"
                 tabIndex={0}

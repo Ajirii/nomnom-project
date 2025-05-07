@@ -12,6 +12,7 @@ export interface JwtUser {
   currency: number;
   hunger: number;
   lastHungerUpdate: Date;
+  equippedCosmeticId: string?;
 }
 
 declare global {

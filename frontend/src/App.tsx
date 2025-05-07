@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Navbar from "./components/Navbar/Navbar";
 import "./components/Navbar/Navbar.css";
 import "./components/Faces/Normalface.css";
@@ -20,6 +20,7 @@ import "./components/Start/Start.css";
 import { useAuth } from "./context/AuthContext";
 import ClickableNomNom from "./components/Faces/ClickableNomNom";
 import Modal from "./components/Modal/loginModal";
+import { fetchCosmetics } from "./utils/fetchCosmetics"; // make sure this is imported
 
 const backgrounds: Record<string, string> = {
   home: "/assets/background/Summer2.png",
@@ -33,7 +34,7 @@ const backgrounds: Record<string, string> = {
 const App = () => {
   const [activeComponent, setActiveComponent] = useState<string>("start");
   const [cosmetic, setCosmetic] = useState<string>(
-    "/assets/white_face_assets/blush.svg"
+    "/assets/cosmetics/blush.svg"
   );
   const [faceState, setFaceState] = useState<
     "default" | "happy" | "arrow" | "meh" | "hungry"
@@ -45,6 +46,25 @@ const App = () => {
   const [unlockedCosmetics, setUnlockedCosmetics] = useState<{
     [key: string]: boolean;
   }>({});
+
+  useEffect(() => {
+    const loadCosmetics = async () => {
+      const { allCosmetics, unlockedMap, coins, currentCosmeticId } =
+        await fetchCosmetics();
+
+      setUnlockedCosmetics(unlockedMap);
+      setCoins(coins);
+
+      const equipped = allCosmetics.find(
+        (c) => c.cosmeticId === currentCosmeticId
+      );
+      if (equipped) {
+        setCosmetic(equipped.iconUrl);
+      }
+    };
+
+    loadCosmetics();
+  }, []);
 
   const handleStartClick = () => {
     setActiveComponent("home");
@@ -66,8 +86,10 @@ const App = () => {
   const handleCosmeticChange = (newCosmetic: string) => {
     setCosmetic(newCosmetic);
   };
-  const handleFaceStateChange = (newFaceState: typeof faceState) =>
+
+  const handleFaceStateChange = (newFaceState: typeof faceState) => {
     setFaceState(newFaceState);
+  };
 
   return (
     <main>
@@ -106,22 +128,27 @@ const App = () => {
           {activeComponent === "quests" && (
             <Quests coins={coins} setCoins={setCoins} />
           )}
+
           {activeComponent === "recipes" && <Recipes />}
+
           {!isLoggedIn && activeComponent === "login" && (
             <Login
               onLoginSuccess={() => setActiveComponent("home")}
               setActiveComponent={setActiveComponent}
             />
           )}
+
           {!isLoggedIn && activeComponent === "signup" && (
             <SignUp onSignUpSuccess={() => setActiveComponent("home")} />
           )}
+
           {showModal && (
             <Modal
               message="Please sign in to access this page!"
               onClose={() => setShowModal(false)}
             />
           )}
+
           <Footer />
         </>
       )}

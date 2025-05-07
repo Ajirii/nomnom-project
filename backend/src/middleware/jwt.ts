@@ -1,11 +1,11 @@
 import jwt from "jsonwebtoken";
-import { Request, Response, NextFunction } from "express";
-import { JwtUser } from "../types/express";
+import { Response, NextFunction } from "express";
+import { JwtUser, AuthenticatedRequest } from "../types/express";
 
 const JWT_SECRET = process.env.JWT_SECRET as string;
 
 export const authenticateJWT = (
-  req: Request,
+  req: AuthenticatedRequest,
   res: Response,
   next: NextFunction
 ): void => {
