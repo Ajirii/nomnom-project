@@ -43,21 +43,23 @@ export const fetchUserQuests = async (
       return;
     }
 
-    const quests = await getUserQuests(userId);
-    const user = await prisma.user.findUnique({
-      where: { userId },
-      select: { currency: true },
-    });
-
-    const achievement = await prisma.achievement.findUnique({
-      where: { userId },
-      select: { completedQuests: true },
-    });
+    let quests = await getUserQuests(userId);
 
     if (!quests || quests.length === 0) {
-      res.status(404).json({ error: "No quest found." });
-      return;
+      quests = await getRandomQuests(userId); // Assign 4 new quests
     }
+
+    // Re-fetch user and achievement (these are still needed)
+    const [user, achievement] = await Promise.all([
+      prisma.user.findUnique({
+        where: { userId },
+        select: { currency: true },
+      }),
+      prisma.achievement.findUnique({
+        where: { userId },
+        select: { completedQuests: true },
+      }),
+    ]);
 
     res.status(200).json({
       quests,
