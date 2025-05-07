@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Navbar from "./components/Navbar/Navbar";
 import "./components/Navbar/Navbar.css";
 import "./components/Faces/Normalface.css";
@@ -21,9 +21,6 @@ import { useAuth } from "./context/AuthContext";
 import ClickableNomNom from "./components/Faces/ClickableNomNom";
 import Modal from "./components/Modal/loginModal";
 
-// import ClickEffects from "./components/MouseEffects/ClickEffects";
-// import "./components/MouseEffects/ClickEffects.css";
-
 const backgrounds: Record<string, string> = {
   home: "/assets/background/Summer2.png",
   quests: "/assets/background/nightcity.png",
@@ -35,7 +32,6 @@ const backgrounds: Record<string, string> = {
 
 const App = () => {
   const [activeComponent, setActiveComponent] = useState<string>("start");
-  const [hunger, setHunger] = useState<number>(100);
   const [cosmetic, setCosmetic] = useState<string>(
     "/assets/white_face_assets/blush.svg"
   );
@@ -46,7 +42,6 @@ const App = () => {
   const { isLoggedIn } = useAuth();
   const [showModal, setShowModal] = useState(false);
   const [coins, setCoins] = useState<number>(0);
-
   const [unlockedCosmetics, setUnlockedCosmetics] = useState<{
     [key: string]: boolean;
   }>({});
@@ -74,14 +69,6 @@ const App = () => {
   const handleFaceStateChange = (newFaceState: typeof faceState) =>
     setFaceState(newFaceState);
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setHunger((prevHunger) => Math.max(prevHunger - 10, 0));
-    }, 6 * 60 * 60 * 1000);
-
-    return () => clearInterval(interval);
-  }, []);
-
   return (
     <main>
       {activeComponent !== "start" && (
@@ -106,7 +93,6 @@ const App = () => {
 
           {activeComponent === "companion" && (
             <Companion
-              hunger={hunger}
               coins={coins}
               setCoins={setCoins}
               onCosmeticChange={handleCosmeticChange}
@@ -118,7 +104,6 @@ const App = () => {
           {activeComponent === "quests" && (
             <Quests coins={coins} setCoins={setCoins} />
           )}
-
           {activeComponent === "recipes" && <Recipes />}
           {!isLoggedIn && activeComponent === "login" && (
             <Login

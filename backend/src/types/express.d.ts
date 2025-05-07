@@ -11,6 +11,7 @@ export interface JwtUser {
   googleId: string;
   currency: number;
   hunger: number;
+  lastHungerUpdate: Date;
 }
 
 declare global {

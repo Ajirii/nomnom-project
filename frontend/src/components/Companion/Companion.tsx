@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import type { Dispatch, SetStateAction } from "react";
-import { fetchCosmetics } from "../../utils/fetchCosmetics";
+import { fetchCosmetics, purchaseCosmetic } from "../../utils/fetchCosmetics";
 
 interface Cosmetic {
   cosmeticId: string;
@@ -11,7 +11,6 @@ interface Cosmetic {
 }
 
 interface CompanionProps {
-  hunger: number;
   coins: number;
   setCoins: (value: number) => void;
   unlockedCosmetics: { [key: string]: boolean };
@@ -20,7 +19,6 @@ interface CompanionProps {
 }
 
 const Companion = ({
-  hunger,
   coins,
   setCoins,
   unlockedCosmetics,
@@ -32,23 +30,29 @@ const Companion = ({
   const [showModal, setShowModal] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [fetchError, setFetchError] = useState<string | null>(null);
+  const [hunger, setHunger] = useState<number>(100);
 
   useEffect(() => {
-    const fetchCosmeticsData = async () => {
+    const loadCosmetics = async () => {
       try {
-        const data = await fetchCosmetics();
-        setCosmetics(data);
+        const { allCosmetics, unlockedMap, coins, hunger } =
+          await fetchCosmetics();
+        setCosmetics(allCosmetics);
+        setUnlockedCosmetics(unlockedMap);
+        setCoins(coins);
+        setHunger(hunger);
       } catch (error) {
-        setFetchError("Failed to load cosmetics. Please try again later.");
+        console.error(error);
+        setFetchError("Failed to load cosmetics.");
       } finally {
         setIsLoading(false);
       }
     };
 
-    fetchCosmeticsData();
-  }, []);
+    loadCosmetics();
+  }, [setCoins, setUnlockedCosmetics]);
 
-  const handleCosmeticClick = (
+  const handleCosmeticClick = async (
     cosmeticId: string,
     price: number,
     iconUrl: string
@@ -61,10 +65,17 @@ const Companion = ({
     }
 
     if (coins >= price) {
-      setUnlockedCosmetics((prev) => ({ ...prev, [cosmeticId]: true }));
-      setCoins(coins - price);
-      setMessage(`Unlocked ${cosmeticId} for ${price} coins!`);
-      onCosmeticChange(iconUrl);
+      try {
+        const purchasedCosmetic = await purchaseCosmetic(cosmeticId);
+        setUnlockedCosmetics((prev) => ({ ...prev, [cosmeticId]: true }));
+        setCoins(coins - price);
+        setMessage(
+          `Unlocked ${purchasedCosmetic.cosmeticId} for ${price} coins!`
+        );
+        onCosmeticChange(iconUrl);
+      } catch (error) {
+        setMessage("Failed to purchase cosmetic.");
+      }
     } else {
       setMessage("Not enough coins to unlock this cosmetic.");
     }
@@ -76,7 +87,6 @@ const Companion = ({
 
   return (
     <div className="companion-section">
-      {/* HP Info Modal */}
       {showModal && (
         <div className="modal-overlay" onClick={() => setShowModal(false)}>
           <div className="modal" onClick={(e) => e.stopPropagation()}>
@@ -96,7 +106,6 @@ const Companion = ({
         </div>
       )}
 
-      {/* General Message Modal */}
       {message && (
         <div className="modal-overlay" onClick={() => setMessage(null)}>
           <div className="modal" onClick={(e) => e.stopPropagation()}>
@@ -112,7 +121,6 @@ const Companion = ({
         </div>
       )}
 
-      {/* HP Bar Section */}
       <div className="hp-layout">
         <button
           className="info-button"
@@ -135,7 +143,6 @@ const Companion = ({
         </div>
       </div>
 
-      {/* Cosmetics Section */}
       <div className="cosmetics-container">
         <div className="cosmetics-header-row">
           <h2 className="cosmetics-header">Cosmetics</h2>

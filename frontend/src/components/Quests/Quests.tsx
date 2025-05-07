@@ -1,5 +1,10 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import orange from "/assets/cosmetics/orange.png";
+import {
+  fetchUserQuests,
+  completeQuest,
+  acceptQuest,
+} from "../../utils/fetchQuests";
 
 interface Quest {
   questId: string;
@@ -7,45 +12,8 @@ interface Quest {
   description: string;
   rewardCurrency: number;
   rewardHunger: number;
-  status: "available" | "seen" | "accepted" | "completed";
+  status: "available" | "accepted" | "completed";
 }
-
-const initialQuests: Quest[] = [
-  {
-    questId: "1",
-    title: "Recipe Adventure",
-    description:
-      "Cook a dish from a cuisine you've never heard of. Bonus points if you can pronounce it!",
-    rewardCurrency: 1000,
-    rewardHunger: 40,
-    status: "available",
-  },
-  {
-    questId: "2",
-    title: "Master the Frying Pan",
-    description:
-      "Perfectly fry an egg. It's a simple task… unless you're still trying to figure out how not to turn it into scrambled eggs.",
-    rewardCurrency: 15,
-    rewardHunger: 20,
-    status: "available",
-  },
-  {
-    questId: "3",
-    title: "Cake Perfection",
-    description: "Create a delicious cake without burning it!",
-    rewardCurrency: 20,
-    rewardHunger: 30,
-    status: "available",
-  },
-  {
-    questId: "4",
-    title: "Spice Challenge!",
-    description: "Make a spicy dish. Not too spicy... Or else...",
-    rewardCurrency: 25,
-    rewardHunger: 25,
-    status: "available",
-  },
-];
 
 export const Quests = ({
   coins,
@@ -54,23 +22,56 @@ export const Quests = ({
   coins: number;
   setCoins: React.Dispatch<React.SetStateAction<number>>;
 }) => {
-  const [quests, setQuests] = useState<Quest[]>(initialQuests);
+  const [quests, setQuests] = useState<Quest[]>([]);
   const [selectedQuest, setSelectedQuest] = useState<Quest | null>(null);
+  const [showModal, setShowModal] = useState(false);
+  const [completedCount, setCompletedCount] = useState<number>(0);
 
-  const handleAccept = (id: string) => {
-    setQuests((prev) =>
-      prev.map((q) => (q.questId === id ? { ...q, status: "accepted" } : q))
-    );
+  useEffect(() => {
+    const loadQuests = async () => {
+      try {
+        const questsFromApi = await fetchUserQuests();
+        const normalized = questsFromApi.quests.map((q: any) => ({
+          ...q,
+          status: q.status.toLowerCase(),
+        }));
+        setQuests(normalized);
+        setCompletedCount(questsFromApi.completedCount);
+        setCoins(questsFromApi.coins);
+      } catch (err) {
+        console.error("Error loading quests:", err);
+      }
+    };
+
+    loadQuests();
+  }, []);
+
+  const handleAccept = async (questId: string) => {
+    try {
+      await acceptQuest(questId);
+      setQuests((prev) =>
+        prev.map((q) =>
+          q.questId === questId ? { ...q, status: "accepted" } : q
+        )
+      );
+    } catch (err) {
+      console.error("Error accepting quest:", err);
+    }
   };
 
-  const handleComplete = (id: string) => {
-    const quest = quests.find((q) => q.questId === id);
-    if (quest && quest.status === "accepted") {
-      setCoins((prev) => prev + quest.rewardCurrency);
+  const handleComplete = async (questId: string) => {
+    try {
+      const newCoins = await completeQuest(questId);
+      setCoins(newCoins);
+      setQuests((prev) =>
+        prev.map((q) =>
+          q.questId === questId ? { ...q, status: "completed" } : q
+        )
+      );
+      setCompletedCount((prev) => prev + 1);
+    } catch (err) {
+      console.error("Error completing quest:", err);
     }
-    setQuests((prev) =>
-      prev.map((q) => (q.questId === id ? { ...q, status: "completed" } : q))
-    );
   };
 
   const groupedQuests = {
@@ -78,6 +79,57 @@ export const Quests = ({
     accepted: quests.filter((q) => q.status === "accepted"),
     completed: quests.filter((q) => q.status === "completed"),
   };
+
+  const achievements = [
+    {
+      threshold: 1,
+      label: "🏅",
+      title: "Novice Chef",
+      desc: "Completed your first quest",
+    },
+    {
+      threshold: 3,
+      label: "💪",
+      title: "Committed Cook",
+      desc: "Completed 3 quests",
+    },
+    {
+      threshold: 5,
+      label: "🔥",
+      title: "Culinary Challenger",
+      desc: "Completed 5 quests",
+    },
+    {
+      threshold: 10,
+      label: "⭐",
+      title: "Kitchen Pro",
+      desc: "Completed 10 quests",
+    },
+    {
+      threshold: 15,
+      label: "🏆",
+      title: "Master of Meals",
+      desc: "Completed 15 quests",
+    },
+    {
+      threshold: 20,
+      label: "🍽️",
+      title: "Dining Dynamo",
+      desc: "Completed 20 quests",
+    },
+    {
+      threshold: 25,
+      label: "🥘",
+      title: "Feast Commander",
+      desc: "Completed 25 quests",
+    },
+    {
+      threshold: 30,
+      label: "👨‍🍳",
+      title: "Legendary Chef",
+      desc: "Completed 30 quests",
+    },
+  ];
 
   const getQuestItemClass = (quest: Quest) => {
     let base = "quest-item";
@@ -89,8 +141,46 @@ export const Quests = ({
 
   return (
     <div className="recipes-section">
+      {showModal && (
+        <div className="modal-overlay" onClick={() => setShowModal(false)}>
+          <div
+            className="modal-content achievements-grid"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <h2 className="achievement-heading">Achievements</h2>
+            <div className="achievement-boxes">
+              {achievements.map((a, index) => (
+                <div
+                  key={index}
+                  className={`achievement-tile ${
+                    completedCount >= a.threshold ? "unlocked" : "locked"
+                  }`}
+                >
+                  <div className="achievement-icon">{a.label}</div>
+                  <div className="achievement-title">{a.title}</div>
+                  <div className="achievement-desc">{a.desc}</div>
+                </div>
+              ))}
+            </div>
+            <button
+              className="close-button"
+              onClick={() => setShowModal(false)}
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      )}
+
       <div className="row">
         <div className="main">
+          <button
+            className="achievements-btn"
+            onClick={() => setShowModal(true)}
+          >
+            View Achievements 🏆
+          </button>
+
           <div className="quest-container">
             <div className="master">
               <h2>

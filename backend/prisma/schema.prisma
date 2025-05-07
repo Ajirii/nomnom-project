@@ -14,11 +14,13 @@ model User {
   googleId      String?        @unique
   currency      Int            @default(0)
   hunger        Int            @default(100)
+  lastHungerUpdate DateTime @default(now())
 
   quests        Quest[]
   userCosmetics UserCosmetic[]
   UserQuest     UserQuest[]
   recipes       Recipe[]
+  achievements    Achievement[]
 }
 
 model Recipe {
@@ -48,16 +50,24 @@ model Quest {
   userUserId  String?
 }
 
-model UserQuest {
-  userQuestId String   @id @default(uuid())
-  userId      String
-  questId     String
-  completedAt DateTime @default(now())
-
-  user  User  @relation(fields: [userId], references: [userId])
-  quest Quest @relation(fields: [questId], references: [questId])
+enum QuestStatus {
+  AVAILABLE
+  ACCEPTED
+  COMPLETED
 }
 
+model UserQuest {
+  userQuestId   String    @id @default(uuid())
+  userId        String
+  questId       String
+  assignedDate  DateTime  @default(now())
+  status        QuestStatus @default(AVAILABLE)
+
+  user          User     @relation(fields: [userId], references: [userId])
+  quest         Quest    @relation(fields: [questId], references: [questId])
+
+  @@unique([userId, questId])
+}
 
 model Cosmetic {
   cosmeticId     String         @id @default(uuid())
@@ -70,12 +80,19 @@ model Cosmetic {
 }
 
 model UserCosmetic {
-  userCid    String @id @default(uuid())
   userId     String
   cosmeticId String
+  isUnlocked Boolean @default(false)
 
   user     User     @relation(fields: [userId], references: [userId])
   cosmetic Cosmetic @relation(fields: [cosmeticId], references: [cosmeticId])
 
   @@unique([userId, cosmeticId])
+}
+
+model Achievement {
+  userId          String @id
+  completedQuests Int    @default(0)
+
+  user User @relation(fields: [userId], references: [userId])
 }

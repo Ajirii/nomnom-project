@@ -49,7 +49,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use("/api/recipes", recipeRoutes);
 app.use("/api/login", googleRoutes);
 app.use("/api/login", loginRoutes);
-app.use("/api/quest", questRoutes);
+app.use("/api/quests", questRoutes);
 app.use("/api/cosmetics", cosmeticRoutes);
 
 /* SERVER */
