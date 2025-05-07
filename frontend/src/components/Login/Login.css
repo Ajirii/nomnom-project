@@ -95,6 +95,12 @@
   color: #0056b3;
 }
 
+.google-login-wrapper {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
 .google-login-button iframe {
   width: 100% !important;
   max-width: 100%;

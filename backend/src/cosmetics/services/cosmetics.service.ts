@@ -95,7 +95,13 @@ export const handlePurchase = async (userId: string, cosmeticId: string) => {
       }
     );
 
-    return result;
+    // refetch with cosmetic info included
+    const fullResult = await prisma.userCosmetic.findUnique({
+      where: { userId_cosmeticId: { userId, cosmeticId } },
+      include: { cosmetic: true },
+    });
+
+    return fullResult;
   } catch (error) {
     console.error("Purchase failed:", error);
     throw new Error("Purchase could not be completed.");

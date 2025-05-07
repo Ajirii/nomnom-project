@@ -132,10 +132,12 @@ const Login = ({ onLoginSuccess, setActiveComponent }: LoginProps) => {
                   Sign Out
                 </button>
               )}
-              <GoogleLogin
-                onSuccess={handleGoogleLogin}
-                onError={() => console.log("Login Failed")}
-              />
+              <div className="google-login-wrapper">
+                <GoogleLogin
+                  onSuccess={handleGoogleLogin}
+                  onError={() => console.log("Login Failed")}
+                />
+              </div>
               <p className="sign-up">
                 Don’t have an account?{" "}
                 <span

@@ -89,7 +89,7 @@ const Companion = ({
         setCoins(coins - price);
         setMessage(
           `Unlocked ${
-            purchasedCosmetic.cosmetic?.cosmeticId ?? "Unknown"
+            purchasedCosmetic.cosmetic?.name ?? "Unknown"
           } for ${price} coins!`
         );
 
