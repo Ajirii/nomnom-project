@@ -11,7 +11,7 @@ router.get("/protected", authenticateJWT, (req, res) => {
   res.json({ message: "This is a protected route", user: req.user });
 });
 
-router.get("/", authenticateJWT, fetchRecipe);
+router.get("/", fetchRecipe);
 router.get("/all", authenticateJWT, fetchAllRecipes);
 router.get("/:id", authenticateJWT, fetchRecipeById);
 export default router;

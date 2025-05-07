@@ -27,7 +27,6 @@ export const fetchRecipes = async ({
   });
 
   const url = `${baseUrl}api/recipes?${query.toString()}`;
-  console.log("API URL:", url);
 
   const res = await fetch(url, {
     method: "GET",

@@ -11,7 +11,7 @@ export const getRecipeByIngredients = async (
   ingredients: string,
   cuisine: string,
   strict: string,
-  user?: User
+  user?: { userId: string } | null
 ) => {
   const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
   let strictMode: boolean = false;
@@ -62,7 +62,7 @@ export const getRecipeByIngredients = async (
     const rawResponse: string | any = response.choices[0]?.message?.content;
     const content: Recipe = JSON.parse(rawResponse) as Recipe;
 
-    if (user) {
+    if (user?.userId) {
       content.createdBy = user.userId;
     } else {
       content.createdBy = null;
@@ -167,7 +167,9 @@ async function doesRecipeExist(recipe: Recipe) {
   }
 }
 
-async function deleteUnfavoritedRecipes(user: User): Promise<void> {
+async function deleteUnfavoritedRecipes(user: {
+  userId: string;
+}): Promise<void> {
   if (!user?.userId) {
     return;
   }
@@ -190,6 +192,7 @@ async function deleteUnfavoritedRecipes(user: User): Promise<void> {
     if (userRecipes.length < 30) {
       return;
     }
+
     for (let i of userRecipes) {
       try {
         await prisma.recipe.delete({

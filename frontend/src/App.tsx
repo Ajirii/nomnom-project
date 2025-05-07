@@ -50,22 +50,34 @@ const App = () => {
 
   useEffect(() => {
     const loadCosmetics = async () => {
-      const { allCosmetics, unlockedMap, coins, currentCosmeticId } =
-        await fetchCosmetics();
+      try {
+        const token = localStorage.getItem("token");
+        if (!token) {
+          console.warn("Token not found, skipping cosmetics fetch.");
+          return;
+        }
 
-      setUnlockedCosmetics(unlockedMap);
-      setCoins(coins);
+        const { allCosmetics, unlockedMap, coins, currentCosmeticId } =
+          await fetchCosmetics();
 
-      const equipped = allCosmetics.find(
-        (c) => c.cosmeticId === currentCosmeticId
-      );
-      if (equipped) {
-        setCosmetic(equipped.iconUrl);
+        setUnlockedCosmetics(unlockedMap);
+        setCoins(coins);
+
+        const equipped = allCosmetics.find(
+          (c) => c.cosmeticId === currentCosmeticId
+        );
+        if (equipped) {
+          setCosmetic(equipped.iconUrl);
+        }
+      } catch (error) {
+        console.error("Failed to load cosmetics:", error);
       }
     };
 
-    loadCosmetics();
-  }, []);
+    if (isLoggedIn) {
+      loadCosmetics();
+    }
+  }, [isLoggedIn]);
 
   const handleStartClick = () => {
     setActiveComponent("home");

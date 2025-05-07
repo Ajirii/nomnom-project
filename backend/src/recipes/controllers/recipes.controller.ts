@@ -18,19 +18,23 @@ export const fetchRecipe = async (
     const ingredients = req.query.ingredients as string;
     const cuisine = (req.query.cuisine as string) ?? "any";
     const strict = (req.query.strict as string) ?? "false";
-    const user = req.user;
+    const user = req.user ?? null;
+
     if (!ingredients) {
       res.status(400).json({ error: "No ingredients provided." });
+      return;
     }
 
     const recipe = await getRecipeByIngredients(
       ingredients,
       cuisine,
       strict,
-      user as JwtUser
+      user // pass null or user
     );
+
     res.status(200).json(recipe);
   } catch (err) {
+    console.error(err);
     if (!res.headersSent) {
       res.status(500).json({ error: "Internal server error" });
     }
