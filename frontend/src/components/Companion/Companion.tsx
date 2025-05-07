@@ -70,8 +70,11 @@ const Companion = ({
         setUnlockedCosmetics((prev) => ({ ...prev, [cosmeticId]: true }));
         setCoins(coins - price);
         setMessage(
-          `Unlocked ${purchasedCosmetic.cosmeticId} for ${price} coins!`
+          `Unlocked ${
+            purchasedCosmetic.cosmetic?.cosmeticId ?? "Unknown"
+          } for ${price} coins!`
         );
+
         onCosmeticChange(iconUrl);
       } catch (error) {
         setMessage("Failed to purchase cosmetic.");
@@ -82,7 +85,7 @@ const Companion = ({
   };
 
   if (isLoading) {
-    return <p>Loading cosmetics...</p>;
+    return;
   }
 
   return (

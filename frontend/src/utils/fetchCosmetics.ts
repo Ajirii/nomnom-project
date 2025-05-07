@@ -10,12 +10,25 @@ const getAuthHeaders = (): HeadersInit => {
   };
 };
 
+interface Cosmetic {
+  cosmeticId: string;
+  name: string;
+  description: string;
+  iconUrl: string;
+  price: number;
+}
+
 interface FetchCosmeticsResult {
-  allCosmetics: any[];
+  allCosmetics: Cosmetic[];
   unlockedMap: Record<string, boolean>;
   coins: number;
   hunger: number;
   userId: string;
+}
+
+interface UserCosmeticEntry {
+  cosmeticId: string;
+  isUnlocked: boolean;
 }
 
 export const fetchCosmetics = async (): Promise<FetchCosmeticsResult> => {
@@ -39,17 +52,43 @@ export const fetchCosmetics = async (): Promise<FetchCosmeticsResult> => {
   const userData = await unlockedRes.json();
 
   const unlockedMap: Record<string, boolean> = {};
-  (userData.cosmetics || []).forEach((entry: any) => {
-    unlockedMap[entry.cosmetic.cosmeticId] = entry.isUnlocked === true;
+  const userCosmetics = userData.cosmetics as UserCosmeticEntry[];
+  userCosmetics.forEach((entry) => {
+    unlockedMap[entry.cosmeticId] = entry.isUnlocked;
   });
 
   const allRes = await fetch(`${baseUrl}api/cosmetics`, {
     headers: getAuthHeaders(),
   });
 
-  if (!allRes.ok) throw new Error("Failed to fetch all cosmetics");
+  if (!allRes.ok) {
+    const errText = await allRes.text();
+    console.error("Error fetching all cosmetics:", errText);
+    throw new Error("Failed to fetch all cosmetics");
+  }
 
-  const allCosmetics = await allRes.json();
+  const allCosmeticsRaw = await allRes.json();
+
+  if (!Array.isArray(allCosmeticsRaw)) {
+    console.error(
+      "Expected cosmetics response to be an array, got:",
+      allCosmeticsRaw
+    );
+    throw new Error("Invalid cosmetics format");
+  }
+
+  const allCosmetics: Cosmetic[] = allCosmeticsRaw.filter((c, index) => {
+    const isValid =
+      c &&
+      typeof c.cosmeticId === "string" &&
+      typeof c.name === "string" &&
+      typeof c.iconUrl === "string" &&
+      typeof c.price === "number";
+    if (!isValid) {
+      console.warn("Invalid cosmetic at index", index, c);
+    }
+    return isValid;
+  });
 
   return {
     allCosmetics,
