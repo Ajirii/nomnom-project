@@ -61,8 +61,14 @@ export const fetchUserQuests = async (
       }),
     ]);
 
+    // Add userCurrency to each quest
+    const questsWithUserData = quests.map((quest) => ({
+      ...quest,
+      userCurrency: user?.currency || 0, // Add user currency here
+    }));
+
     res.status(200).json({
-      quests,
+      quests: questsWithUserData,
       completedQuests: achievement?.completedQuests || 0,
       currency: user?.currency || 0,
     });

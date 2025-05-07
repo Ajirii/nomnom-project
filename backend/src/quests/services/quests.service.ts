@@ -1,4 +1,4 @@
-import { PrismaClient } from "@prisma/client";
+import { PrismaClient, QuestStatus } from "@prisma/client";
 const prisma = new PrismaClient();
 
 export async function getQuestById(questId: string) {
@@ -26,6 +26,7 @@ export async function getUserQuests(userId: string) {
     prisma.user.findUnique({
       where: { userId },
       select: {
+        userId: true,
         currency: true,
       },
     }),
@@ -36,11 +37,13 @@ export async function getUserQuests(userId: string) {
   }
 
   return userQuestRows.map((uq) => ({
-    ...uq.quest,
-    status: uq.status,
-    rewardCurrency: uq.quest?.rewardCurrency,
-    rewardHunger: uq.quest?.rewardHunger,
-    userCurrency: user.currency,
+    questId: uq.quest.questId,
+    title: uq.quest.title,
+    description: uq.quest.description,
+    rewardCurrency: uq.quest.rewardCurrency,
+    rewardHunger: uq.quest.rewardHunger,
+    status: uq.status as QuestStatus,
+    userUserId: user.userId,
   }));
 }
 
@@ -84,8 +87,13 @@ export const getRandomQuests = async (userId: string) => {
 
   if (existingUserQuests.length > 0) {
     return existingUserQuests.map((uq) => ({
-      ...uq.quest,
-      status: uq.status,
+      questId: uq.quest.questId,
+      title: uq.quest.title,
+      description: uq.quest.description,
+      rewardCurrency: uq.quest.rewardCurrency,
+      rewardHunger: uq.quest.rewardHunger,
+      status: uq.status as QuestStatus,
+      userUserId: uq.userId,
     }));
   }
 
@@ -98,11 +106,19 @@ export const getRandomQuests = async (userId: string) => {
       userId,
       questId: quest.questId,
       assignedDate: startOfDay,
-      status: "AVAILABLE",
+      status: QuestStatus.AVAILABLE, // use enum, not string
     })),
   });
 
-  return selectedQuests.map((q) => ({ ...q, status: "AVAILABLE" }));
+  return selectedQuests.map((q) => ({
+    questId: q.questId,
+    title: q.title,
+    description: q.description,
+    rewardCurrency: q.rewardCurrency,
+    rewardHunger: q.rewardHunger,
+    status: QuestStatus.AVAILABLE,
+    userUserId: userId,
+  }));
 };
 
 export const completeUserQuest = async (
@@ -116,7 +132,7 @@ export const completeUserQuest = async (
     },
   });
 
-  if (!userQuest || userQuest.status !== "ACCEPTED") {
+  if (!userQuest || userQuest.status !== QuestStatus.ACCEPTED) {
     throw new Error("Quest not accepted or already completed");
   }
 
@@ -125,7 +141,7 @@ export const completeUserQuest = async (
       userId_questId: { userId, questId },
     },
     data: {
-      status: "COMPLETED",
+      status: QuestStatus.COMPLETED,
     },
   });
 
@@ -159,7 +175,7 @@ export const acceptUserQuest = async (userId: string, questId: string) => {
       userId_questId: { userId, questId },
     },
     data: {
-      status: "ACCEPTED",
+      status: QuestStatus.ACCEPTED,
     },
   });
 
