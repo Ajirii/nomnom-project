@@ -20,12 +20,20 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (token) {
-      setIsLoggedIn(true);
       try {
         const decoded: any = jwtDecode(token);
-        setUserId(decoded.userId);
+        if (decoded.exp * 1000 < Date.now()) {
+          console.warn("Token expired");
+          localStorage.removeItem("token");
+          setIsLoggedIn(false);
+          setUserId(null);
+        } else {
+          setIsLoggedIn(true);
+          setUserId(decoded.userId);
+        }
       } catch (error) {
         console.error("Invalid token:", error);
+        setIsLoggedIn(false);
         setUserId(null);
       }
     }
