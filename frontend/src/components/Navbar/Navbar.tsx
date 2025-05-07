@@ -107,9 +107,19 @@ const Navbar = ({ onLinkClick }: NavbarProps) => {
                 </a>
               </li>
               <li className="navbar_font">
-                <a href="#login" onClick={() => onLinkClick("login")}>
-                  Log In
-                </a>
+                {isLoggedIn ? (
+                  <a className="navbar_font" onClick={handleSignOut}>
+                    Sign Out
+                  </a>
+                ) : (
+                  <a
+                    href="#login"
+                    className="navbar_font"
+                    onClick={() => onLinkClick("login")}
+                  >
+                    Sign In
+                  </a>
+                )}
               </li>
             </ul>
           </div>

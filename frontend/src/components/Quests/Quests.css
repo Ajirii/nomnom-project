@@ -1,27 +1,27 @@
-.row {
+.quest-row {
   display: flex;
   flex-wrap: wrap;
   flex: 1;
+  margin-bottom: 50em;
 }
 
-.main {
+.quest-main {
   flex: auto;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
   align-items: center;
-  height: 80vh;
-  padding: 20px;
   position: relative;
+  top: 40em;
 }
 
 .quest-container {
   display: flex;
   width: 80%;
   position: absolute;
-  top: 53%;
+  top: 50%;
   left: 50%;
-  transform: translateX(-50%);
+  transform: translate(-50%, -50%);
   border: 2px solid #ddd;
   border-radius: 8px;
   overflow: hidden;
@@ -285,11 +285,23 @@
   background-color: #8e3e3e;
 }
 
+@media (max-width: 768px) {
+  .quest-main {
+    top: 27em;
+  }
+}
+
+@media (max-width: 480px) {
+  .quest-main {
+    top: 27em;
+  }
+}
+
 @media screen and (max-width: 600px) {
   .quest-container {
     flex-direction: column;
     width: 100%;
-    top: auto;
+    top: 7em;
   }
 
   .master,
@@ -315,7 +327,7 @@
   .quest-container {
     flex-direction: column;
     width: 90%;
-    top: 5%;
+    top: 8em;
   }
 
   .achievements-btn {
@@ -346,7 +358,7 @@
   .quest-container {
     flex-direction: row;
     width: 80%;
-    top: 12%;
+    top: 3em;
   }
 
   .achievements-btn {

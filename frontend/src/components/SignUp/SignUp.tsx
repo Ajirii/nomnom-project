@@ -47,8 +47,8 @@ const SignUp = ({ onSignUpSuccess }: SignUpProps) => {
 
   return (
     <div className="signup-section">
-      <div className="row">
-        <div className="main">
+      <div className="login-row">
+        <div className="login-main">
           <div className="login-container">
             <h2>Sign Up</h2>
             <form onSubmit={handleSignUp}>
