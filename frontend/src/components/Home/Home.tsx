@@ -78,7 +78,6 @@ const Home = ({
   return (
     <div className="home-row">
       <div className="home-main">
-        <div>{message && <p className="retro-message">{message}</p>}</div>
         <div className="input-container">
           <input
             type="text"
@@ -128,6 +127,9 @@ const Home = ({
           >
             {loading ? "Generating..." : "Send"}
           </button>
+          <div className="error-message">
+            {message && <p className="retro-message">{message}</p>}
+          </div>
         </div>
       </div>
 

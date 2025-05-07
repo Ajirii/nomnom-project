@@ -6,15 +6,16 @@
   justify-content: flex-end;
   align-items: center;
   padding: 20px;
-  background: #f8f8f8;
+  background: url("/assets/background/nightcloud.png") no-repeat center center;
+  background-size: cover;
   width: 100vw;
   height: 100vh;
   z-index: 10;
 }
 
 .s-container {
-  height: 30em;
-  width: 35em;
+  height: 20ox;
+  width: 20em;
   position: absolute;
   transform: translate(-50%, -50%);
   top: 30%;
@@ -37,32 +38,45 @@
 }
 
 .sleepy-nomnom-face {
-  height: 50em;
-  width: 50em;
-  position: relative;
-  border-radius: 50%;
+  height: 20em;
+  width: 40em;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   display: flex;
-  justify-content: center; 
-  align-items: center; 
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: rgb(255, 255, 255);
+  font-family: "Courier New", Courier, monospace;
+  border: 8px solid #222;
+  border-radius: 0.5em;
+  box-shadow: 0 0 0 4px #000, 0 0 30px rgb(255, 255, 255),
+    inset 0 0 5px rgb(255, 255, 255), 0 10px 20px rgba(0, 0, 0, 0.5);
+  image-rendering: pixelated;
+  outline: 2px solid #333;
+  backdrop-filter: blur(2px);
+  cursor: pointer;
 }
 .s-eye-l,
 .s-eye-r {
   position: absolute;
-  background-color: #222;
+  background-color: #ffffff;
   height: 0.5em;
   width: 4.12em;
   /* height: 2.25em;
   width: 4.12em;
   border-radius: 0 0 2.93em 2.93em; */
-  top: 50%; 
+  top: 50%;
   transform: translateY(-50%);
 }
 .s-eye-l {
-  left: 35%; 
+  left: 30%;
 }
 
 .s-eye-r {
-  left: 55%; 
+  left: 55%;
 }
 
 /* .eye-l::after,
@@ -89,11 +103,11 @@
 .s-mouth {
   height: 1.7em;
   width: 1.45em;
-  background-color: #222;
+  background-color: #ffffff;
   border-radius: 50%;
   position: absolute;
-  left: 24em;
-  top: 26em;
+  left: 18em;
+  top: 10em;
   animation: snoore 5s infinite;
 }
 
@@ -131,27 +145,33 @@
 }
 
 .s-container .z-1 {
-  top: 5.5em;
-  left: 2.5em;
+  bottom: 50px;
+  right: 10em;
   animation-delay: 7s;
+  color: white;
+  z-index: 10;
 }
 
 .s-container .z-2 {
-  top: 7em;
-  left: 1.5em;
+  bottom: 4em;
+  right: 13em;
   animation-delay: 1s;
+  color: white;
+  z-index: 10;
 }
 
 .s-container .z-3 {
-  top: 5em;
-  left: 4em;
+  bottom: 1em;
+  right: 12em;
+  color: white;
+  z-index: 10;
 }
 
 .start-button {
   width: 400px;
   height: 100px;
-  background-color: #b85555;
-  color: white;
+  background-color: rgba(255, 255, 255, 0.784);
+  color: #565656;
   border: none;
   padding: 10px;
   border-radius: 30px;
@@ -159,12 +179,18 @@
   font-size: 16px;
   font-family: inherit;
   position: absolute;
-  top: 65%;
+  top: 45em;
   left: 50%;
   transform: translate(-50%, -50%);
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.start-button:hover {
+  border-color: #565656;
+  background-color: rgba(255, 255, 255, 0.611);
+  color: #565656;
 }
 
 @media (max-width: 479px) {
@@ -179,8 +205,49 @@
   }
 }
 
-@media (min-width: 768px) {
+@media (max-width: 768px) {
   .start-button {
+    top: 25em;
+  }
+
+  .sleepy-nomnom-face {
+    width: 24em;
+    height: 12em;
+  }
+
+  .eye-l,
+  .eye-r {
+    width: 5em;
+    height: 5em;
+  }
+
+  .mouth {
+    width: 4em;
+    height: 4em;
+    left: 6.8em;
+  }
+}
+
+@media (max-width: 480px) {
+  .start-button {
+    top: 25em;
     font-size: 25px;
+  }
+
+  .sleepy-nomnom-face {
+    width: 18em;
+    height: 10em;
+  }
+
+  .eye-l,
+  .eye-r {
+    width: 4em;
+    height: 4em;
+  }
+
+  .mouth {
+    width: 4em;
+    height: 4em;
+    left: 6.8em;
   }
 }
