@@ -29,7 +29,7 @@ export const fetchRecipe = async (
       ingredients,
       cuisine,
       strict,
-      user // pass null or user
+      user
     );
 
     res.status(200).json(recipe);
