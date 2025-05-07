@@ -46,10 +46,9 @@ export const fetchUserQuests = async (
     let quests = await getUserQuests(userId);
 
     if (!quests || quests.length === 0) {
-      quests = await getRandomQuests(userId); // Assign 4 new quests
+      quests = await getRandomQuests(userId);
     }
 
-    // Re-fetch user and achievement (these are still needed)
     const [user, achievement] = await Promise.all([
       prisma.user.findUnique({
         where: { userId },
@@ -61,10 +60,9 @@ export const fetchUserQuests = async (
       }),
     ]);
 
-    // Add userCurrency to each quest
     const questsWithUserData = quests.map((quest) => ({
       ...quest,
-      userCurrency: user?.currency || 0, // Add user currency here
+      userCurrency: user?.currency || 0,
     }));
 
     res.status(200).json({

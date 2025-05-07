@@ -37,11 +37,10 @@ export const fetchCostmeticsByUser = async (
       return;
     }
 
-    // Fetch the iconUrl of the equipped cosmetic using the equippedCosmeticId
     const equippedCosmetic = data.user.equippedCosmeticId
       ? await prisma.cosmetic.findUnique({
           where: { cosmeticId: data.user.equippedCosmeticId },
-          select: { iconUrl: true, name: true, description: true }, // You can add more fields if needed
+          select: { iconUrl: true, name: true, description: true },
         })
       : null;
 
@@ -53,7 +52,7 @@ export const fetchCostmeticsByUser = async (
       currency: data.user.currency,
       hunger: data.user.hunger,
       equippedCosmeticId: data.user.equippedCosmeticId,
-      equippedCosmetic: equippedCosmetic, // Return the full cosmetic data
+      equippedCosmetic: equippedCosmetic,
     });
   } catch (error) {
     if (!res.headersSent) {
@@ -129,10 +128,8 @@ export const equipCosmetic = async (
       return;
     }
 
-    // Ensure cosmetic is unlocked for the user
     const updatedUser = await updateEquippedCosmetic(userId, cosmeticId);
 
-    // Fetch the full cosmetic details
     const equippedCosmetic = await prisma.cosmetic.findUnique({
       where: { cosmeticId },
     });
@@ -142,11 +139,10 @@ export const equipCosmetic = async (
       return;
     }
 
-    // Send the equipped cosmetic details to the frontend
     res.status(200).json({
       message: "Cosmetic equipped.",
       equippedCosmeticId: updatedUser.equippedCosmeticId,
-      equippedCosmetic: equippedCosmetic, // Send the cosmetic details
+      equippedCosmetic: equippedCosmetic,
     });
   } catch (error) {
     console.error("Error in equipCosmetic:", error);

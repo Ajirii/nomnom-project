@@ -41,7 +41,6 @@ export const fetchCosmetics = async (): Promise<FetchCosmeticsResult> => {
   const userId = decodedToken.userId;
   if (!userId) throw new Error("User ID not found in token");
 
-  // Fetch the user's unlocked cosmetics and other user data
   const unlockedRes = await fetch(`${baseUrl}api/cosmetics/user/${userId}`, {
     headers: getAuthHeaders(),
   });
@@ -61,7 +60,6 @@ export const fetchCosmetics = async (): Promise<FetchCosmeticsResult> => {
     unlockedMap[entry.cosmeticId] = entry.isUnlocked;
   });
 
-  // Fetch all available cosmetics (including the equipped cosmetic iconUrl)
   const allRes = await fetch(`${baseUrl}api/cosmetics`, {
     headers: getAuthHeaders(),
   });
@@ -82,7 +80,6 @@ export const fetchCosmetics = async (): Promise<FetchCosmeticsResult> => {
     throw new Error("Invalid cosmetics format");
   }
 
-  // Filter out invalid cosmetics
   const allCosmetics: Cosmetic[] = allCosmeticsRaw.filter((c, index) => {
     const isValid =
       c &&
@@ -96,11 +93,10 @@ export const fetchCosmetics = async (): Promise<FetchCosmeticsResult> => {
     return isValid;
   });
 
-  // Now, include the equipped cosmetic details (if any)
   const equippedCosmetic = userData.equippedCosmeticId
     ? allCosmetics.find(
         (cosmetic) => cosmetic.cosmeticId === userData.equippedCosmeticId
-      ) || null // If not found, explicitly return null
+      ) || null
     : null;
 
   return {
@@ -110,7 +106,7 @@ export const fetchCosmetics = async (): Promise<FetchCosmeticsResult> => {
     hunger: userData.hunger ?? 0,
     userId,
     currentCosmeticId: userData.equippedCosmeticId ?? null,
-    equippedCosmetic, // Now this is of type 'Cosmetic | null'
+    equippedCosmetic,
   };
 };
 

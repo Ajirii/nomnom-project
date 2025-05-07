@@ -106,7 +106,7 @@ export const getRandomQuests = async (userId: string) => {
       userId,
       questId: quest.questId,
       assignedDate: startOfDay,
-      status: QuestStatus.AVAILABLE, // use enum, not string
+      status: QuestStatus.AVAILABLE,
     })),
   });
 

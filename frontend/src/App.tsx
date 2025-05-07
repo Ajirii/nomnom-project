@@ -20,7 +20,7 @@ import "./components/Start/Start.css";
 import { useAuth } from "./context/AuthContext";
 import ClickableNomNom from "./components/Faces/ClickableNomNom";
 import Modal from "./components/Modal/loginModal";
-import { fetchCosmetics } from "./utils/fetchCosmetics"; // make sure this is imported
+import { fetchCosmetics } from "./utils/fetchCosmetics";
 
 const backgrounds: Record<string, string> = {
   home: "/assets/background/Summer2.png",

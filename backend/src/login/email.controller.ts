@@ -87,6 +87,14 @@ export const registerUser = async (
       },
     });
 
+    await prisma.userCosmetic.create({
+      data: {
+        userId: user.userId,
+        cosmeticId: "1",
+        isUnlocked: true,
+      },
+    });
+
     const token = jwt.sign({ userId: user.userId }, JWT_SECRET, {
       expiresIn: "7d",
     });

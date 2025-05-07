@@ -31,6 +31,8 @@ export const googleLogin = async (
 
     let user = await prisma.user.findUnique({ where: { email } });
 
+    let isNewUser = false;
+
     if (!user) {
       user = await prisma.user.create({
         data: {
@@ -40,6 +42,7 @@ export const googleLogin = async (
           hunger: 100,
         },
       });
+      isNewUser = true;
     } else {
       if (!user.googleId) {
         user = await prisma.user.update({
@@ -47,6 +50,16 @@ export const googleLogin = async (
           data: { googleId },
         });
       }
+    }
+
+    if (isNewUser) {
+      await prisma.userCosmetic.create({
+        data: {
+          userId: user.userId,
+          cosmeticId: "1", // Blush
+          isUnlocked: true,
+        },
+      });
     }
 
     const token = jwt.sign(
